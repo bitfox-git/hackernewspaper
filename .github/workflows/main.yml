@@ -23,3 +23,16 @@ jobs:
 
       - name: execute py script
         run: python generator.py ${{ vars.HN_ISSUE }}
+
+      - name: Compile tex file 
+        uses: dante-ev/latex-action@2021-A
+        with:
+          root_file: output.tex
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          tag: ${{ vars.HN_ISSUE }}
+          artifacts: "output.tex,assets/**"
+          bodyFile: "output.pdf"
