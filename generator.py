@@ -7,6 +7,7 @@ import urllib.request
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 
+
 ISSUE = "665" 
 
 paperdata = {
@@ -107,9 +108,9 @@ def generate_screenshot(index, url, browser):
     page = browser.new_page()
     page.goto(url)
     #TODO Solve the cookie accept problem 
-    page.screenshot(path=f'./assets/{ISSUE}/{index}.png')
+    page.screenshot(path=f'{index}.png')
 
-html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE+"?e=3b2a3a6e4e")
+html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
 
 soup = parse_html(html)
 header = get_header(soup)
@@ -121,13 +122,13 @@ with sync_playwright() as p:
     for index, art in enumerate(articles):
         
         #if file exists skip
-        if os.path.isfile(f'./assets/{ISSUE}/{index}.png') or os.path.isfile(f'./assets/{ISSUE}/{index}.jpg'):
+        if os.path.isfile(f'{index}.png') or os.path.isfile(f'{index}.jpg'):
             continue
 
         if (is_youtube_url(art.mainurl)):      
             t = Thumbnail(art.mainurl)
             t.fetch()
-            t.save(dir=f"./assets/{ISSUE}", filename=f'{index}', overwrite=True)
+            t.save(dir=".", filename=f'{index}', overwrite=True)
         else:
             generate_screenshot(index, art.mainurl, browser)
     browser.close()
@@ -138,7 +139,7 @@ newsitems = []
 
 # load or download art.mainurl contents
 def loadordownload(index, art):
-    fname = f'./assets/{ISSUE}/{index}.html'
+    fname = f'{index}.html'
     if os.path.isfile(fname):
         with open(fname, encoding="utf-8") as f:
             sitecontent = f.read()

@@ -8,6 +8,10 @@ __pycache__/
 
 # local cache of assets
 /assets/**
+*.jpg
+*.png
+*.html
+
 
 # Distribution / packaging
 .Python
