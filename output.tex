@@ -1,0 +1,2698 @@
+\documentclass[10pt,a4paper]{article} 
+\usepackage[a4paper, margin=1.5cm, tmargin=2.0cm, bmargin=2.0cm]{geometry}
+
+\usepackage{helvet} % Font for main content
+
+\frenchspacing 
+
+\usepackage{graphicx} 
+\usepackage{amssymb,amsmath} 
+\usepackage{multicol} 
+\usepackage{url}
+\usepackage{wrapfig} 
+\usepackage[T1]{fontenc} 
+\usepackage[pdfpagemode=FullScreen, colorlinks=false]{hyperref} 
+\usepackage{fancyhdr} 
+
+% https://mirrors.ibiblio.org/CTAN/fonts/fontawesome/doc/fontawesome.pdf
+\usepackage{fontawesome}
+\pagestyle{fancy} 
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{trimclip} 
+
+\DeclareUnicodeCharacter{FFFD}{?}
+\DeclareUnicodeCharacter{274C}{x}
+\DeclareUnicodeCharacter{2139}{i}
+
+
+
+% Headers
+\lhead{hacker{\color{red}news}paper }
+\rhead{\rightmark }
+% Footers
+\lfoot{\footnotesize hackernewspaper
+\faGlobe \href{https://hackernewsletter.com/}{hackernewsletter.com} 
+}
+\cfoot{} 
+\rfoot{\footnotesize Page \thepage}
+
+% Lines
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0.4pt} 
+
+% Metadata
+\hypersetup{
+    pdftitle = {HackerNewPaper 665},
+    pdfauthor = {Lucas Vos}
+}
+
+
+\titleformat{\section}
+{\normalfont\Huge\scshape\color{red}}
+{\noindent}
+{0em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\noindent}
+{0em}{}
+
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+
+\begin{document}
+\thispagestyle{empty}
+% put LOGO 
+\Huge \usefont{T1}{phv}{b}{n} 
+\noindent\textbf{hacker{\color{red}news}paper}
+\normalfont
+\normalsize
+\hfill Issue \#665
+
+{\noindent\color{red} \rule{\linewidth}{0.5mm}}
+
+\begin{quotation}
+    \textit{In every walk with nature one receives far more than he seeks. } \par\hfill --- John Muir
+ 
+\end{quotation}
+
+\tableofcontents
+
+\newpage
+\pagestyle{fancy}
+
+\section{\#Favorites}
+
+\subsection{LK-99 isn’t a superconductor}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Garisto; Dan \\
+{\scriptsize\faCalendar}\space 
+2023-08-16 \\
+{\scriptsize\faGlobe}\space 
+nature.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37149349\&utm\_term=comment}{2096} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37149349\&utm\_term=comment}{113} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://www.nature.com/articles/d41586-023-02585-7?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{0.png}
+    }
+  
+\paragraph{Researchers seem to have solved the puzzle of LK-99. Scientific detective work has unearthed evidence that the material is not a superconductor, and clarified its actual properties.}
+
+The conclusion dashes hopes that LK-99 — a compound of copper, lead, phosphorus and oxygen — would prove to be the first superconductor that works at room temperature and ambient pressure. Instead, studies have shown that impurities in the material — in particular, copper sulfide — were responsible for sharp drops in its electrical resistivity and a display of partial levitation over a magnet, properties similar to those exhibited by superconductors.
+“I think things are pretty decisively settled at this point,” says Inna Vishik, a condensed-matter experimentalist at the University of California, Davis.
+Claimed superconductor LK-99 is an online sensation — but replication efforts fall short
+Claimed superconductor LK-99 is an online sensation — but replication efforts fall short
+The LK-99 saga began in late July, when a team led by Sukbae Lee and Ji-Hoon Kim at the Quantum Energy Research Centre, a start-up firm in Seoul, published preprints1,2 claiming that LK-99 is a superconductor at normal pressure, and at temperatures up to at least 127 ºC (400 kelvin). All previously confirmed superconductors function only at very low temperatures and extreme pressures.
+The extraordinary claim quickly grabbed the attention of the science-interested public and researchers, some of whom tried to replicate LK-99.
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Htmx is part of the GitHub Accelerator}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-06-06 \\
+{\scriptsize\faGlobe}\space 
+htmx.org \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37144985\&utm\_term=comment}{1074} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37144985\&utm\_term=comment}{71} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://htmx.org/posts/2023-06-06-htmx-github-accelerator/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{1.png}
+    }
+  
+\paragraph{htmx is part of the GitHub Accelerator!
+We are excited to announce that htmx has been accepted into the first class of the
+GitHub Open Source Accelerator!}
+ This is a tremendous opportunity to work with and
+learn from some of the most successful open source developers and projects, and a great chance to get the message
+out about hypermedia and htmx.
+We plan on using this opportunity to begin work on htmx 2.0 and, we hope, possibly learn how to make working on htmx
+a full time job!
+Here are some of the other open source projects that we have met through the GitHub accelerator and that we recommend
+people check out:
+- BoxyHQ - BoxyHQ’s suite of APIs for security and privacy helps engineering teams build and ship compliant cloud applications faster.
+- Cal.com - Cal.com is a scheduling tool that helps you schedule meetings without the back-and-forth emails.
+- Crowd.dev - Centralize community, product, and customer data to understand which companies are engaging with your open source project.
+- Documenso - The Open-Source DocuSign Alternative. We aim to earn your trust by enabling you to self-host the platform and examine its inner workings.
+- Erxes - The Open-Source HubSpot Alternative. A single XOS enables to create unique and life-changing experiences that work for all types of business.
+- Formbricks - Survey granular user segments at any point in the user journey. Gather up to 6x more insights with targeted micro-surveys. All open-source.
+- Forward Email - Free email forwarding 
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{We reduced the cost of building Mastodon at Twitter-scale by 100x}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Nathan Marz \\
+{\scriptsize\faCalendar}\space 
+2023-08-15 \\
+{\scriptsize\faGlobe}\space 
+redplanetlabs.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37137110\&utm\_term=comment}{944} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37137110\&utm\_term=comment}{89} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://blog.redplanetlabs.com/2023/08/15/how-we-reduced-the-cost-of-building-twitter-at-twitter-scale-by-100x/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{2.png}
+    }
+  
+\paragraph{I’m going to cover a lot of ground in this post, so here’s the TLDR:
+- We built a Twitter-scale Mastodon instance from scratch in only 10k lines of code.}
+ This is 100x less code than the \~1M lines Twitter wrote to build and scale their original consumer product, which is very similar to Mastodon. Our instance is located at https://mastodon.redplanetlabs.com and open for anyone to use. The instance has 100M bots posting 3,500 times per second at 403 average fanout to demonstrate its scale.
+- Our implementation is built on top of a new platform called Rama that we at Red Planet Labs have developed over the past 10 years. This is the first time we’re talking about Rama publicly. Rama unifies computation and storage into a coherent model capable of building end-to-end backends at any scale in 100x less code than otherwise. Rama integrates and generalizes data ingestion, processing, indexing, and querying. Rama is a generic platform for building application backends, not just for social networks, and is programmed with a pure Java API. I will be exploring Rama in this post through the example of our Mastodon implementation.
+- We spent nine person-months building our scalable Mastodon instance. Twitter spent \~200 person-years to build and scale their original consumer product, and Instagram spent \~25 person-years building Threads, a recently launched Twitter competitor. In their effort Instagram was able to leverage infrastructure already powering similar products.
+- Our scalable Ma
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Ask vs. Guess Culture}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Jean Hsu \\
+{\scriptsize\faCalendar}\space 
+2023-08-12 \\
+{\scriptsize\faGlobe}\space 
+substack.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37176703\&utm\_term=comment}{722} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37176703\&utm\_term=comment}{86} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://jeanhsu.substack.com/p/ask-vs-guess-culture?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{3.jpg}
+    }
+  
+\paragraph{Ask vs guess culture
+When unreasonable requests are followed up with "but you could have just said no!" Exploring the clashes of ask culture and guess culture, at home and at work.}
+
+Have you had someone ask you for a favor that seemed unreasonable — a referral you didn’t want to make, a long-term stay at your place, a sizable cash loan? But because they asked, you felt obliged to seriously consider it, to try to meet their request, even if it put you in a space of discomfort? Maybe you carry out the favor, but it sours your relationship, and when it all comes out, that person says, “Well why’d you agree to it? You could have just said no!”
+But you feel resentful that that person even put you in a position to have to say, “Sorry we’re a bit busy that week so don’t have space for you to stay with us,” or “I can’t loan you that money at the moment”?
+Congratulations, you’ve just encountered a clash between ask culture and guess culture.
+The idea of ask vs guess culture was shared online in 2007 by a user tangerine on Metafilter. When I first read it years ago, a lightbulb moment went off, and many frustrations and conflicts I had while growing up made much more sense in this framework.
+Despite this idea’s longevity, I find that it’s still a new-to-many and incredibly useful concept to revisit, so here’s a little exploration of ask vs guess culture at home and at work.
+Ask culture and guess culture are vastly different in behavior and expectations. Here are some highlights:
+Ask cul
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Writing about what you learn pushes you to understand topics better}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Addy Osmani \\
+{\scriptsize\faCalendar}\space 
+2023-08-12 \\
+{\scriptsize\faGlobe}\space 
+addyosmani.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37118883\&utm\_term=comment}{700} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37118883\&utm\_term=comment}{46} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://addyosmani.com/blog/write-learn/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{4.jpg}
+    }
+  
+\paragraph{Write about what you learn. It pushes you to understand topics better.
+August 12, 2023
+Write about what you learn. It pushes you to understand topics better.}
+ Sometimes the gaps in our knowledge only become clear when explaining things to others.
+Writing about what you learn is more than just a method of documentation; it's a powerful tool for deepening understanding and revealing the gaps in one's knowledge. This practice pushes us to explore topics more thoroughly and to articulate their thoughts in a coherent and precise manner.
+Learning Through Writing
+- Exploration: Writing about a subject can in cases require a comprehensive exploration of the topic. This often leads to uncovering new insights and connections that might not be apparent through mere reading or listening.
+- Articulation: Putting thoughts into words forces a person to clarify their understanding. This process of articulation helps in identifying areas where the understanding might be vague or incomplete.
+- Reflection: Writing allows for reflection on the subject matter, enabling the learner to connect new information with existing knowledge. This synthesis helps in creating a more robust and interconnected understanding of the subject.
+- Revelation of Gaps: Sometimes, the act of writing reveals areas where the knowledge is lacking or inconsistent. Recognizing these gaps is the first step towards filling them and achieving a more complete understanding.
+The Benefits
+- Enhanced Retention: Writing about what y
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Squeeze the hell out of the system you have}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Dan Slimmon \\
+{\scriptsize\faCalendar}\space 
+2023-08-11 \\
+{\scriptsize\faGlobe}\space 
+danslimmon.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37091983\&utm\_term=comment}{683} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37091983\&utm\_term=comment}{57} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://blog.danslimmon.com/2023/08/11/squeeze-the-hell-out-of-the-system-you-have/\#like-2777?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{5.jpg}
+    }
+  
+\paragraph{About a year ago, I raised a red flag with colleagues and managers about Postgres performance. Our database was struggling to keep up with the load generated by our monolithic SaaS application.}
+ CPU utilization was riding between 60 and 80, and at least once it spiked to 100, causing a brief outage.
+Now, we had been kicking the can down the road with respect to Postgres capacity for a long time. When the database looked too busy, we’d replace it with a bigger instance and move on. This saved us a lot of time and allowed us to focus on other things, like building features, which was great.
+But this time, it wasn’t possible to scale the DB server vertically: we were already on the biggest instance. And we were about to overload that instance.
+Lots of schemes were floated. Foremost among them:
+- Shard writes. Spin up a cluster of independent databases, and write data to one or the other according to some partitioning strategy.
+- Do micro-services. Split up the monolith into multiple interconnected services, each with its own data store that could be scaled on its own terms.
+Both of these options are cool! A strong case can be made for either one on its merits. With write sharding, we could potentially increase our capacity by 2 or even 3 orders of magnitude. With micro-services, we’d be free to use “the right tool for the job,” picking data stores optimized to the requirements of each service workload. Either branch of the skill tree would offer exciting options for fault toler
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{How a startup loses its spark}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-01 \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37098483\&utm\_term=comment}{567} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37098483\&utm\_term=comment}{47} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://blog.johnqian.com/startup-spark?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{6.jpg}
+    }
+  
+\paragraph{How a startup loses its spark
+At a well-run seed stage startup, engineers will often describe the work experience as intoxicating. At a larger company, the best you get is "enjoyable".}
+ Why does this happen? Is it inevitable?
+Let's inspect what makes a startup intoxicating. An engineer should spend most of their time in this core loop:
+- If needed, talk to users, figure out their problems.
+- Come up with an idea to build.
+- If needed, discuss the idea with coworkers.
+- Implement the idea.
+- Cross fingers and ship. Celebrate or postmortem. Then go back to step 1.
+At <10 people, each of these steps can be fun.
+- You can just directly reach out to users you’re interested in and grab a beer with them.
+- If you find an idea that you think is both valuable to the company and interesting to you, you can just drop everything to work on it.
+- Almost any coworker will be interested in discussing this idea with you because:
+- They have skin in the game. If your idea is good, they benefit from encouraging you to take it on. If your idea is bad, they benefit from explaining what’s wrong. They may even care as users themselves.
+- They might want to work with you on it.
+- They can likely offer useful insights since everyone’s familiar with a significant chunk of the codebase.
+- Implementation is quick.
+- Choose whatever tools you want, no security review.
+- Small codebase. Can hold the whole thing in your head, so you feel comfortable making sweeping refactors. Fast hot reload, so can do qui
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{The Carrot Problem}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Uri \\
+{\scriptsize\faCalendar}\space 
+2023-07-05 \\
+{\scriptsize\faGlobe}\space 
+atvbt.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37100226\&utm\_term=comment}{566} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37100226\&utm\_term=comment}{44} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://www.atvbt.com/the-carrot-problem/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{7.jpg}
+    }
+  
+\paragraph{Carrot Problems
+In World War II, the story goes, the British invented a new kind of onboard radar that allowed its pilots to shoot down German planes at night.}
+[1]
+They didn't want the Germans to know about this technology, but they had to give an explanation for their new, improbable powers.
+So they invented a propaganda campaign that claimed their pilots had developed exceptional eyesight by eating "an excess of carrots."
+If you're going to trick people into doing something pointless, eating excessive carrots seems like one of the better ones. Still, there's an issue: people who believed the propaganda and tried to get super-sight would be spending time and effort on something that wasn't going to work.[2]
+I'll call this a Carrot Problem.
+Once you look for Carrot Problems, you see them everywhere. Essentially, any time someone achieves success in a way they don't want to admit publicly, they have to come up with an excuse for their abilities. And that means misleading a bunch of people into (potentially) wasting their time, or worse.
+For example:
+- People who take steroids don't generally admit to taking steroids, so they come up with various explanations for their new physiques. But anyone who follows that advice will be disappointed; without the steroids, they just won't get the same results.
+- Many companies basically distribute their jobs to friends and insiders, but don't want to admit that publicly. So they set up public application processes, which cause outsiders to 
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Retrieving 1TB of data from a faulty drive with the help of woodworking tools}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-17 \\
+{\scriptsize\faGlobe}\space 
+blog.jgc.org \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37160783\&utm\_term=comment}{509} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37160783\&utm\_term=comment}{46} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://blog.jgc.org/2023/08/retrieving-1tb-of-data-from-faulty.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{8.jpg}
+    }
+  
+\paragraph{Case Dan A4 v4.}
+1
+Motherboard Z690I Strix Gaming
+Processor i5-12400F
+CPU Cooler Noctua NH-L9i-17xx Chromax Black
+Noctua NA-FD1
+Memory Corsair CMK32GX5M2B5200C40
+GPU GeForce RTX 3070 Eagle
+Storage 2 x Seagate Firecuda 530 1TB
+Case fans 2 x Noctua A9x14 HS-PWM chromax.Black.swap
+PSU Corsair SF750
+And one day after months of use it froze mid-game and went into a BIOS loop and wouldn't boot. I quickly realized that only one of the Seagate Firecuda 530 SSDs was detected. After some unscrewing and experimenting with the two drives in the two slots I found that one of them was dead.
+And then I left the PC alone for a few days and turned it on again. It booted into Windows and immediately crashed.
+That made me wonder if the failure was temperature related; when cool it seemed to work. So, I left the Firecuda in the freezer at -18C for 30 minutes. Inserting it into an NVMe M.2 USB case I was able to see the drive on my Mac. Success!
+Well, for a few minutes. It seemed that as the drive heated up it failed again. Which lead me to believe that there was a faulty connection somewhere on the board. Very careful plugging and unplugging of the board helped me find the right spot to squeeze one of the chips to make the SSD work: no low temperatures needed.
+Now, I couldn't possibly sit and hold the SSD squeezing the chip while I copied off the data so I came up with another solution. A metal G clamp and strips of a Silicon Valley Bank credit card under the SSD to support the PCB.
+Here's the con
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Mister Rogers had a point – routinely greeting six neighbors maximizes wellbeing}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Gallup; Inc; Kayley Bayne; Dan Witters \\
+{\scriptsize\faCalendar}\space 
+2023-08-15 \\
+{\scriptsize\faGlobe}\space 
+gallup.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37175432\&utm\_term=comment}{347} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37175432\&utm\_term=comment}{46} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://news.gallup.com/poll/509543/saying-hello-linked-higher-wellbeing-limits.aspx?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{9.jpg}
+    }
+  
+Story Highlights
+- Routinely greeting six neighbors maximizes wellbeing outcomes
+- All five wellbeing elements linked to greeting neighbors
+- Greeting neighbors climbs steadily with age, peaking among 65 and older
+WASHINGTON, D.C. -- Adults in the U.S. who regularly say hello to multiple people in their neighborhood have higher wellbeing than those who greet fewer or no neighbors. Americans’ wellbeing score increases steadily by the number of neighbors greeted, from 51.5 among those saying hello to zero neighbors to 64.1 for those greeting six neighbors. No meaningful increase in wellbeing is seen for additional neighbors greeted beyond six.
+These results were collected as part of the Gallup National Health and Well-Being Index. The index is calculated on a scale of zero to 100, where zero represents the lowest possible wellbeing and 100 represents the highest possible wellbeing. The Well-Being Index score for the nation comprises metrics affecting overall wellbeing and each of the five essential elements of wellbeing:
+- Career wellbeing: You like what you do every day.
+- Social wellbeing: You have meaningful friendships in your life.
+- Financial wellbeing: You manage your money well.
+- Physical wellbeing: You have energy to get things done.
+- Community wellbeing: You like where you live.
+These findings, from a poll conducted May 30-June 6, 2023, are based on 4,556 U.S. adults surveyed by web as part of the Gallup Panel, a probability-based panel of about 100,000 adults acros
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{How should I read type system notation?}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Alexis King \\
+{\scriptsize\faCalendar}\space 
+2023-08-14 \\
+{\scriptsize\faGlobe}\space 
+stackexchange.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{344} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{19} \\
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://langdev.stackexchange.com/questions/2692/how-should-i-read-type-system-notation?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{10.jpg}
+    }
+  
+\paragraph{The notation used to describe type systems varies from presentation to presentation, so giving a comprehensive overview is impossible.}
+ However, most presentations share a large, common subset, so this answer will attempt to provide a foundation of enough of the basics to understand variations on the common theme.
+Syntax and grammars
+Type systems as applied to programming language are syntactic systems. That is, a type system is a set of rules that operate on the (abstract) syntax of a programming language. For this reason, comprehensive treatments of type systems begin by providing the grammar of all the syntactic constructs considered by the type system using BNF notation. In the simplest typed languages, syntax is needed for precisely two things: expressions and types.
+For example, let’s consider the grammar for an extremely simple language of booleans and integers:
+\$\$
+begin\{array\}\{rcll\}
+e hskip\{-10mu\}
+\&::=\&hskip\{-10mu\} mathsf\{true\}hskip\{10mu\}|hskip\{10mu\}mathsf\{false\} \&textrm\{boolean literal\}
+\& | \&hskip\{-10mu\} 0 hskip\{5mu\}|hskip\{5mu\} 1 hskip\{5mu\}|hskip\{5mu\} \{-1\} hskip\{5mu\}|hskip\{5mu\} 2 hskip\{5mu\}|hskip\{5mu\} \{-2\} hskip\{5mu\}|hskip\{5mu\} ldots \&textrm\{integer literal\}
+\& | \&hskip\{-10mu\} mathbf\{if\} e mathbf\{then\} e mathbf\{else\} e \&textrm\{conditional\}
+\& | \&hskip\{-10mu\} e + e hskip\{10mu\}|hskip\{10mu\} e - e hskip\{10mu\}|hskip\{10mu\} e × e \&textrm\{arithmetic\}
+\& | \&hskip\{-10mu\} e = e hskip\{10mu\}|hskip\{10mu\} e < e hskip\{10mu\}|hskip\{10mu\} e
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\newpage
+\section{\#Ask HN}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Tell us about your project that's not done yet but you want feedback on}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{184} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{232} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37156101\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=ask\_hn}{
+    \includegraphics[width=0.99\linewidth]{11.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{A lot of times with side projects I wished I had gotten feedback early on, before I spent a lot of time on an inefficient direction.}
+\paragraph{}
+ I wonder if people wait too long to publish something before it is fully polished, then realized that the polishing wasn't needed.
+I'm interested to see things that people would have never published otherwise. I know a lot of my projects never make it to a published phase, but I still would have been interested in knowing the general reception. Please drop your projects here!
+The guide covers things like:
+- shebangs
+- exit codes
+- parameter expansion
+- file permissions
+- how to look up docs via "man" and "help"
+- And a lot more.
+The codebase I'm starting with is a Ruby version manager (written in bash) called RBENV. I've published it onto a platform called HelpThisBook.com, a platform to help authors get feedback from early readers (co-created by Rob Fitzpatrick, author of "The Mom Test", "Write Useful Books", etc.). Instructions on how to leave feedback should be given when you open the link below.
+https://helpthisbook.com/richie/impostors-guide-to-the-shell
+reply
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Burnout because of ChatGPT?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-14 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{160} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{55} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37126182\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=ask\_hn}{
+    \includegraphics[width=0.99\linewidth]{12.jpg}
+}
+\end{minipage}
+\paragraph{}
+TL;DR (summarised by ChatGPT) - I'm experiencing increased productivity and independence with ChatGPT but grappling with challenges such as lack of work-life boundaries and overwhelming information, leading to stress and burnout.
+Long story...
+I have been using ChatGPT for a while, and moved to the Plus subscription for their GPT-4 model, which I must say, is quite good.
+1. ChatGPT makes us very productive. Personally, in my early 40s, I feel my brain is back in 20s.
+2. I no longer feel the need to hire juniors. This is a short-term positive and maybe a long-term negative.
+[[EDIT: I may have implied a wrong meaning. To clarify - nobody's going yet because of ChatGPT. It is just raising the bar high and higher. What took me years to learn, this thing can do already and much more. And I cannot predict the financial future of OpenAI or the markets in general.]]
+A lot of stuff I used to delegate to fellow humans are now being delegated to ChatGPT. And I can get the results immediately and at any time I want. I agree that it cannot operate on its own. I still need to review and correct things. I have do that even when working with other humans. The only difference is that I can start trusting a human to improve, but I cannot expect ChatGPT to do so. Not that it is incapable, but because it is restricted by OpenAI.
+And I have gotten better at using it. Calling myself a prompt-engineer sounds weird.
+With all the good, I am now experiencing the cons, stress and burnout:
+1. Humans wor
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{What are some easy ways to earn some side money?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-16 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{83} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37138807\&utm\_term=comment}{35} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37150862\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=ask\_hn}{
+    \includegraphics[width=0.99\linewidth]{13.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Hello,
+I am an experienced developer (11y) trying to earn some money on the side.
+I am looking for some tips what could I do.}
+\paragraph{}
+
+The reason I said "easy" in the title is because I have a full time job, so I can't commit to multi-month projects full time.
+I earned some good money on Topcoder before, but currently there are only a very few projects listed.
+I am not a good speaker, so things like Youtube channel, or streaming is out of the picture, I am not comfortable uploading videos of myself.
+I checked freelancer websites, but competition is crazy there (developing a full-fledged ecommerce web application for \$100, and such)
+Are there any other good websites like Topcoder?
+What do YOU do to earn money on the side?
+Edit: For suggestions about the US: I am actually living in Canada. If you have any Canada specific, please suggest :)
+Beekeeping can offer a relaxing, nature-oriented antidote to the stresses of coding, and moreover, there is a burgeoning market for smart apiary technology. Bee mortality rates have increased over recent years for numerous reasons, and technology is beginning to find ways to address these problems.
+As a developer, you could design systems to monitor hive health, honey production levels or even bee activity. This data can be used to predict illnesses, optimize honey production, or understand more about bee behavior, providing valuable insights to the beekeeping community as well as researchers.
+This unique combination of software development and beekee
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Show HN}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{StarLite 12.5-inch Linux tablet}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2022-09-06 
+{\scriptsize\faGlobe}\space 
+starlabs.systems 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37169696\&utm\_term=comment}{573} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37169696\&utm\_term=comment}{55} 
+}
+\par\medskip\noindent
+\href{https://us.starlabs.systems/pages/starlite?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{14.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{StarLite
+Compact yet powerful; your perfect partner in every journey.
+Intel Alder Lake
+N200
+processor
+4800MHz
+16 GB
+memory
+Up to
+3.7GHz
+quad-core processing
+Fanless
+0db
+design
+12.}
+\paragraph{}
+5-inch
+3k
+touch display
+Up to
+12 hrs
+battery life
+Type II Anodised
+Aluminium
+Chassis
+Magnetic
+Convertible
+Design
+Versatile Connectivity
+01.
+WiFi 5 and Bluetooth 5.1
+For all things wireless.
+02.
+Micro HDMI
+For easy output.
+03.
+USB-C
+For charging and expansion.
+04.
+USB-C
+For charging and expansion.
+05.
+Micro SD
+For simple connectivity.
+06.
+Headphone Jack
+For audio output.
+Open-source firmware
+powered by
+coreboot
+and
+edk II.
+Measured Boot
+Secured boot flow gives you peace of mind.
+5-years of updates
+Backed by secure updates delivered via the LVFS.
+Lightweight Firmware
+Super efficient firmware that only takes 0.76s to POST.
+Endless Firmware Customization
+Tailor your firmware effortlessly using the Advanced Configuration interface, a nod to the trusted feel of
+traditional BIOS.
+From perfecting system performance to ensuring compatibility across diverse Operating Systems, the realm of endless tweaking awaits. Delve deep into the extensive options and mold your firmware to your unique specifications.
+Crystal clarity. Touch precision.
+Experience 3k resolution brought to life with intuitive touch controls. Designed for seamless interactions and stunning visuals.
+2880x1920
+resolution
+300cd/m²
+brightness
+178°
+viewing angle
+12.5"
+visible display
+Minuscule Charger.
+Massive Battery.
+Experience the power of our min
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Little Rat – Chrome extension monitors network calls of all extensions}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Dnakov 
+{\scriptsize\faCalendar}\space 
+2023-08-22 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37119942\&utm\_term=comment}{549} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37119942\&utm\_term=comment}{22} 
+}
+\par\medskip\noindent
+\href{https://github.com/dnakov/little-rat?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{15.jpg}
+}
+\end{minipage}
+\paragraph{}
+little-rat
+🐀 Small chrome extension to monitor (and optionally block) other extensions' network calls
+Chrome Web Store (Lite version)
+The published extension lacks the ability to track the number of requests and notify you, but you can still use it for blocking requests. The reason is that the extension uses the
+declarativeNetRequest.onRuleMatchedDebug API which is not available for publishing in the Chrome Web Store.
+Get it here
+Manual Installation (Full Version)
+- Download the ZIP of this repo.
+- Unzip
+- Go to chromium/chrome Extensions.
+- Click to check Developer mode.
+- Click Load unpacked extension....
+- In the file selector dialog:
+- Select the directory
+little-rat-mainwhich was created above.
+- Click Open.
+- Select the directory
+Screenshots
+Open-Source Libraries <3
+- Icons from feathericons.com
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{PDF Tool – Modify PDFs in the browser without uploading}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-01 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37110628\&utm\_term=comment}{519} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37110628\&utm\_term=comment}{34} 
+}
+\par\medskip\noindent
+\href{https://www.pdftool.org?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{16.jpg}
+}
+\end{minipage}
+\paragraph{}
+PDF Tool - HodlSoftware
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Opendream: A layer-based UI for Stable Diffusion}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Varunshenoy 
+{\scriptsize\faCalendar}\space 
+2023-08-18 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37136898\&utm\_term=comment}{470} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37136898\&utm\_term=comment}{20} 
+}
+\par\medskip\noindent
+\href{https://github.com/varunshenoy/opendream?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{17.jpg}
+}
+\end{minipage}
+\paragraph{}
+Opendream: A Web UI For the Rest of Us 💭 🎨
+Opendream brings much needed and familiar features, such as layering, non-destructive editing, portability, and easy-to-write extensions, to your Stable Diffusion workflows. Check out our demo video.
+Getting started
+- Prerequisites: Make sure you have Node installed. You can download it here.
+- Clone this repository.
+- Navigate to this project within your terminal and run
+sh ./run\_opendream.sh. After \~30 seconds, both the frontend and backend of the Opendream system should be up and running.
+Features
+Diffusion models have emerged as powerful tools in the world of image generation and manipulation. While they offer significant benefits, these models are often considered black boxes due to their inherent complexity. The current diffusion image generation ecosystem is defined by tools that allow one-off image manipulation tasks to control these models - text2img, in-painting, pix2pix, among others.
+For example, popular interfaces like Automatic1111, Midjourney, and Stability.AI's DreamStudio only support destructive editing: each edit "consumes" the previous image. This means users cannot easily build off of previous images or run multiple experiments on the same image, limiting their options for creative exploration.
+Layering and Non-destructive Editing
+Non-destructive editing is a method of image manipulation that preserves the original image data while allowing users to make adjustments and modifications without overwriting previous 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Ubicloud – open, free and portable cloud}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Ubicloud 
+{\scriptsize\faCalendar}\space 
+2023-08-25 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37154138\&utm\_term=comment}{205} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37154138\&utm\_term=comment}{14} 
+}
+\par\medskip\noindent
+\href{https://github.com/ubicloud/ubicloud?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{18.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Ubicloud
+Ubicloud is an open, free, and portable cloud. Think of it as an open alternative to cloud providers, like what Linux is to proprietary operating systems.}
+\paragraph{}
+
+Ubicloud provides IaaS cloud features on bare metal providers, such as Hetzner, OVH, and AWS Bare Metal. You can set it up yourself on these providers or you can use our managed service. We're currently in public alpha.
+Quick start
+Managed platform
+You can use Ubicloud without installing anything. When you do this, we pass along the underlying provider's benefits to you, such as price or location.
+Build your own cloud
+You can also build your own cloud. To do this, start up Ubicloud's control plane and connect to its cloud console.
+git clone git@github.com:ubicloud/ubicloud.git \# Generate secrets for demo ./demo/generate\_env \# Run containers: db-migrator, app (web \& respirate), postgresql docker-compose -f demo/docker-compose.yml up \# Visit localhost:3000
+The control plane is responsible for cloudifying bare metal Linux machines. The easiest way to build your own cloud is to lease instances from one of those providers. For example: https://www.hetzner.com/sb
+Once you lease instance(s), run the following script for each instance to cloudify the instance. By default, the script cloudifies bare metal instances leased from Hetzner. After you cloudify your instances, you can provision and manage cloud resources on these machines.
+\# Enter hostname/IP and provider, and install SSH key as instructed by script docker exec -i
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Lottielab – Create product animations in the browser easily}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-01 
+{\scriptsize\faGlobe}\space 
+lottielab.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37133128\&utm\_term=comment}{153} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37133128\&utm\_term=comment}{17} 
+}
+\par\medskip\noindent
+\href{https://www.lottielab.com/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{19.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Examples
+Examples
+Examples
+Copy from Figma
+Pen tool
+Shapes
+Copy from Figma
+Pen tool
+Shapes
+Design to Motion
+Design to Motion
+Design to Motion
+Design to Motion
+Design to Motion
+in a snap.
+in a snap.}
+\paragraph{}
+
+in a snap.
+in a snap.
+in a snap.
+Import assets from your favourite design tools or start from scratch in Lottielab.
+Import assets from your favourite design tools or start from scratch in Lottielab.
+Import assets from your favourite design tools or start from scratch in Lottielab.
+Import assets from your favourite design tools or start from scratch in Lottielab.
+Import assets from your favourite design tools or start from scratch in Lottielab.
+Easing
+Linear
+Natural
+Accelerate
+Share, review, and ship
+Share, review, and ship
+Share, review, and ship
+Share, review, and ship
+Share, review, and ship
+to iOS, Android, and Web
+to iOS, Android, and Web
+to iOS, Android, and Web
+to iOS, Android, and Web
+to iOS, Android, and Web
+Connect your design process and production assets with 1:1 Lottie support across platforms.
+Connect your design process and production assets with 1:1 Lottie support across platforms.
+Connect your design process and production assets with 1:1 Lottie support across platforms.
+Connect your design process and production assets with 1:1 Lottie support across platforms.
+Connect your design process and production assets with 1:1 Lottie support across platforms.
+A motion super power for teams
+A motion super power for teams
+A motion super power for teams
+A motion super power fo
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Layerform – Open-source development environments using Terraform files}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-15 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37133128\&utm\_term=comment}{121} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37133128\&utm\_term=comment}{10} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37134293\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{20.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Hi HN, we're Lucas and Lucas, the authors of Layerform (https://github.com/ergomake/layerform). Layerform is an open-source tool for setting up development environments using plain .tf files.}
+\paragraph{}
+ We allow each engineer to create their own "staging" environment and reuse infrastructure.
+Whenever engineers run layerform spawn, we use plain .tf files to give them their own "staging" environment that looks just like production.
+Many teams have a single (or too few) staging environments, which developers have to queue to use. This is particularly a problem when a system is large, because then engineers can't run it on their machines and cannot easily test their changes in a production-like environment. Often they end up with a cluttered Slack channel in which engineers wait for their turn to use staging. Sometimes, they don't even have that clunky channel and end up merging broken code or shipping bugs to production. Lucas and I decided to solve this because we previously suffered with shared staging environments.
+Layerform gives each developer their own production-like environment.This eliminates the bottleneck, increasing the number of deploys engineers make. Additionally, it reduces the amount of bugs and rework because developers have a production-like environment to develop and test against. They can just run "layerform spawn" and get their own staging.
+We wrap the MPL-licensed Terraform and allow engineers to encapsulate each part of their infrastructure into layers. They can th
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Code}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Things you forgot (or never knew) because of React}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-04 
+{\scriptsize\faGlobe}\space 
+joshcollinsworth.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37131802\&utm\_term=comment}{521} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37131802\&utm\_term=comment}{83} 
+}
+\par\medskip\noindent
+\href{https://joshcollinsworth.com/blog/antiquated-react?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{21.jpg}
+}
+\end{minipage}
+\paragraph{}
+Things you forgot (or never knew) because of React
+Part 1: an intro about music, defaults, and bubbles
+Like a lot of people, there was a time when the only music I listened to was whatever was played on my local radio station. (A lot of people over 30 or so, anyway. If this doesn’t sound familiar to you yet, just stick with me for a minute here.) At the time, I was happy with that. It seemed like all I needed.
+Looking back, I realize: I naively trusted that anything good inevitably became popular—and therefore, anything worth knowing would eventually come my way on its own.
+Eventually, though, other music began to take root in my life. Through new friends and the internet, I became acquainted with new artists, further and further from the things I liked before—or, at least, thought I liked.
+This music was different. I wasn’t in love with it one week and sick of it the next. Listening to it wasn’t part of an endless cycle.
+If anything, it was the opposite; it was music I actually liked and appreciated more the more I listened to it. There was depth to it. Sure, it didn’t have the loud distorted guitars, punch-line lyrics, or sugar-coated melodies I’d enjoyed up until that point. But to my surprise, that actually somehow made it better, not worse.
+That’s when I began to realize: maybe I was never really as satisfied as I thought I was.
+Maybe my bliss was, in fact, predicated on ignorance.
+Finding richness beyond the defaults
+I suspect you can probably relate to that story, even
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{I wrote a RDBMS (SQLite clone) from scratch in pure Python}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Spandanb 
+{\scriptsize\faCalendar}\space 
+2023-08-13 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37114141\&utm\_term=comment}{369} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37114141\&utm\_term=comment}{20} 
+}
+\par\medskip\noindent
+\href{https://github.com/spandanb/learndb-py?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{22.jpg}
+}
+\end{minipage}
+\paragraph{}
+LearnDB
+What I Cannot Create, I Do Not Understand -Richard Feynman
+In the spirit of Feynman's immortal words, the goal of this project is to better understand the internals of databases by implementing a relational database management system (RDBMS) (sqlite clone) from scratch.
+This project was motivated by a desire to: 1) understand databases more deeply and 2) work on a fun project. These dual goals led to a:
+- relatively simple code base
+- relatively complete RDBMS implementation
+- written in pure python
+- No build step
+- zero configuration
+- configuration can be overriden
+This makes the learndb codebase great for tinkering with. But the product has some key limitations that means it shouldn't be used as an actual storage solution.
+Features
+Learndb supports the following:
+- it has a rich sql (learndb-sql) with support for
+select, from, where, group by, having, limit, order by
+- custom lexer and parser built using
+lark
+- at a high-level, there is an engine that can accept some SQL statements. These statements expresses operations on a database (a collection of tables which contain data)
+- allows users/agents to connect to RDBMS in multiple ways:
+- REPL
+- importing python module
+- passing a file of commands to the engine
+- on-disk btree implementation as backing data structure
+Limitations
+- Very simplified 1 implementation of floating point number arithmetic, e.g. compared to IEEE754).
+- No support for common utility features, like wildcard column expansion, e.g.
+select * ..
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Thoughts on Elixir, Phoenix and LiveView after 18 months of commercial use}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-11 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37114457\&utm\_term=comment}{298} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37114457\&utm\_term=comment}{17} 
+}
+\par\medskip\noindent
+\href{https://korban.net/posts/2023-08-11-thoughts-on-elixir-phoenix-liveview/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{23.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{I’ve been leading a team developing an application using Elixir, Phoenix and LiveView for the last 18 months and accumulated some thoughts on the stack.}
+\paragraph{}
+ For the most part, it has been a very pleasant experience.
+Compared to my initial evaluation of Elixir that I’d done prior to diving in in earnest, it exceeded my expectations in terms of availability of tools \& packages and the overall quality of dev experience.
+Prior to Elixir, I was working primarily with Elm which probably colours my experience, but I have used a bunch of languages and have switched from static to dynamic types and back several times.
+First of all, I find Elixir quite enjoyable:
+As the pipeline example illustrates, Elixir seems to me to be one of those projects where instead of chasing the perfect design of every feature it’s OK to put in place pragmatic solutions even if they have warts. Some things are messy as a result but that’s an acceptable compromise:
+Enum/
+Map/
+List/
+Keywordand
+Kernel, or things like
+MapSetinstead of
+Set, or charlists (needed for compatibility with Erlang), or inconsistent naming (
+is\_mapvs
+empty?).
+unlessor the ability to define some custom operators, or all the different ways to access values in maps \& structs that seem to be a bit confusing to newcomers.
+f.()) is weird for an FP language.
+My experience with Phoenix has been almost entirely with a LiveView lens, so I don’t have that much to say about Phoenix itself. It seems to be a reasonable MVC framework. The very welcome add
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Railway Oriented Programming}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2007-03-10 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37171943\&utm\_term=comment}{297} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37171943\&utm\_term=comment}{26} 
+}
+\par\medskip\noindent
+\href{https://fsharpforfunandprofit.com/rop/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{24.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Railway Oriented Programming
+This page contains links to the slides and code from my talk “Railway Oriented Programming”.}
+\paragraph{}
+
+Here’s the blurb for the talk:
+Many examples in functional programming assume that you are always on the “happy path”. But to create a robust real world application you must deal with validation, logging, network and service errors, and other annoyances.
+So, how do you handle all this in a clean functional way?
+This talk will provide a brief introduction to this topic, using a fun and easy-to-understand railway analogy.
+I am also planning to upload some posts on these topics soon. Meanwhile, please see the recipe for a functional app series, which covers similar ground.
+If you want to to see some real code, I have created this project on Github that compares normal C\# with F\# using the ROP approach
+WARNING: This is a useful approach to error handling, but please don’t take it to extremes! See my post on “Against Railway-Oriented Programming”.
+I presented on this topic at NDC London 2014 (click image to view video)
+Other videos of this talk are available are from NDC Oslo 2014 and Functional Programming eXchange, 2014
+Slides from Functional Programming eXchange, March 14, 2014
+The powerpoint slides are also available from Github. Feel free to borrow from them!
+If you like my way of explaining things with pictures, take a look at my "Domain Modeling Made Functional" book! It's a friendly introduction to Domain Driven Design, modeling with types, and function
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Turmoil, a framework for developing and testing distributed systems}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-03 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37163187\&utm\_term=comment}{272} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37163187\&utm\_term=comment}{14} 
+}
+\par\medskip\noindent
+\href{https://tokio.rs/blog/2023-01-03-announcing-turmoil?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{25.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Announcing turmoil
+January 3, 2023
+Today, we are happy to announce the initial release of
+turmoil,
+a framework for developing and testing distributed systems.
+Testing distributed systems is hard.}
+\paragraph{}
+ Non-determinism is everywhere (network, time, threads, etc.), making reproducible results difficult to achieve. Development cycles are lengthy due to deployments. All these factors slow down development and make it difficult to ensure system correctness.
+turmoil strives to solve these problems by simulating hosts, time and the
+network. This allows for an entire distributed system to run within a single
+process on a single thread, achieving deterministic execution. We also provide
+fine grain control over the network, with support for dropping, holding and
+delaying messages between hosts.
+Getting Started
+To use
+turmoil, add the crate to your
+Cargo.toml file:
+[dev-dependencies] turmoil = "0.3"
+Similar to
+loom, we provide simulated networking types that mirror
+tokio::net. Define a new module in your crate named
+net or any other name of
+your choosing. In this module, list out the types that need to be toggled
+between
+turmoil and
+tokio::net:
+pub use tokio::net::*; pub use turmoil::net::*;
+Then, write your software using networking types from this local module.
+mod simulation \{ fn simulate\_it() -> turmoil::Result \{ // build the simulation let mut sim = turmoil::Builder::new().build(); // setup a host sim.host("server", || async move \{ // host software goes here \}); // setup the test sim.cli
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Python: Just Write SQL}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-10 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37118633\&utm\_term=comment}{220} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37118633\&utm\_term=comment}{58} 
+}
+\par\medskip\noindent
+\href{https://joaodlf.com/python-just-write-sql?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{26.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{I have been writing a lot more Go this past year. For those not familiar, Go favours a non-ORM, non-query-builder approach to interacting with databases.}
+\paragraph{}
+ This comes naturally due to the sql package: A common interface to be used alongside database drivers. It’s very common to see actual SQL in Go, even in large projects. On the other hand, Python does not have anything in the standard library that supports database interaction, this has always been a problem for the community to solve. There are many ORMs and query builders for Python:
+- SQLAlchemy
+- Django ORM
+- Peewee (my personal favourite)
+- … plenty more!
+You can of course just take your favourite adapter and write SQL in Python (which is what we’ll be doing!), but I think most developers will agree that, as soon as you need to interact with a database, it is far more probable to immediately reach for an ORM like SQLAlchemy.
+(This is not to say Go doesn’t have popular ORMs, but you’re much more likely to see Go devs leveraging the standard library and database adapters, this is the typical approach new Go devs will be directed to.)
+In this post, I will aim to approach SQL in Python in the same vein as Go:
+- I want to write SQL.
+- I don’t want to rely on a query builder (let alone an ORM).
+- I want to package all of this in an abstraction that allows me to quickly change between database solutions, as well as make it easy to test.
+- l want a very clear separation between my database(s) and business logic.
+Show me the code
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Astro: All-in-one web framework designed for speed}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-01 
+{\scriptsize\faGlobe}\space 
+astro.build 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37108111\&utm\_term=comment}{166} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37108111\&utm\_term=comment}{27} 
+}
+\par\medskip\noindent
+\href{https://astro.build/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{27.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{- Astro
+-
+Score: 98
+- Gatsby
+-
+Score: 68
+- Next.js
+-
+Score: 63
+- WordPress
+-
+Score: 58
+- Nuxt
+-
+Score: 54
+Build the web
+you want
+Astro is the all-in-one web framework designed for speed.}
+\paragraph{}
+ Pull your content from anywhere and deploy everywhere, all powered by your favorite UI components and libraries.
+npm create astro@latest
+Copied!
+Used by the best developers and teams around the world:
+Full speed
+Astro optimizes your website like no other framework can. Leverage Astro's unique zero-JS frontend architecture to unlock higher conversion rates with better SEO.
+Content-focused
+Astro was designed for your content. Fetch data from any CMS or work locally with type-safe Markdown and MDX APIs.
+Blogs
+Build personal and professional blogs with Astro's built-in Markdown support and content APIs.
+Marketing
+Stand out from the crowd with a lightning fast site that ranks higher in SEO.
+Agencies
+Agencies use Astro to build fast websites, faster. Customize every site with full control over your frontend code.
+E-Commerce
+Time is money. Give your customers a better shopping experience and grow your business faster.
+Portfolios
+Put your best foot forward with a portfolio that performs. Help people get to know you (and your work) faster.
+Zero to website in whoa
+Bring your
+favorite tools
+Your existing UI components already run in Astro, no changes required. Add new
+integrations to your project with
+astro add.
+Deploy anywhere, even to the edge
+Try Astro in your browser
+Start your first Astro project r
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Algebraic data types in Lua (almost)}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37163742\&utm\_term=comment}{72} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37163742\&utm\_term=comment}{2} 
+}
+\par\medskip\noindent
+\href{https://mrcjkb.dev/posts/2023-08-17-lua-adts.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{28.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Lua, in the realm of Neovim, is a curious companion. For personal configuration tweaks, it’s incredibly responsive, giving me immediate feedback.}
+\paragraph{}
+ Moreover, when I’m uncertain about an idea’s potential, Lua offers a forgiving platform for prototyping without commitment.
+Yet, as the maintainer of a few plugins, who otherwise works with Haskell professionally, I have mixed feelings. Its dynamic typing casts shadows of unpredictability, making Neovim plugins susceptible to unexpected bugs at the wrong time.
+When it comes to Neovim plugin (and Lua) development, the right tools can be game-changers.
+I’m aware of typed languages that compile to Lua, but here’s a native approach.
+Here, I’ll delve into my experiences in leveraging
+lua-language-server
+and its support for type annotations,
+demonstrating how they can elevate the robustness and expressiveness of your Lua code.
+As an example, we will be attempting to define an algebraic data type (ADT),
+and using
+lua-language-server for static type checking.
+What are algebraic data types (ADT)s?
+For those steeped in the world of functional languages like Haskell, F\#, or OCaml, the term ADT might sound familiar. If that’s you, feel free to skip ahead.
+But if ADTs sound Greek to you, a straightforward analogy would be Rust Enums, which are, in fact, ADTs. They’re powerful constructs allowing versatile and type-safe data modeling.
+I want to keep this post short, so I will assume this is enough information for you to know all the niceties that
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Data}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{OpenFarm – a free and open database and web application for gardening knowledge}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Openfarm; OpenFarm 
+{\scriptsize\faCalendar}\space 
+2013-01-01 
+{\scriptsize\faGlobe}\space 
+openfarm.cc 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37125830\&utm\_term=comment}{526} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37125830\&utm\_term=comment}{17} 
+}
+\par\medskip\noindent
+\href{https://openfarm.cc?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=data}{
+    \includegraphics[width=0.99\linewidth]{29.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Welcome to OpenFarm! We're a pretty new project and community so please excuse any bugs you find in the website. Interested in helping out?}
+\paragraph{}
+ Become a member for free and we'll be in contact via our email newsletter!
+×
+1
+Choose a Crop
+2
+Find a Guide
+3
+Grow!
+Growing Guides show you how to care for your Crop during all
+of its Life Stages. Each Guide is based on specific environmental
+conditions and growing practices, and ranked for compatibility
+with you and your gardens.
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Uses and abuses of cloud data warehouses}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Arjun Narayan; Andy Hattemer 
+{\scriptsize\faCalendar}\space 
+2023-07-27 
+{\scriptsize\faGlobe}\space 
+materialize.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37146532\&utm\_term=comment}{153} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37146532\&utm\_term=comment}{11} 
+}
+\par\medskip\noindent
+\href{https://materialize.com/blog/warehouse-abuse/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=data}{
+    \includegraphics[width=0.99\linewidth]{30.jpg}
+}
+\end{minipage}
+\paragraph{}
+Cloud Data Warehouses (CDWs) are increasingly working their way into the dependency graph for important parts of the business: user-facing features, operational tools, customer comms, and even billing. Running this kind of operational work on a CDW might look promising initially but companies paint themselves into a corner as workloads expand: Either the cost (in warehouse invoices) to deliver the work outpaces the value delivered, or hard performance limits inherent to the design of analytical data warehouses prevent teams from delivering the capabilities necessary to serve the work in production.
+Why? Operational workloads have fundamental requirements that are diametrically opposite from the requirements for analytical systems, and we’re finding that a tool designed for the latter doesn’t always solve for the former. That said, teams running operational work on the warehouse aren’t completely irrational. There are many good reasons for building this way, especially initially.
+What is operational?
+First, a working definition. An operational tool facilitates the day-to-day operation of your business. Think of it in contrast to analytical tools that facilitate historical analysis of your business to inform longer term resource allocation or strategy. If an operational system goes down for the day, there are people who will either be unable to do their job, or deliver a degraded service that day.
+|Analytical Work||Operational Work|
+|
+|
+To simplify things, most operational work
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Design}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{CSS Selectors: A Visual Guide}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-01 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37132754\&utm\_term=comment}{298} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37132754\&utm\_term=comment}{22} 
+}
+\par\medskip\noindent
+\href{https://fffuel.co/css-selectors/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=design}{
+    \includegraphics[width=0.99\linewidth]{31.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{CSS Selectors: A Visual Guide
+✨ Here's a visual guide to the most popular CSS selectors.}
+\paragraph{}
+
+CSS selectors are patterns used in CSS to select and style HTML elements on a page, allowing us to dictate how styles apply to specific HTML elements.
+Along with traditional CSS selectors, we also have pseudo-classes and pseudo-elements. Pseudo-classes allow us to define styles based on an element's state or its relation to other elements. Think of things like hovering over a button or selecting the first item in a list. Pesudo-classes start with a colon character (:).
+On the other hand, pseudo-elements give you the power to target and style specific parts of an element, such as its first line or before and after its content. Pseudo-elements start with two colons (::).
+This guide serves as your map, detailing and visualizing these essential selectors.
+- ↑
+- *
+- element
+- .class
+- \#id
+- .class.class-2
+- .class,.class-2
+- .class .class-2
+- .class + class-2
+- .class > class-2
+- .class \~ class-2
+- * + *
+- [attr]
+- [attr=val]
+- [attr\~=val]
+- [attr*=val]
+- [attr\^=val]
+- [attr\$=val]
+- :link :active :visited :hover
+- :focus
+- :checked
+- :disabled
+- :enabled
+- :valid
+- :invalid
+- :required
+- :optional
+- :first-child
+- :last-child
+- :nth-child
+- :nth-last-child
+- :only-child
+- :first-of-type
+- :last-of-type
+- :nth-of-type
+- :nth-last-of-type
+- :only-of-type
+- :target
+- :not()
+- :has()
+- ::before
+- ::after
+- ::first-letter
+- ::first-line
+- ::placeholder
+- ::selection
+- ::marker
+- ...
+* universal sel
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Why font-size must NEVER be in pixels}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Grace Snow 
+{\scriptsize\faCalendar}\space 
+2023-05-02 
+{\scriptsize\faGlobe}\space 
+FEDmentor.dev 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37124019\&utm\_term=comment}{24} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37124019\&utm\_term=comment}{7} 
+}
+\par\medskip\noindent
+\href{https://FEDmentor.dev/posts/font-size-px/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=design}{
+    \includegraphics[width=0.99\linewidth]{32.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Why font-size must NEVER be in pixels
+— 4 minutes to read
+Certain font-related CSS properties will render your site completely inaccessible if their value is declared using pixels even once.}
+\paragraph{}
+
+Which properties are affected?
+All of these properties must never ever be declared in pixels.
+font-size
+line-height
+letter-spacing
+Even if your style guide or design file gives you these sizes in pixels (or pts), we must translate those values into more appropriate units.
+Why does it matter?
+A lot more people than you may think change their base text size, usually making it larger. This can be done at an operating system level or at a browser level.
+As browsers and devices make settings searchable and more user-friendly, the number of people tweaking font settings will only increase. (I once walked in on my mum holding a magnifying glass up to her computer screen because she didn't know she could change the text size! 🤭 Thankfully, those days are long behind her...)
+If you've used pixels to define any of the above style properties, these will not respect the user's font size preferences!
+At best this means text content becomes too small for some people to read comfortably (bring out that magnifying glass!). At worst, it means letters or lines will overlap each other, making the text totally unreadable! 😱
+The good news is, if we DO use appropriate units, everything will scale beautifully for ALL users, no matter what changes they make in their settings. And these are easy changes to make!
+
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{British Library's Public Domain Images}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Flickr 
+{\scriptsize\faCalendar}\space 
+2023-08-26 
+{\scriptsize\faGlobe}\space 
+flickr.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37165281\&utm\_term=comment}{11} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37165281\&utm\_term=comment}{2} 
+}
+\par\medskip\noindent
+\href{https://www.flickr.com/photos/britishlibrary/albums/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=design}{
+    \includegraphics[width=0.99\linewidth]{33.jpg}
+}
+\end{minipage}
+\paragraph{}
+Explore
+Recent Photos
+Trending
+Events
+The Commons
+Flickr Galleries
+World Map
+Camera Finder
+Flickr Blog
+Prints
+The Print Shop
+New
+Prints \& Wall Art
+Photo Books
+Get Pro
+Pro Plans
+Stats Dashboard
+Get Auto-Uploadr
+Log In
+Sign Up
+Log In
+Explore
+Trending
+Events
+The Commons
+Flickr Galleries
+Flickr Blog
+The Print Shop
+New
+Prints \& Wall Art
+Photo Books
+Get Pro
+About
+Jobs
+Blog
+Developers
+Guidelines
+Help
+Help forum
+Privacy
+Terms
+Cookies
+English
+British Library
+Follow
+The British Library
+58K Followers
+•
+30 Following
+1,073,589 Photos
+Joined 2007
+British Library
+The British Library
+58K Followers
+•
+30 Following
+1,073,589 Photos
+Joined 2007
+Follow
+Save
+Cancel
+Drag to set position!
+About
+Photostream
+Albums
+Faves
+Galleries
+Groups
+View collections
+1
+2
+3
+4
+5
+6
+7
+•••
+13
+14
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Adapting Illustrations on Dark Mode}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Simon Farshid 
+{\scriptsize\faCalendar}\space 
+2023-08-15 
+{\scriptsize\faGlobe}\space 
+simonfarshid.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37133657\&utm\_term=comment}{9} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37133657\&utm\_term=comment}{1} 
+}
+\par\medskip\noindent
+\href{https://blog.simonfarshid.com/adapting-illustrations-to-dark-mode?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=design}{
+    \includegraphics[width=0.99\linewidth]{34.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Adapting Illustrations to Dark Mode
+3 min read
+I want to share with you a quick way to make illustrations on your website work in both light and dark mode:
+.dark .}
+\paragraph{}
+invert-on-dark \{ filter: invert(1) hue-rotate(180deg); \}
+Try it!
+Toggle dark mode in the navigation bar and see the cover photo switch colors.
+How it works
+Intuitively, you want to swap black for white, white for black. For colors, you want to swap lighter colors for darker colors and vice versa.
+invert(1)
+Using
+invert(1) from the CSS Filter Effects, you can invert the colors:
+.dark .invert-on-dark \{ filter: invert(1); \}
+After inversion, light parts of the image appear dark and vice versa.
+Unfortunately, colors are reversed too: red becomes cyan, green becomes pink, blue becomes yellow, ... You don't want this!
+To understand why, let's look at what the
+invert(1) function does:
+function invert(\{ r, g, b \}) \{ return \{ r: 255 - r, g: 255 - g, b: 255 - b \}; \}
+The invert function operates in the RGB color space. First, the color is broken up into its Red, Green and Blue components. Then, each value is subtracted from the maximum possible value, 255.
+We can do the math to see the color flipping in action:
+invert(\{ r: 0, g: 0, b: 0 \}) // black -> \{ r: 255, g: 255, b: 255 \} // white invert(\{ r: 0, g: 255, b: 0 \}) // green -> \{ r: 255, g: 0, b: 255 \} // pink
+For every color, its complimentary color is returned. When inverting for dark mode, we're aiming for a color palette that retains the original's intent. We need a differ
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Books}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Ask HN: Any interesting books you have read lately?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37133657\&utm\_term=comment}{399} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37133657\&utm\_term=comment}{179} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37156372\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{35.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{[1]: https://stallman.org/Bob-Chassell
+I'm a person that struggles with boundary-setting and have spent numerous years in relationships that have left me as less-than I was before.}
+\paragraph{}
+ Imagine people-pleasing to an absolute fault, and being more of a chameleon that adapts to avoid conflicts. This has led to problems of identity, and deriving my sense of worth through others which isn't healthy.
+Fortunately, I do not have the same problems professionally and part of my people-pleasing skills have been put to good use there.
+However, history continued and continues to repeat itself to this day. I'm more than half-way into this book and am not only seeing patterns from my childhood, my relationships with my parents, and my early relationships (platonic \& romantic)
+It's been eye-opening, and I consider it my first step in breaking this trend.
+reply
+Is that also what I can expect from the book, or did I come to conclusions too quickly?
+The men's rights stuff tells them they've been sold a lie/raw deal by society, and that they can get power, success, etc. by rejecting that narrative that didn't work for them. Yes, this involves a lot of fear, misogyny, etc. but at it's core there is the message that it's your own fault, and you need to take responsibility: learn to set boundaries, work hard, prioritize and communicate your own needs, develop vulnerability and emotional intelligence, etc. Old self help books that really work are extremely popular in these communities, and these men sup
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{The unpublished preface to Orwell’s Animal Farm}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Denyse O'Leary 
+{\scriptsize\faCalendar}\space 
+2023-08-12 
+{\scriptsize\faGlobe}\space 
+mindmatters.ai 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37129768\&utm\_term=comment}{300} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37129768\&utm\_term=comment}{23} 
+}
+\par\medskip\noindent
+\href{https://mindmatters.ai/2023/08/a-warning-from-the-unpublished-preface-to-orwells-animal-farm/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{36.jpg}
+}
+\end{minipage}
+\paragraph{}
+A Warning From the Unpublished Preface to Orwell’s Animal FarmOnly discovered in 1971, the Preface offers George Orwell’s critical but neglected insights into the nature of censorship in a free society
+George Orwell‘s novella Animal Farm (1945) was a political fable. The cleverly portrayed animals who chase off the farmer and try to run the farm as a utopia slowly begin to replicate all the attitudes and practices against which they had rebelled. The story, summarized here, satirizes the Soviet Union’s transition from revolution to totalitarianism under Joseph Stalin (1878–1953). In fact, the animal characters and incidents are often allusions to historical Soviet figures and events.
+His Preface, “The Freedom of the Press,” was omitted from the first edition of the book, then disappeared, and was not rediscovered until 1971. From it, we learn that Orwell had considerable difficulty getting his fable published. That wasn’t principally because of wartime issues. There was a shortage of books and his was highly readable. Rather, British intellectuals of the day did not wish to hear any criticism of Stalin or allusions to his atrocities:
+Obviously it is not desirable that a government department should have any power of censorship (except security censorship, which no one objects to in war time) over books which are not officially sponsored. But the chief danger to freedom of thought and speech at this moment is not the direct interference of the MOI or any official body. If publ
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Is this a good book for me, now?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2016-01-01 
+{\scriptsize\faGlobe}\space 
+maryrosecook.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37144601\&utm\_term=comment}{233} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37144601\&utm\_term=comment}{14} 
+}
+\par\medskip\noindent
+\href{https://maryrosecook.com/blog/post/is-this-a-good-book-for-me-now?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{37.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Is this a good book for me, now?
+I used to believe that every book has an objective value. And I used to believe that this value is fixed and universal.}
+\paragraph{}
+
+Now, I believe it’s much more useful to say something in this form: this book has this value to this person in this context.
+For example, Mindset by Carol Dweck was life changing to me when I read it in 2016.
+The “me” part is important because I grew up thinking that intelligence is fixed and my skill in each activity I tried was based on talent and was fixed. So I thought I should to do the things I had a knack for, and I thought that the things I found difficult would stay difficult. Learning about a growth mindset was extremely valuable to me.
+The 2016 part - the context - was also important. I’d just spent the last three years working at the Recurse Center, a place and community suffused with the idea that people can grow. I was primed for these ideas.
+A second example. Around ten years ago I read You and your research by Richard Hamming. This is an essay by a mathematician who did ground-breaking research into telecommunications. He relates this anecdote:
+I had been eating for some years with the Physics table at the Bell Telephone Laboratories restaurant…Fame, promotion and hiring by other companies ruined the average quality of the people so I shifted to the Chemistry table in another corner of the restaurant. I began by asking what the important problems were in chemistry, then later what important problems they were 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Peter Pan copyright}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2007-12-31 
+{\scriptsize\faGlobe}\space 
+gosh.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37128929\&utm\_term=comment}{140} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37128929\&utm\_term=comment}{9} 
+}
+\par\medskip\noindent
+\href{https://www.gosh.org/about-us/peter-pan/copyright/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{38.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Peter Pan copyright
+Who owns the copyright to Peter Pan?
+J M Barrie gifted the rights to Peter Pan to Great Ormond Street Hospital in 1929.}
+\paragraph{}
+ Over the years, this generous gift has provided a significant source of income to help support the work of the hospital, and to help provide seriously ill children with the best chance to fulfil their potential.
+Copyright Designs and Patents Act
+The copyright first expired in the UK (and the rest of Europe) in 1987, 50 years after Barrie’s death.
+However, former Prime Minister Lord Callaghan successfully proposed an amendment to the Copyright Designs and Patents Act (CDPA) of 1988, giving Great Ormond Street Hospital the unique right to royalties from stage performances of Peter Pan (and any adaptation of the play) as well as from publications, audio books, ebooks,radio broadcasts and films of the story of Peter Pan, in perpetuity.
+Copyright in UK and Europe
+In 1996, the copyright term was extended to 70 years after the author’s death throughout the European Union, which meant Peter Pan enjoyed revived copyright until 31 December 2007, after which it entered the public domain in Europe.
+In the UK, the CDPA therefore prevails so that the hospital will continue enjoying the benefit of Barrie’s gift in perpetuity.
+US copyright
+Although the novel Peter Pan (also known as Peter and Wendy) is in the public domain in the US, the play (and stage adaptations) is in copyright there until December 2023.
+This is because the novel was published in 191
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{New book considers the impact of electronic logging devices on drivers}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+David Hollis 
+{\scriptsize\faCalendar}\space 
+2023-01-04 
+{\scriptsize\faGlobe}\space 
+truckersnews.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37143716\&utm\_term=comment}{69} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37143716\&utm\_term=comment}{9} 
+}
+\par\medskip\noindent
+\href{https://www.truckersnews.com/home/article/15305066/new-book-considers-the-impact-of-electronic-logging-devices-on-drivers?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{39.jpg}
+}
+\end{minipage}
+\paragraph{}
+Few developments since President Jimmy Carter signed the Motor Carrier Act of 1980 have so riled and divided the American trucking industry as the mandatory installation of electronic logging devices in most heavy-duty trucks. Praised and pushed by carriers and regulators but reviled by most truckers, ELDs were positioned as a mandated step toward improving highway safety by combating driver fatigue.
+A new book by a Cornell University professor takes a deep dive into the arrival and use of ELDs, and the effect the technology has had on truckers. Data Driven: Truckers, Technology, and the New Workplace Surveillance by Karen Levy arrived last month from Princeton University Press.
+We had a chance to speak with Levy, who is an associate professor of information science in Cornell's Ann S. Bowers College of Computing and Information Science. (The following has been edited for clarity and brevity.)
+Truckers News: Interesting book. Quite the topic within the industry. What prompted you to write this?
+Karen Levy: It was kind of a little bit of an unexpected twist in my life. I started the book when I was a graduate student. I was studying sociology, getting my PhD, and before that I had gotten a law degree. So I was really interested in the law and kind of how it functions, and especially the relationship between law and technology. So I feel it's increasingly common to kind of see governments or companies or other groups turn to technology as a way to enforce rules more strictly or
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Wright's Book of Poultry}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2009-11-04 
+{\scriptsize\faGlobe}\space 
+archive.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37129799\&utm\_term=comment}{19} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37129799\&utm\_term=comment}{3} 
+}
+\par\medskip\noindent
+\href{https://archive.org/details/wrightsbookofpou00wrig?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{40.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{We will keep fighting for all libraries - stand with us!
+Search the history of over 830 billion
+web pages
+on the Internet.}
+\paragraph{}
+
+Capture a web page as it appears now for use as a trusted citation in the future.
+Please enter a valid web address
+Many pages have very fine print, with the result of some pages having very faint text.
+2,047
+Views
+12
+Favorites
+Uploaded by
+Robert West
+on November 4, 2009
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Working}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{80\% of bosses say they regret earlier return-to-office plans}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Morgan Smith 
+{\scriptsize\faCalendar}\space 
+2023-08-11 
+{\scriptsize\faGlobe}\space 
+cnbc.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37093854\&utm\_term=comment}{719} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37093854\&utm\_term=comment}{64} 
+}
+\par\medskip\noindent
+\href{https://www.cnbc.com/2023/08/11/80percent-of-bosses-say-they-regret-earlier-return-to-office-plans.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{41.jpg}
+}
+\end{minipage}
+\paragraph{}
+80 of bosses say they regret earlier return-to-office plans: ‘A lot of executives have egg on their faces’
+After three years of haphazard plans for getting workers back at their desks, the return-to-office movement has entered a phase of remorse.
+A whopping 80 of bosses regret their initial return-to-office decisions and say they would have approached their plans differently if they had a better understanding of employees' office attendance, their usage of office amenities and other related factors, according to new research from Envoy.
+"Many companies are realizing they could have been a lot more measured in their approach, rather than making big, bold, very controversial decisions based on executives' opinions rather than employee data," Larry Gadea, Envoy's CEO and founder, tells CNBC Make It.
+Envoy interviewed more than 1,000 U.S. company executives and workplace managers who work in-person at least one day per week.
+Some leaders lamented the challenge of measuring the success of in-office policies, while others said it's been hard to make long-term real estate investments without knowing how employees might feel about being in the office weeks, or even months, from now.
+Kathy Kacher, a consultant who advises corporate executives on their return-to-office plans, is surprised the percentage isn't higher.
+"Many organizations that attempted to force a return to the office have had to retract or change their plans because of employee pushback, and now, they don't look stron
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{How to communicate when trust is low without digging yourself into a deeper hole}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Mipsytipsy 
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faGlobe}\space 
+charity.wtf 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37166946\&utm\_term=comment}{595} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37166946\&utm\_term=comment}{45} 
+}
+\par\medskip\noindent
+\href{https://charity.wtf/2023/08/17/how-to-communicate-when-trust-is-low-without-digging-yourself-into-a-deeper-hole/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{42.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{This is based on an internal quip doc I wrote up about careful communication in the context of rebuilding trust. I got a couple requests to turn it into a blog post for sharing purposes; here you go.}
+\paragraph{}
+🌈✨🥂
+In this doc I mention Christine, my wonderful, brilliant cofounder and CEO, and the time (years ago) when our relationship had broken down completely, forcing us to rebuild our trust from the ground up.
+(Cofounder relationships can be hard. They are a lot like marriages; in their difficulty and intensity, yes, but also in that when you’re doing it with the right person, it’s all worth it. 💜)
+Tips for Careful Communication
+When a relationship has very little trust, you tend to interpret everything someone says in the worst possible light, or you may hear hostility, contempt, or dismissiveness where none exists. On the other side of the exchange, the conversation becomes a minefield, where it feels like everything you say gets misinterpreted or turned against you no matter how careful you are trying to be. This can turn into a death spiral of trust where every interaction ends up with each of you hardening against each other a little more and filing away ever more wounds and slights. 💔
+Yet you HAVE to communicate in order to work together! You have to be able to ask for things and give feedback.
+The way trust gets rebuilt is by ✨small, positive interactions✨. If you’re in a trust hole, you can’t hear them clearly, and they can’t hear you (or your intent) clearly. So you have to 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Job Corps: free, residential training and education for low-income young adults}
+\textsc{\footnotesize
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37166478\&utm\_term=comment}{364} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37166478\&utm\_term=comment}{30} 
+}
+\par\medskip\noindent
+\href{https://www.jobcorps.gov/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{43.jpg}
+}
+\end{minipage}
+\paragraph{}
+
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Ask HN: How do you look for jobs in 2023?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-13 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37166478\&utm\_term=comment}{236} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37166478\&utm\_term=comment}{53} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37111256\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{44.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{I’m steadily looking for new opportunities, but am increasingly annoyed by the LinkedIn / Indeed grind. I feel like half the jobs are recruiting firms or very bloated positions with >500 applicants.}
+\paragraph{}
+
+I love the monthly “Who is hiring?” thread — these positions almost always yield more responses and suffer less from false advertising.
+Are there other sites I’m not considering? Methods I’m not using? How do you find good (defined as not bloated and optimized for LI) job opportunities in the current market?
+My conclusion, so far, is unless you've got strong connections it's hard right now to find a job. Most job posting, as OP mentions get hundreds if not thousands of applications. Other times, I've personally also notice, candidates with perfect skill/experience matches get the same generic rejection ("we respect your experience but we're going to go with another candidate") or worse getting no response at all. There have been mentions of pseudo job posts (ie companies are just falsely advertising positions they are not actually look to fill). Ultimately, a really crappy situation for those looking for a job. Even experienced people, think 7,8,10+ years of experience, are seeing similar things unless they have a strong connection that get them to the final stage(s) of the internet process.
+Happy to provide a links to relevant online discussions and articles about this situation if anyone is interested. Let me know.
+reply
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Throwing away 10 months of work after 2 months on the job}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Dan Cowell 
+{\scriptsize\faCalendar}\space 
+2023-06-30 
+{\scriptsize\faGlobe}\space 
+dancowell.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37167833\&utm\_term=comment}{176} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37167833\&utm\_term=comment}{35} 
+}
+\par\medskip\noindent
+\href{https://www.dancowell.com/breaking-the-rules/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{45.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Breaking the rules: I threw away 10 months of work after 2 months on the job.
+When I took over the team, they were in month 8 of a 3-month project to relaunch the company's ecommerce website.}
+\paragraph{}
+ After 2 months leading the team, I decided to scrap it and start over. This is the story of how and why, and whether it all worked out.
+The relaunch of our ecommerce website had one goal: deliver blazing fast performance with Server-Side Rendering.
+Our JavaScript bundle size was 168mb on a good day. The development environment took 3 minutes to become responsive on a top-of-the-line MacBook Pro. Engineers would regularly come in to work, type
+npm run dev and go for a coffee while their machine's fans tried and failed to keep up with the demands placed on them by our bloated project.
+Where did it go so wrong?
+The backstory
+The company's first website was an AngularJS single-page application. AngularJS didn't support server-side rendering, so the website was slow to render on first load, but snappy once everything had downloaded.
+On the web, milliseconds matter - and this goes double for ecommerce. We needed to reduce our time to first meaningful paint.
+Angular 2 was on the team's radar, and although it was a substantial departure from AngularJS, it seemed like the logical foundation for the new website. There was even an experimental server-side rendering feature branch under active development! Surely it would be ready to go by the time they were ready to ship!
+The team built the site, r
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Repo with a list of 80 decent companies hiring remotely in Europe}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+EuropeanRemote 
+{\scriptsize\faCalendar}\space 
+2023-08-25 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37144925\&utm\_term=comment}{99} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37144925\&utm\_term=comment}{12} 
+}
+\par\medskip\noindent
+\href{https://github.com/EuropeanRemote/european-remote-software-companies?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{46.jpg}
+}
+\end{minipage}
+\paragraph{}
+European Remote
+List of the remote software companies hiring in Europe
+|Company||Domain||Tech-stack||Salary transparency||Global salary||Profile|
+|1Password 🇨🇦||Security||🖥 Golang 🎨 React, TypeScript ☁️ AWS||❌||❌||ℹ️|
+|Agile Lab 🇮🇹||Databases \& tools||🖥 Node.js, Java, Scala, TypeScript, Python 🎨 React, TypeScript ☁️ Azure, AWS, GCP||✅||✅||ℹ️|
+|Ahrefs 🇸🇬||Search engine tools||🖥 C++, DLang, OCaml, ReasonML 🎨 React, JavaScript, Gatsby, Melange||❌||✅||ℹ️|
+|Airtable 🇺🇸||Databases \& tools||🖥 Ruby, Node.js, JavaScript 🎨 JavaScript, TypeScript ☁️ AWS||❌||❌||ℹ️|
+|Aula Education 🇬🇧||EdTech||🖥 JavaScript, Node.js 🎨 React ☁️ AWS||✅||✅||ℹ️|
+|Auth0 🇺🇸||Security||🖥 Node.js, GraphQL 🎨 React ☁️ AWS||❌||❌||ℹ️|
+|Automattic 🇺🇸||Content management||🖥 PHP, WordPress||❌||✅||ℹ️|
+|Balsamiq 🇮🇹||Design||🖥 Rails, Ruby ☁️ AWS||❌||❌||ℹ️|
+|Baremetrics 🇺🇸||Business management||🖥 Ruby 🎨 Vue.js, TypeScript||✅||✅||ℹ️|
+|BaseCamp 🏡||Project management||🖥 Ruby, Rails||❌||✅||ℹ️|
+|Bind 🇬🇧||Online community||🖥 JavaScript, Node.js, TypeScript 🎨 React, JavaScript, TypeScript||❌||✅||ℹ️|
+|Buffer 🏡||Social media automation||🖥 Node.js, GraphQL 🎨 React, Next.js||✅||❌||ℹ️|
+|Cabify 🇪🇸||Transport||🖥 Golang, Elixir, Ruby, Java 🎨 React, TypeScript ☁️ AWS, GCP||✅||✅||ℹ️|
+|Canonical 🇬🇧||Operating Systems||🖥 Python, Golang||❌||❌||ℹ️|
+|ChartMogul 🇩🇪||Business management||🖥 Ruby, JavaScript, Python, Rails 🎨 Vue.js, TypeScript, JavaScript ☁️ AWS||❌||❌||ℹ️|
+|Chili Piper 🇺🇸||Sales||🖥 Kotlin, Scala, Akka, Play ☁️ GCP||❌||❌||ℹ️|
+|CircleC
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Learn}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Toki Pona: an attempted universal language with only \~120 words}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Andi 
+{\scriptsize\faCalendar}\space 
+2022-07-22 
+{\scriptsize\faGlobe}\space 
+cohost.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37113307\&utm\_term=comment}{504} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37113307\&utm\_term=comment}{40} 
+}
+\par\medskip\noindent
+\href{https://cohost.org/mcc/post/59045-mi-kama-sona-e-toki?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{47.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{So I stumbled a few weeks ago on this video about the world's smallest conlang and I've been thinking about it ever since.
+(You will probably have the idea more than fully by the ten minute mark.}
+\paragraph{}
+)
+This fascinated me. I think languages are really interesting but I'm also really bad at them. I cannot hack the memorization. I've mostly avoided conlangs (that's Constructed Languages, like Esperanto or Klingon) because like, oh no, now there's even more languages for me to fail at memorizing. So like, a language so minimal you can almost learn it by accident, suddenly my ears perk up.
+Toki pona is really interesting, on a lot of different axes. It's a thought experiment in Taoist philosophy that turns out to be actually, practically useful. It's Esperanto But It Might Actually Work This Time¹. It has NLP implications— it's a human language which feels natural to speak yet has such a deeply logical structure it seems nearly custom-designed for simple computer programs to read and write it². Beyond all this it's simply beautiful as an intellectual object— nearly every decision it makes feels deeply right. It solves a seemingly insoluble problem³ and does it with a sense of effortlessness and an implied "LOL" at every step.
+So what toki pona is. Toki pona is a language designed around the idea of being as simple as it is possible for a language to be. It has 120 words in its original form (now, at the twenty year mark, up to 123), but you can form a lot of interesting sentences with 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Thermodynamic Linear Algebra}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Aifer; Maxwell; Donatella; Kaelan; Gordon; Max Hunter; Ahle; Thomas; Simpson; Daniel; Crooks; Gavin E; Coles; Patrick J 
+{\scriptsize\faCalendar}\space 
+2023-08-10 
+{\scriptsize\faGlobe}\space 
+arxiv.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37106789\&utm\_term=comment}{233} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37106789\&utm\_term=comment}{20} 
+}
+\par\medskip\noindent
+\href{https://arxiv.org/abs/2308.05660?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{48.jpg}
+}
+\end{minipage}
+\paragraph{}
+Condensed Matter > Statistical Mechanics
+[Submitted on 10 Aug 2023]
+Title:Thermodynamic Linear AlgebraDownload PDF
+Abstract: Linear algebraic primitives are at the core of many modern algorithms in engineering, science, and machine learning. Hence, accelerating these primitives with novel computing hardware would have tremendous economic impact. Quantum computing has been proposed for this purpose, although the resource requirements are far beyond current technological capabilities, so this approach remains long-term in timescale. Here we consider an alternative physics-based computing paradigm based on classical thermodynamics, to provide a near-term approach to accelerating linear algebra.
+At first sight, thermodynamics and linear algebra seem to be unrelated fields. In this work, we connect solving linear algebra problems to sampling from the thermodynamic equilibrium distribution of a system of coupled harmonic oscillators. We present simple thermodynamic algorithms for (1) solving linear systems of equations, (2) computing matrix inverses, (3) computing matrix determinants, and (4) solving Lyapunov equations. Under reasonable assumptions, we rigorously establish asymptotic speedups for our algorithms, relative to digital methods, that scale linearly in matrix dimension. Our algorithms exploit thermodynamic principles like ergodicity, entropy, and equilibration, highlighting the deep connection between these two seemingly distinct fields, and opening up algebraic applicat
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Fred Fish}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2004-10-20 
+{\scriptsize\faGlobe}\space 
+wikipedia.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37148062\&utm\_term=comment}{163} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37148062\&utm\_term=comment}{16} 
+}
+\par\medskip\noindent
+\href{https://en.wikipedia.org/wiki/Fred\_Fish?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{49.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Fred Fish
+This article's tone or style may not reflect the encyclopedic tone used on Wikipedia.}
+\paragraph{}
+ (April 2014)
+Fred Fish
+|Born||November 4, 1952|
+|Died||April 20, 2007(aged 54)|
+|Known for||Fish Disks|
+Fred Fish (November 4, 1952 – April 20, 2007) was a computer programmer notable for work on the GNU Debugger and his series of freeware disks for the Amiga.
+The Amiga Library Disks – colloquially referred to as Fish Disks (a term coined by Perry Kivolowitz at a Jersey Amiga User Group meeting) – became the first national rallying point, a sort of early postal system. Fish would distribute his disks around the world in time for regional and local user group meetings, which in turn duplicated them for local distribution. Typically, only the cost of materials changed hands. The Fish Disk series ran from 1986 to 1994. In it, one can chart the growing sophistication of Amiga software and see the emergence of many software trends.
+The Fish Disks were distributed at computer stores and Amiga enthusiast clubs. Contributors submitted applications and source code and the best of these each month were assembled and released as a diskette. Since the Internet was not yet in popular usage outside military and university circles, this was a primary way for enthusiasts to share work and ideas.[1] He also initiated the "GeekGadgets" project, a GNU standard environment for AmigaOS and BeOS.
+Fish worked for Cygnus Solutions in the 1990s before he left for Be Inc. in 1998.[2]
+In 1978, he self-publis
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Sargablock: Bricks from Seaweed}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Sid Lee 
+{\scriptsize\faCalendar}\space 
+2023-01-01 
+{\scriptsize\faGlobe}\space 
+fortomorrow.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37175721\&utm\_term=comment}{151} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37175721\&utm\_term=comment}{13} 
+}
+\par\medskip\noindent
+\href{https://fortomorrow.org/explore-solutions/sargablock?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{50.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Sargablock
+Sargablock is a construction material made from sargassum seaweed, brown algae that washes up on Caribbean beaches and costs a fortune to the tourism industry.}
+\paragraph{}
+ Interest has spread from Mexico to countries around the Caribbean and beyond.
+My journey began in 2015 when sargassum seaweed first started washing up on the shores of the Riviera Maya. Where others saw a problem, I saw an opportunity to turn it into its own sustainable solution, including placing it in service of people who need it the most.
+I started collecting sargassum seaweed to use as fertilizer for my business, Blue-Green Nursery, and selling it in small amounts to my clients. Soon I obtained permits and within a year was employing about 300 families to clean the beaches for local hotels and resorts. But then it occurred to me that we could turn sargassum seaweed into construction bricks as it was already being used to make products like plates and other things. Inspired by the memory of my family’s little adobe house, I developed Sargablock, an architectural brick made from the sargassum seaweed that spoils our beaches between April and October.
+I adjusted a machine designed to make adobe bricks so that it can process a mix of 40 sargassum and 60 other organic materials for the Sargablock. The machine can turn out 1,000 blocks a day, and after four hours of baking in the sun, they are dried and ready to be used. After we built Casa Angelita, the first sargassum house named after my mother, Sargablo
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Ancient fires drove large mammals extinct, study suggests}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Katrina Miller 
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faGlobe}\space 
+nytimes.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37166986\&utm\_term=comment}{146} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37166986\&utm\_term=comment}{20} 
+}
+\par\medskip\noindent
+\href{https://www.nytimes.com/2023/08/17/science/climate-paleontology-mammals.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{51.jpg}
+}
+\end{minipage}
+\paragraph{}
+Supported by
+Ancient Fires Drove Large Mammals Extinct, Study Suggests
+Fossils from La Brea Tar Pits in Southern California suggest that sabertooth cats and other large North American mammals disappeared as a result of wildfires spurred by human activity.
+Wildfires are getting worse. Parts of the United States, scientists say, are experiencing wildfires three times as often — and four times as big — as they were 20 years ago. This summer alone, smoke from Canadian blazes turned North American skies an unearthly orange, “fire whirls” were seen in the Mojave Desert and raging flames in Maui led to disaster.
+Records of the distant past can reveal what once drove increased fire activity and what can happen as a result. In a new study published Thursday in the journal Science, a group of paleontologists that analyzed fossil records at La Brea Tar Pits, a famous excavation site in Southern California, concluded that the disappearance of sabertooth cats, dire wolves and other large mammals in this region nearly 13,000 years ago was linked to rising temperatures and increased fire activity spurred by people.
+“We implicate humans as being the primary cause of the tipping point,” said Robin O’Keefe, an evolutionary biologist at Marshall University. “What happened in La Brea, is it happening now? Well, that’s a really good question — and I think we should figure it out.”
+Earth has seen five mass extinction events so far; some scientists argue that the disappearance of large mammals at t
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Is Venus in some way tidally locked to Earth?}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Puzzlet Puzzlet 
+{\scriptsize\faCalendar}\space 
+2020-06-11 
+{\scriptsize\faGlobe}\space 
+stackexchange.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37118114\&utm\_term=comment}{128} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37118114\&utm\_term=comment}{8} 
+}
+\par\medskip\noindent
+\href{https://astronomy.stackexchange.com/questions/36488/is-venus-in-some-way-tidally-locked-to-earth?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{52.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{This is a fun little problem that's remarkably close and the math is pretty easy when you use the right periods.
+Venus' synodic period, relative to Earth, is 583.92 days on average.}
+\paragraph{}
+ He uses 584, but lets strive for accuracy. Venus' solar day is 116.75 days, so 5 solar days is 583.75 days - Venus does 5 rotations in nearly the same amount of time that Earth and Venus line up together.
+More details below:
+Eccentricity in this case, doesn't matter, so, even though Earth will move different amounts in those 218 days past the first full year, it's the average that matters.
+A cool property of tidal locking is that the locked objects can move ahead or behind and it doesn't undo the locking. For example, our Moon is tidally locked but its eccentricity still creates libration. Pluto can move ahead of or fall behind its 3/2 resonance with Neptune, but Neptune's gravity draws it back, so it never laps the 3/2 resonance. It stays locked. All we need is the average synodic period, or 583.92 days.
+.03 is closer than many tidally locked objects' periods can be, but that doesn't mean they're tidally locked. One can still lap the other.
+We know it's coincidence because orbital periods, which determine the 583.92 ratio, are highly stable and Venus' orbital period might change very slowly, but only very slowly.
+The variation is a little under .03 or 3 parts in 10,000. It's close enough that we might want to get more decimal points to get more accuracy, but that's where I run into some problem
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Core War, a very old game about programming}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2003-07-21 
+{\scriptsize\faGlobe}\space 
+wikipedia.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37117469\&utm\_term=comment}{65} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37117469\&utm\_term=comment}{9} 
+}
+\par\medskip\noindent
+\href{https://en.wikipedia.org/wiki/Core\_War?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{53.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Core War
+|Core War|
+|Developer(s)||D. G. Jones \& A. K. Dewdney|
+|Release||March 1984|
+|Genre(s)||Programming game|
+Core War is a 1984 programming game created by D. G. Jones and A. K.}
+\paragraph{}
+ Dewdney in which two or more battle programs (called "warriors") compete for control of a virtual computer. These battle programs are written in an abstract assembly language called Redcode. The standards for the language and the virtual machine were initially set by the International Core Wars Society (ICWS), but later standards were determined by community consensus.
+Gameplay[edit]
+At the beginning of a game, each battle program is loaded into memory at a random location, after which each program executes one instruction in turn. The goal of the game is to cause the processes of opposing programs to terminate (which happens if they execute an invalid instruction), leaving the victorious program in sole possession of the machine.
+The earliest published version of Redcode defined only eight instructions. The ICWS-86 standard increased the number to 10 while the ICWS-88 standard increased it to 11. The currently used 1994 draft standard has 16 instructions. However, Redcode supports a number of different addressing modes and (starting from the 1994 draft standard) instruction modifiers which increase the actual number of operations possible to 7168. The Redcode standard leaves the underlying instruction representation undefined and provides no means for programs to access it. Arithmetic operation
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Watching}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Pijul: Version-Control Post-Git}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-07-11 
+{\scriptsize\faYoutube}\space 
+youtube.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37094599\&utm\_term=comment}{201} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37094599\&utm\_term=comment}{23} 
+}
+\par\medskip\noindent
+\href{https://www.youtube.com/watch?v=7MpdZkGj5AI\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{54.jpg}
+}
+\end{minipage}
+\paragraph{}
+Over
+Pers
+Auteursrecht
+Contact
+Creators
+Adverteren
+Ontwikkelaars
+Voorwaarden
+Privacy
+Beleid en veiligheid
+Zo werkt YouTube
+Nieuwe functies testen
+© 2023 Google LLC
+YouTube, een bedrijf van Google
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{A simple way to test the charge level on alkaline batteries}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2013-08-13 
+{\scriptsize\faYoutube}\space 
+youtube.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37155657\&utm\_term=comment}{110} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37155657\&utm\_term=comment}{14} 
+}
+\par\medskip\noindent
+\href{https://www.youtube.com/watch?v=nwfFBUVxpac\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{55.jpg}
+}
+\end{minipage}
+\paragraph{}
+Over
+Pers
+Auteursrecht
+Contact
+Creators
+Adverteren
+Ontwikkelaars
+Voorwaarden
+Privacy
+Beleid en veiligheid
+Zo werkt YouTube
+Nieuwe functies testen
+© 2023 Google LLC
+YouTube, een bedrijf van Google
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Tmux has forever changed the way I write code}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-04-25 
+{\scriptsize\faYoutube}\space 
+youtube.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37172711\&utm\_term=comment}{103} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37172711\&utm\_term=comment}{14} 
+}
+\par\medskip\noindent
+\href{https://www.youtube.com/watch?v=DzNmUNvnB04\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{56.jpg}
+}
+\end{minipage}
+\paragraph{}
+Over
+Pers
+Auteursrecht
+Contact
+Creators
+Adverteren
+Ontwikkelaars
+Voorwaarden
+Privacy
+Beleid en veiligheid
+Zo werkt YouTube
+Nieuwe functies testen
+© 2023 Google LLC
+YouTube, een bedrijf van Google
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Unit: A visual programming system}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-16 
+{\scriptsize\faYoutube}\space 
+youtube.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37156337\&utm\_term=comment}{97} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37156337\&utm\_term=comment}{14} 
+}
+\par\medskip\noindent
+\href{https://www.youtube.com/watch?v=lvvzolKHt2E\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{57.jpg}
+}
+\end{minipage}
+\paragraph{}
+Over
+Pers
+Auteursrecht
+Contact
+Creators
+Adverteren
+Ontwikkelaars
+Voorwaarden
+Privacy
+Beleid en veiligheid
+Zo werkt YouTube
+Nieuwe functies testen
+© 2023 Google LLC
+YouTube, een bedrijf van Google
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Startup News}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Discord.io breached, 760k user accounts for sale on darknet}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Alex Ivanovs 
+{\scriptsize\faCalendar}\space 
+2023-08-14 
+{\scriptsize\faGlobe}\space 
+stackdiary.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37124187\&utm\_term=comment}{404} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37124187\&utm\_term=comment}{14} 
+}
+\par\medskip\noindent
+\href{https://stackdiary.com/the-data-of-760000-discord-io-users-was-put-up-for-sale-on-the-darknet/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{58.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Note: I've gone ahead and updated the featured image, so it doesn't seem like this has something to do with Discord "directly".}
+\paragraph{}
+ It was not my intention to leave an impression like that, but this still affects every single Discord user who was using the Discord.io service!
+An unidentified individual has listed the data of 760,000 Discord.io (the site is dead at the moment, so you can see an Archive.org snapshot here) users for sale on a darknet forum. This discovery was brought to light by the "Information Leaks" Telegram channel, associated with the Russian service for tracking vulnerabilities, data leaks, and monitoring fraudulent online resources.
+For clarity, Discord.io is/was a platform that allows you to create custom, personal Discord invites. The offered database comprises details like email addresses, hashed passwords, and other user-specific data.
+Update (8/15/2023): A spokesperson from Discord has responded to my email with the following,
+Discord is not affiliated with Discord.io. We do not share any user information with Discord.io directly and we do not have access to or control of information in Discord.io's custody.
+We are committed to protecting the privacy and data of our users and encourage our users to enable Two-Factor Authentication (2FA) to help keep their accounts protected, and consider SMS Authentication.
+Additionally, we have revoked the oauth tokens for any Discord user that has used Discord.io, so that app can no longer perform actions on behalf of 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Following pushback, Zoom says it won't use customer data to train AI models}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Jai Vijayan 
+{\scriptsize\faCalendar}\space 
+2023-08-14 
+{\scriptsize\faGlobe}\space 
+darkreading.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37123572\&utm\_term=comment}{392} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37123572\&utm\_term=comment}{41} 
+}
+\par\medskip\noindent
+\href{https://www.darkreading.com/analytics/following-pushback-zoom-says-it-won-t-use-customer-data-to-train-ai-models?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{59.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Zoom says it will walk back a recent change to its terms of service that allowed the company to use some customer content to train its machine learning and artificial intelligence models.}
+\paragraph{}
+
+The move comes after recent criticism on social media from customers who are concerned about the privacy implications of Zoom using data in such a manner.
+Backing Down on Data Use Plans
+"Following feedback, Zoom made the decision to update its Terms of Service to reflect Zoom does not use any of your audio, video, chat, screen sharing, attachments or other communications-like Customer Content (such as poll results, whiteboard and reactions) to train Zoom or third-party artificial intelligence models," a spokeswoman said in an emailed statement. "Zoom has accordingly updated its Terms of Service and product to make this policy clear."
+Zoom's decision — and the reason for it — is sure to add to the growing debate about the privacy and security implications of technology companies using customer data to train AI models.
+In Zoom's case, the company recently introduced two generative AI features — Zoom IQ Meeting Summary and Zoom IQ Team Chat Compose — that offer AI-powered chat composition and automated meeting summaries. The terms of an updated service policy that the company announced earlier this year gave Zoom the right to use some customer data behind these services for training the AI models — without needing customer consent.
+Specifically, Zoom's policy gave the company a "perpetual, worl
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{China’s property giant Evergrande files for bankruptcy protection in Manhattan}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Sumathi Bala 
+{\scriptsize\faCalendar}\space 
+2023-08-18 
+{\scriptsize\faGlobe}\space 
+cnbc.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37171187\&utm\_term=comment}{322} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37171187\&utm\_term=comment}{19} 
+}
+\par\medskip\noindent
+\href{https://www.cnbc.com/2023/08/18/china-property-developer-evergrande-files-for-bankruptcy-protection-in-us.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{60.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{- China's heavily indebted property developer Evergrande Group on Thursday filed for Chapter 15 bankruptcy protection in a U.S. bankruptcy court.}
+\paragraph{}
+
+- In a filing to the Manhattan bankruptcy court, the firm sought recognition of restructuring talks underway in Hong Kong, the Cayman Islands and the British Virgin Islands.
+- The world's most indebted property developer defaulted in 2021 and announced an offshore debt restructuring program in March.
+China's heavily indebted property giant Evergrande Group on Thursday filed for Chapter 15 bankruptcy protection in a U.S. court.
+In a filing with the Manhattan bankruptcy court, the company referenced restructuring proceedings in Hong Kong, the Cayman Islands and the British Virgin Islands.
+In a separate statement, Evergrande on Friday said that it will ask the U.S. court for "recognition of the schemes of arrangement under the offshore debt restructuring for Hong Kong and the British Virgin Islands."
+It added, "The application is a normal procedure for the offshore debt restructuring and does not involve bankruptcy petition."
+The world's most indebted property developer defaulted in 2021 and announced an offshore debt restructuring program in March. Trading of Evergrande shares have been suspended since March 2022.
+Chapter 15 bankruptcy protection allows a U.S. bankruptcy court to intervene in cross-border insolvency case involving foreign companies that are undergoing restructuring from creditors. It aims to protect the debtors' asset
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{SUSE to go private}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+SUSE 
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faGlobe}\space 
+suse.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37166885\&utm\_term=comment}{273} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37166885\&utm\_term=comment}{39} 
+}
+\par\medskip\noindent
+\href{https://www.suse.com/news/EQT-announces-voluntary-public-purchase-offer-and-intention-to-delist-SUSE/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{61.jpg}
+}
+\end{minipage}
+\paragraph{}
+LUXEMBOURG
+SUSE®, the company behind SUSE Linux Enterprise (SLE), Rancher and NeuVector and a global leader in enterprise open source solutions, is announcing that its majority shareholder Marcel LUX III SARL (Marcel) intends to take the company private by delisting it from the Frankfurt Stock Exchange via a merger into an unlisted Luxembourg entity in the legal form of an S.A.
+Marcel, a holding company that is legally controlled by fund entities of the EQT VIII fund (referred to herein, together with Marcel, as EQT Private Equity), which in turn are managed and legally controlled by affiliates of EQT AB with its registered seat in Stockholm, Sweden, holds approximately 79 of the shares in SUSE.
+EQT Private Equity has announced its intention to launch a voluntary public purchase offer to the other shareholders of SUSE (Offer) to buy their shares prior to the delisting. The offer price per SUSE share to be paid by Marcel will be EUR 16.00 less the gross amount per SUSE share of an interim dividend to be paid by SUSE to all shareholders. EUR 16.00 represents a premium of approximately 67 percent on the XETRA closing share price of EUR 9.605 on 17 August 2023.
+SUSE’s Management Board and Supervisory Board support the strategic opportunity from delisting of the company as it will allow SUSE to focus fully on its operational priorities and execution of its long-term strategy. To this end SUSE has entered into a Transaction Framework Agreement (TFA) with Marcel to facilitate the t
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\section{\#Fun}
+
+\begin{multicols}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{AI-town, run your own custom AI world SIM with JavaScript}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+A 
+{\scriptsize\faCalendar}\space 
+2023-08-24 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37128293\&utm\_term=comment}{428} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37128293\&utm\_term=comment}{30} 
+}
+\par\medskip\noindent
+\href{https://github.com/a16z-infra/ai-town?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fun}{
+    \includegraphics[width=0.99\linewidth]{62.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{AI Town 🏠💻💌
+Join our community Discord: AI Stack Devs
+AI Town is a virtual town where AI characters live, chat and socialize.}
+\paragraph{}
+
+This project is a deployable starter kit for easily building and customizing your own version of AI town. Inspired by the research paper Generative Agents: Interactive Simulacra of Human Behavior.
+The primary goal of this project, beyond just being a lot of fun to work on, is to provide a platform with a strong foundation that is meant to be extended. The back-end engine natively supports shared global state, transactions, and a journal of all events so should be suitable for everything from a simple project to play around with to a scalable, multi-player game. A secondary goal is to make a JS/TS framework available as most simulators in this space (including the original paper above) are written in Python.
+Overview
+Stack
+- Game engine \& Database: Convex
+- VectorDB: Pinecone
+- Auth: Clerk
+- Text model: OpenAI
+- Deployment: Fly
+- Pixel Art Generation: Replicate, Fal.ai
+- Background Music Generation: Replicate using MusicGen
+Installation
+Clone repo and Install packages
+git clone https://github.com/a16z-infra/ai-town.git cd ai-town npm install npm run dev
+npm run dev will fail asking for environment variables.
+Enter them in the environment variables on your Convex dashboard to proceed.
+You can get there via
+npx convex dashboard or https://dashboard.convex.dev
+See below on how to get the various environment variables.
+a. Set up Clerk
+- Go to https://dashbo
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Not My Cows – Save your cows. Blast the meteors. Giddy up}
+\textsc{\footnotesize
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37164650\&utm\_term=comment}{84} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37164650\&utm\_term=comment}{21} 
+}
+\par\medskip\noindent
+\href{https://notmycows.com/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fun}{
+    \includegraphics[width=0.99\linewidth]{63.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Not My Cows
+Outer space has unleashed its fury! Protect your live stock, your livelihood, your home. It's all you've got left...}
+\paragraph{}
+
+• Move with A and D •
+• Aim with Right → and Left ← •
+• Shoot with Up ↑ or Spacebar •
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Combustion engine simulation game that generates realistic audio}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Engine-Simulator 
+{\scriptsize\faCalendar}\space 
+2023-04-30 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37173555\&utm\_term=comment}{18} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37173555\&utm\_term=comment}{1} 
+}
+\par\medskip\noindent
+\href{https://github.com/Engine-Simulator/engine-sim-community-edition?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fun}{
+    \includegraphics[width=0.99\linewidth]{64.jpg}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Engine Simulator - Community Edition
+Click here to download the most recent release for Windows
+Please read the installation instructions below.}
+\paragraph{}
+
+Introduction
+Welcome to Engine Simulator - Community Edition, the free version of Engine Simulator by AngeTheGreat. If you're a software developer, the original open-source Engine Simulator can be found here.
+Engine Simulator is an engine simulation game that allows you to build, run, test and actually hear your engine creations.
+How to Download Engine Simulator
+Click here to download the most recent release
+Click here for historical releases after v0.1.11a
+Click here to go to releases v0.1.11a and before
+Installation Instructions
+Engine Simulator does not come with an installer. The
+.zip file that you download contains the entire game and is standalone. You can place it wherever you want. Do not modify anything inside the game's file directory.
+- Download the Engine Simulator
+.zipfile (see How to Download Engine Simulator above)
+- Unzip the
+.zipfile wherever you like
+- Inside the unzipped directory, navigate to the
+bin/folder
+- Run
+engine-sim-app.exe
+- For v0.1.13a or earlier: If an error message pops up saying you are missing a DLL, run the
+.exefiles inside the
+installation/folder. These will install the dependencies that Engine Simulator needs to run if they're not already on your computer
+Controls
+Engine Simulator uses a minimalistic UI driven by keybinds. The most important ones are below.
+|Key/Input||Action|
+|A||Toggle ignition
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols}
+
+\newpage
+\end{document} 

@@ -1,0 +1,171 @@
+\documentclass[10pt,a4paper]{article} 
+\usepackage[a4paper, margin=1.5cm, tmargin=2.0cm, bmargin=2.0cm]{geometry}
+
+\usepackage{helvet} % Font for main content
+
+\frenchspacing 
+
+\usepackage{graphicx} 
+\usepackage{amssymb,amsmath} 
+\usepackage{multicol} 
+\usepackage{url}
+\usepackage{wrapfig} 
+\usepackage[T1]{fontenc} 
+\usepackage[pdfpagemode=FullScreen, colorlinks=false]{hyperref} 
+\usepackage{fancyhdr} 
+
+% https://mirrors.ibiblio.org/CTAN/fonts/fontawesome/doc/fontawesome.pdf
+\usepackage{fontawesome}
+\pagestyle{fancy} 
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{trimclip} 
+
+\DeclareUnicodeCharacter{FFFD}{?}
+\DeclareUnicodeCharacter{274C}{x}
+\DeclareUnicodeCharacter{2139}{i}
+
+
+
+% Headers
+\lhead{hacker{\color{red}news}paper }
+\rhead{\rightmark }
+% Footers
+\lfoot{\footnotesize hackernewspaper
+\faGlobe \href{https://hackernewsletter.com/}{hackernewsletter.com} 
+}
+\cfoot{} 
+\rfoot{\footnotesize Page \thepage}
+
+% Lines
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0.4pt} 
+
+% Metadata
+\hypersetup{
+    pdftitle = {HackerNewPaper 665},
+    pdfauthor = {Lucas Vos}
+}
+
+
+\titleformat{\section}
+{\normalfont\Huge\scshape\color{red}}
+{\noindent}
+{0em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\noindent}
+{0em}{}
+
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+
+\begin{document}
+\thispagestyle{empty}
+% put LOGO 
+\Huge \usefont{T1}{phv}{b}{n} 
+\noindent\textbf{hacker{\color{red}news}paper}
+\normalfont
+\normalsize
+\hfill Issue \#665
+
+{\noindent\color{red} \rule{\linewidth}{0.5mm}}
+
+\begin{quotation}
+    \textit{\VAR{data.quoteLine}} \par\hfill --- \VAR{data.quoteAuthor} 
+\end{quotation}
+
+\tableofcontents
+
+\newpage
+\pagestyle{fancy}
+
+%- for c in categories
+\section{\VAR{c}}
+
+%- if c=="\#Favorites"
+
+%- for n in newsitems
+%- if n.category == c
+
+\subsection{\VAR{n.title}}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+%- for p in n.properties
+{\scriptsize\fa\VAR{p.symbol}}\space 
+%- if p.url != None 
+\href{\VAR{p.url}}{\VAR{p.value}} \\
+    %- else
+\VAR{p.value} \\
+    %- endif
+%- endfor
+}
+\end{minipage} % no space if you would like to put them side by side
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{\VAR{n.url}}{
+        \includegraphics[width=0.99\linewidth]{\VAR{n.image}}
+    }
+  
+%- if n.firstline != None
+\paragraph{\VAR{n.firstline}}
+%- endif
+
+\VAR{n.content}
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+%- endif
+%- endfor
+
+%- else
+
+
+\begin{multicols}{2}
+
+%- for n in newsitems
+%- if n.category == c
+\noindent\begin{minipage}{\linewidth}
+\subsection{\VAR{n.title}}
+\textsc{\footnotesize
+%- for p in n.properties
+{\scriptsize\fa\VAR{p.symbol}}\space 
+    %- if p.url != None
+\href{\VAR{p.url}}{\VAR{p.value}} 
+    %- else
+\VAR{p.value} 
+    %- endif
+%- endfor
+}
+\par\medskip\noindent
+\href{\VAR{n.url}}{
+    \includegraphics[width=0.99\linewidth]{\VAR{n.image}}
+}
+\end{minipage}
+%- if n.firstline != None
+\paragraph{}
+\textbf{\VAR{n.firstline}}
+%- endif
+\paragraph{}
+\VAR{n.content}
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+%- endif
+
+%- endfor
+\end{multicols}
+
+%- endif
+
+\newpage
+%- endfor
+
+
+\end{document} 
