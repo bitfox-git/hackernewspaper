@@ -24,10 +24,14 @@ jobs:
       - name: execute py script
         run: python generator.py ${{ vars.HN_ISSUE }}
 
+      - name: copy the output.tex to working dir
+        run: cp output.tex ./assets/${{ vars.HN_ISSUE }}/output.tex
+
       - name: Compile tex file 
         uses: dante-ev/latex-action@2021-A
         with:
           root_file: output.tex
+          working_directory: ./assets/${{ vars.HN_ISSUE }}
 
       - name: Create release
         uses: ncipollo/release-action@v1
