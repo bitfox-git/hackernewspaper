@@ -7,9 +7,7 @@ jobs:
     steps:
       - name: checkout repo content
         uses: actions/checkout@v3
-
-      - run: mkdir -p ./assets/${{ vars.HN_ISSUE }}
-        
+      
       - name: setup python
         uses: actions/setup-python@v4.7.0
       
@@ -24,19 +22,15 @@ jobs:
       - name: execute py script
         run: python generator.py ${{ vars.HN_ISSUE }}
 
-      - name: copy the output.tex to working dir
-        run: cp output.tex ./assets/${{ vars.HN_ISSUE }}/output.tex
-
       - name: Compile tex file 
-        uses: dante-ev/latex-action@2021-A
+        uses: xu-cheng/latex-action@v2
         with:
           root_file: output.tex
-          working_directory: ./assets/${{ vars.HN_ISSUE }}
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           tag: ${{ vars.HN_ISSUE }}
-          artifacts: "output.tex,assets/**"
+          artifacts: "output.tex,*.jpg,*.png,*.html"
           bodyFile: "output.pdf"
