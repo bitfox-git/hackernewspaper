@@ -23,10 +23,11 @@ jobs:
             latexmk
 
       - name: render output.tex
-        run: latexmk -pdflatex="pdflatex -interaction=nonstopmode" -pdf output.tex
+        run: latexmk -f -pdflatex="pdflatex -interaction=nonstopmode" -pdf ./output.tex
 
       - name: add to buildouput
+        if : always()
         uses: actions/upload-artifact@v3.1.2
         with:
-          path: output.pdf
+          path: "*.*"
 
