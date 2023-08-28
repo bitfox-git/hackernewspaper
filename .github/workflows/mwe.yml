@@ -19,7 +19,6 @@ jobs:
             fontawesome
             xcolor
             titlesec
-            trimclip
             latexmk
 
       - name: render output.tex
