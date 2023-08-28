@@ -19,8 +19,9 @@ jobs:
             fontawesome
             xcolor
             titlesec
+            helvetic
             latexmk
 
       - name: render output.tex
-        run: latexmk -pdf output.tex
+        run: latexmk -f -pdf output.tex
 
