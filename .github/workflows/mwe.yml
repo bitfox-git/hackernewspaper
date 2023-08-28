@@ -19,6 +19,7 @@ jobs:
             fontawesome
             xcolor
             titlesec
+            helvetic
             latexmk
 
       - name: render output.tex
