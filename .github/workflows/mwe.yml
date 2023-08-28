@@ -15,5 +15,8 @@ jobs:
             scheme-basic
             cleveref
             hyperref
+            latexmk
 
-      - name: 
+      - name: render output.tex
+        run: latexmk -interaction nonstopmode -pdf output.tex
+
