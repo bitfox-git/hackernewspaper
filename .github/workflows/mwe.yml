@@ -13,7 +13,7 @@ jobs:
         with:
           packages: >-
             scheme-basic
-            cleveref
+            wrapfig
             hyperref
             fontawesome
             latexmk
