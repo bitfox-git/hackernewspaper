@@ -125,12 +125,17 @@ with sync_playwright() as p:
         if os.path.isfile(f'{index}.png') or os.path.isfile(f'{index}.jpg'):
             continue
 
-        if (is_youtube_url(art.mainurl)):      
+        if (is_youtube_url(art.mainurl)):    
+            # youtube stores it as JPG  
             t = Thumbnail(art.mainurl)
             t.fetch()
             t.save(dir=".", filename=f'{index}', overwrite=True)
         else:
-            generate_screenshot(index, art.mainurl, browser)
+            try:
+                generate_screenshot(index, art.mainurl, browser)
+            except:
+                #TODO : create a timeout/404 default jpg.
+                storeAFakeUrlLater=True
     browser.close()
 
 # parse the content of each link
