@@ -17,6 +17,9 @@ jobs:
             etoolbox
             hyperref
             fontawesome
+            xcolor
+            titlesec
+            trimclip
             latexmk
 
       - name: render output.tex
