@@ -15,8 +15,9 @@ jobs:
             scheme-basic
             cleveref
             hyperref
+            fontawesome
             latexmk
 
       - name: render output.tex
-        run: latexmk -interaction nonstopmode -pdf output.tex
+        run: latexmk -pdf output.tex
 
