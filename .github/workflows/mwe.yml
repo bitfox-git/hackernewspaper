@@ -23,5 +23,5 @@ jobs:
             latexmk
 
       - name: render output.tex
-        run: latexmk -f -pdf output.tex
+        run: latexmk -pdflatex="pdflatex -interaction=nonstopmode" -pdf output.tex
 
