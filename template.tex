@@ -1,8 +1,6 @@
 \documentclass[10pt,a4paper]{article} 
 \usepackage[a4paper, margin=1.5cm, tmargin=2.0cm, bmargin=2.0cm]{geometry}
 
-\usepackage{helvet} % Font for main content
-
 \frenchspacing 
 
 \usepackage{graphicx} 
@@ -52,6 +50,15 @@
 {\noindent}
 {0em}{}
 
+\usepackage{fontspec}
+\setmainfont{texgyrepagella}[
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic,
+]
+
 \begin{document}
 \thispagestyle{empty}
 % put LOGO 
@@ -59,7 +66,7 @@
 \noindent\textbf{hacker{\color{red}news}paper}
 \normalfont
 \normalsize
-\hfill Issue \#665
+\hfill Issue \#\VAR{data.issue}
 
 {\noindent\color{red} \rule{\linewidth}{0.5mm}}
 
@@ -93,7 +100,7 @@
     %- endif
 %- endfor
 }
-\end{minipage} % no space if you would like to put them side by side
+\end{minipage} 
 \begin{minipage}[t]{0.80\linewidth}
 \vspace{0pt}
 \begin{multicols}{2}
