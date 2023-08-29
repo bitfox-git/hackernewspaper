@@ -1,5 +1,4 @@
-import os
-import re
+import os , sys , re
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 from pythumb import Thumbnail
@@ -7,8 +6,12 @@ import urllib.request
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 
+#read the first argument from the command line and use it as the issue number
 
-ISSUE = "665" 
+if len(sys.argv) > 1:
+    ISSUE = sys.argv[1]
+else:
+    ISSUE = "665" 
 
 paperdata = {
     "issue": ISSUE
@@ -110,8 +113,8 @@ def generate_screenshot(index, url, browser):
     #TODO Solve the cookie accept problem 
     page.screenshot(path=f'{index}.png')
 
-html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
 
+html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
 soup = parse_html(html)
 header = get_header(soup)
 
@@ -178,28 +181,28 @@ def faSymbolPerHostname(hostname):
 def isValidDictItem(item, dict):
     return item in dict and dict[item] is not None and dict[item] != ""
 
-def removeUnicode(data):
-    emoj = re.compile("["
-        u"\U0001F600-\U0001F64F"  # emoticons
-        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-        u"\U0001F680-\U0001F6FF"  # transport & map symbols
-        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-        u"\U00002500-\U00002BEF"  # chinese char
-        u"\U00002702-\U000027B0"
-        u"\U00002702-\U000027B0"
-        u"\U000024C2-\U0001F251"
-        u"\U0001f926-\U0001f937"
-        u"\U00010000-\U0010ffff"
-        u"\u2640-\u2642" 
-        u"\u2600-\u2B55"
-        u"\u200d"
-        u"\u23cf"
-        u"\u23e9"
-        u"\u231a"
-        u"\ufe0f"  # dingbats
-        u"\u3030"
-                      "]+", re.UNICODE)
-    return re.sub(emoj, '', data)
+# def removeUnicode(data):
+#     emoj = re.compile("["
+#         u"\U0001F600-\U0001F64F"  # emoticons
+#         u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+#         u"\U0001F680-\U0001F6FF"  # transport & map symbols
+#         u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+#         u"\U00002500-\U00002BEF"  # chinese char
+#         u"\U00002702-\U000027B0"
+#         u"\U00002702-\U000027B0"
+#         u"\U000024C2-\U0001F251"
+#         u"\U0001f926-\U0001f937"
+#         u"\U00010000-\U0010ffff"
+#         u"\u2640-\u2642" 
+#         u"\u2600-\u2B55"
+#         u"\u200d"
+#         u"\u23cf"
+#         u"\u23e9"
+#         u"\u231a"
+#         u"\ufe0f"  # dingbats
+#         u"\u3030"
+#                       "]+", re.UNICODE)
+#     return re.sub(emoj, '', data)
 
 
 for index, art in enumerate(articles):
@@ -209,7 +212,8 @@ for index, art in enumerate(articles):
     if data is None:
         data = ""
     # temp remove all emoji stuff, until found decent solutions in latex
-    data = removeUnicode(data)
+    # solved : no longer necessary with Tectonic Typesetting.
+    # data = removeUnicode(data)
     # data can contain a lot of characters, we only want the first 1500
     data = data[0:min(1500, len(data))]
     # santize the data by removing % and / 
@@ -242,9 +246,13 @@ for index, art in enumerate(articles):
     #image url can be either a png or a jpg
     if os.path.isfile(f'{index}.png'):
         image = f'{index}.png'
-    else:
-        image = f'{index}.jpg'
     
+    if os.path.isfile(f'{index}.jpg'):
+        image = f'{index}.jpg'
+
+    # fall back 
+    image = "notfound.png"
+
     #potential interested metadata fields are: author, date, image, sitename
     #not used , but for future reference : 
     # pagetype [object, article, website ]

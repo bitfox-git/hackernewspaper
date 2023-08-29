@@ -12,6 +12,7 @@ __pycache__/
 *.png
 *.html
 
+!notfound.png
 
 # Distribution / packaging
 .Python

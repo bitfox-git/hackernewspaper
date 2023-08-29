@@ -22,7 +22,10 @@ If you like this hacker**news***paper*, please also subscribe to the original ha
 ## Help wanted
 I'm not a Latex expert and the layout, especially the things with the two columns, are quite difficult to get the vertical alignment, page breaks, etc. the way it should be...
 
-## TODO / NICE-TO-HAVES
-[ ] Solve the GDPR Cookie problems on some screenshot. Auto accept?
-[ ] Better text formatting. Something with a LLM ?
-[ ] Sometimes the metadata hints at a second image. Use that image as well? 
+## Todo
+- [ ] Nicer output
+- [ ] Solve the GDPR Cookie problems on some screenshot. Auto accept?
+- [ ] Better text formatting. Something with a LLM ?
+- [ ] Sometimes the metadata hints at a second image. Let us  that image as well? 
+- [ ] In case of YouTube / Vimeo url's , get the duration as metadata + description from the platform.
+      Requires API key's?

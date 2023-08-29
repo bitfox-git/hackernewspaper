@@ -22,10 +22,13 @@ jobs:
       - name: execute py script
         run: python generator.py ${{ vars.HN_ISSUE }}
 
-      - name: Compile tex file 
-        uses: xu-cheng/latex-action@v2
+      - name: setup Tectonic 
+        uses: WtfJoke/setup-tectonic@v2.1.1
         with:
-          root_file: output.tex
+           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: run Tectonic
+        run: tectonic mwe.tex
 
       - name: Create release
         uses: ncipollo/release-action@v1

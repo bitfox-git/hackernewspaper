@@ -20,11 +20,6 @@
 \usepackage{xcolor}
 \usepackage{titlesec}
 
-\DeclareUnicodeCharacter{FFFD}{?}
-\DeclareUnicodeCharacter{274C}{x}
-\DeclareUnicodeCharacter{2139}{i}
-
-
 
 % Headers
 \lhead{hacker{\color{red}news}paper }
@@ -56,8 +51,6 @@
 {\normalfont\large\bfseries}
 {\noindent}
 {0em}{}
-
-\definecolor{linkcolor}{RGB}{0, 102, 204}
 
 \begin{document}
 \thispagestyle{empty}
@@ -126,7 +119,7 @@
 %- else
 
 
-\begin{multicols*}{2}
+\begin{multicols}{2}
 
 %- for n in newsitems
 %- if n.category == c
@@ -159,7 +152,7 @@
 %- endif
 
 %- endfor
-\end{multicols*}
+\end{multicols}
 
 %- endif
 
