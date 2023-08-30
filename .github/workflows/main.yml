@@ -28,7 +28,7 @@ jobs:
            github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: run Tectonic
-        run: tectonic mwe.tex
+        run: tectonic template.tex
 
       - name: Create release
         uses: ncipollo/release-action@v1
