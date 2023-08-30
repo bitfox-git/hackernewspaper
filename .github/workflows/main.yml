@@ -30,6 +30,12 @@ jobs:
       - name: run Tectonic
         run: tectonic template.tex
 
+      - name: Upload a Build Artifact
+        if: always()
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          path: ./*.*
+
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
