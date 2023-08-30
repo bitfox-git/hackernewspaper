@@ -27,8 +27,11 @@ jobs:
         with:
            github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Print Tectonic version
+        run: tectonic --version
+
       - name: run Tectonic
-        run: tectonic template.tex
+        run: tectonic output.tex
 
       - name: Upload a Build Artifact
         if: always()
