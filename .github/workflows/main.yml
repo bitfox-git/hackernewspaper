@@ -44,5 +44,6 @@ jobs:
         with:
           allowUpdates: true
           tag: ${{ vars.HN_ISSUE }}
-          artifacts: "output.pdf, output.tex,*.jpg,*.png,*.html"
+          name: "HackerNewsPaper #${{ vars.HN_ISSUE }}" 
+          artifacts: "output.pdf"
           
