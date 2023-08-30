@@ -1,0 +1,2213 @@
+\documentclass[10pt,a4paper]{article} 
+\usepackage[a4paper, margin=1.5cm, tmargin=2.0cm, bmargin=2.0cm]{geometry}
+
+\frenchspacing 
+
+\usepackage{graphicx} 
+\usepackage{amssymb,amsmath} 
+\usepackage{multicol} 
+\usepackage{url}
+\usepackage{wrapfig} 
+\usepackage[T1]{fontenc} 
+\usepackage[pdfpagemode=FullScreen, colorlinks=false]{hyperref} 
+\usepackage{fancyhdr} 
+
+% https://mirrors.ibiblio.org/CTAN/fonts/fontawesome/doc/fontawesome.pdf
+\usepackage{fontawesome}
+\pagestyle{fancy} 
+\usepackage{xcolor}
+\usepackage{titlesec}
+
+
+% Headers
+\lhead{hacker{\color{red}news}paper }
+\rhead{\rightmark }
+% Footers
+\lfoot{\footnotesize hackernewspaper
+\faGlobe \href{https://hackernewsletter.com/}{hackernewsletter.com} 
+}
+\cfoot{} 
+\rfoot{\footnotesize Page \thepage}
+
+% Lines
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0.4pt} 
+
+% Metadata
+\hypersetup{
+    pdftitle = {HackerNewPaper 665},
+    pdfauthor = {Lucas Vos}
+}
+
+
+\titleformat{\section}
+{\normalfont\Huge\scshape\color{red}}
+{\noindent}
+{0em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\noindent}
+{0em}{}
+
+\usepackage{fontspec}
+\setmainfont{texgyrepagella}[
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic,
+]
+
+\begin{document}
+\thispagestyle{empty}
+% put LOGO 
+\Huge \usefont{T1}{phv}{b}{n} 
+\noindent\textbf{hacker{\color{red}news}paper}
+\normalfont
+\normalsize
+\hfill Issue \#665\_9
+
+{\noindent\color{red} \rule{\linewidth}{0.5mm}}
+
+\begin{quotation}
+    \textit{Life is like riding a bicycle. To keep your balance, you must keep moving. } \par\hfill --- Albert Einstein
+ 
+\end{quotation}
+
+\tableofcontents
+
+\newpage
+\pagestyle{fancy}
+
+\section{\#Sponsor}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2022-01-01 
+{\scriptsize\faGlobe}\space 
+nudgesecurity.com 
+{\scriptsize\faComments}\space 
+\href{}{None} 
+}
+\par\medskip\noindent
+\href{https://www.nudgesecurity.com/free-shadow-it-inventory?utm\_medium=sponsored\&utm\_source=hacker\_nl\&utm\_content=newsletter\&utm\_campaign=shadow\_it\&utm\_term=230825}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{SaaS and cloud apps introduced outside of IT
+Discover what technology is actually being used across your organization and who first adopted it.}
+\paragraph{}
+ Nudge Security inventories and auto-categorizes all cloud-delivered services: IaaS, PaaS, and SaaS.
+Identities and accounts
+Discover all cloud and SaaS accounts, users, and authentication methods as they are created—including the ones network and endpoint security controls miss.
+Deep context
+Deepen your understanding of cloud and SaaS use with visibility into resources and assets within cloud services, like files, repos, Slack channels, domains, and even billing information.
+Historical use
+Look back to understand who first onboarded a SaaS application, and who might still have unauthorized SaaS access to forgotten or abandoned accounts.
+OAuth grants
+Understand how data is shared across SaaS applications using OAuth grants, quickly surface overly permissive scopes, and easily revoke OAuth grants for Google Workspace and Microsoft 365 that employees no longer need.
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Favorites}
+
+\subsection{We’re all just temporarily abled}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Jim Nielsen \\
+{\scriptsize\faCalendar}\space 
+2023-08-20 \\
+{\scriptsize\faGlobe}\space 
+jim-nielsen.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37205731\&utm\_term=comment}{907} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37205731\&utm\_term=comment}{47} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://blog.jim-nielsen.com/2023/temporarily-abled/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{“We’re All Just Temporarily Abled”
+That’s a quote from Cindy Li — “We're all just temporarily abled”. I first heard it in Sara’s course and it’s been on repeat in my mind ever since June 6th.}
+
+June 6th I was on vacation at the beach with my family and tried something that, looking back now, maybe I’m too old for. And I injured my knee.
+I knew immediately it was bad.
+I laid there in the sand, unable to get up, and let the surf crash over me. After a few waves, I got on my belly dragged myself free.
+Fortunately this all happened the day before we flew home, but sitting there on the beach at sunset I knew my vacation was over at that point.
+That was almost three months ago now. I’m still limping. It’s getting better but it’s slow. The doctor told me, “Just be aware: this isn’t days or weeks recovery. This is months.”
+Since then, I’ve tried to make the best of summer while kids are out of school but my mobility has been limited.
+Through all of it, I’ve found myself noticing “accessibility” helpers more than ever before: that railing on the stairs, that ramp off to the side of the building, that elevator tucked away in the back.
+All things I rarely noticed before but have since become vital.
+And that phrase plays on repeat in my head — “we’re all just temporarily abled”. From my notes on Sarah’s course:
+1 in 5 people currently have a disability. 100 of people will have some form of disability in their lifetime.
+I suppose it’s easy to misunderstand ability as a binary thing. But no
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Microsoft is bringing Python to Excel}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Tom Warren \\
+{\scriptsize\faCalendar}\space 
+2023-08-22 \\
+{\scriptsize\faGlobe}\space 
+theverge.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37222191\&utm\_term=comment}{845} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37222191\&utm\_term=comment}{84} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://www.theverge.com/2023/8/22/23841167/microsoft-excel-python-integration-support?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{Microsoft is bringing popular programming language Python to Excel. A public preview of the feature is available today, allowing Excel users to manipulate and analyze data from Python.}
+
+“You can manipulate and explore data in Excel using Python plots and libraries, and then use Excel’s formulas, charts and PivotTables to further refine your insights,” explains Stefan Kinnestrand, general manager of modern work at Microsoft. “Now you can do advanced data analysis in the familiar Excel environment by accessing Python directly from the Excel ribbon.”
+You won’t need to install any additional software or set up an add-on to access the functionality, as Python integration in Excel will be part of Excel’s built-in connectors and Power Query. Microsoft is also adding a new PY function that allows Python data to be exposed within the grid of an Excel spreadsheet. Through a partnership with Anaconda, an enterprise Python repository, popular Python libraries like pandas, statsmodels, and Matplotlib will be available in Excel.
+Python calculations run in the Microsoft Cloud, with the results returned into an Excel worksheet. Excel users will be able to create formulas, PivotTables, and charts all based on Python data, with the ability to bring in charting libraries like Matplotlib and Seaborn for visualizations like heatmaps, violin plots, and swarm plots.
+“I’m excited that this excellent, tight integration of Python and Excel is now seeing the light of day,” says Guido van Rossum, Python’
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{The ReMarkable Streaming Tool v2: Elevating Remote Work Efficiency}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Olivier Wulveryck \\
+{\scriptsize\faCalendar}\space 
+2023-07-25 \\
+{\scriptsize\faGlobe}\space 
+owulveryck.info \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37196440\&utm\_term=comment}{583} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37196440\&utm\_term=comment}{28} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://blog.owulveryck.info/2023/07/25/evolving-the-game-a-clientless-streaming-tool-for-remarkable-2.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{Evolving the Game: A clientless streaming tool for reMarkable 2
+In 2021, I developed a tool to stream the content of my reMarkable. (and I also blogged about it here).}
+ Given that I was predominantly working from home, this tool was very useful, allowing me to sketch elements during conference calls.
+One of the primary benefits of this tool was its ability to stream content directly into a web browser tab. This feature was particularly useful because it meant I could exclusively share this tab during video calls, ensuring focus on the content I intended to present.
+At its core, the tool consisted of two main components:
+- A server running on the device, responsible for capturing the raw image and transmitting it to the laptop.
+- A service on the laptop, which fetched the raw image from the server and processed it into a format suitable for browser viewing (I produced an MJPEG stream for this).
+Being the product manager of my own tools offered a unique perspective. One piece of feedback I provided from my experience as a user was the slightly cumbersome nature of the tool’s on-the-fly activation. The challenge arose from the necessity of a local service. During video calls, this meant some preparatory steps to initiate the local service, adding an additional layer of complexity to the process.
+Recognizing this pain point, my goal became clear: eliminate the need for the local service. This article delves into the revamped implementation of the streaming tool, which now boasts a
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Code Llama, a state-of-the-art large language model for coding}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37248494\&utm\_term=comment}{521} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37248494\&utm\_term=comment}{66} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://ai.meta.com/blog/code-llama-large-language-model-coding/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{I walked across Luxembourg}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-07-01 \\
+{\scriptsize\faGlobe}\space 
+ioces.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37218841\&utm\_term=comment}{393} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37218841\&utm\_term=comment}{30} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://blog.ioces.com/matt/posts/i-walked-across-luxembourg/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+I Walked Across Luxembourg
+A hike from the west to the east of the Grand Duchy
+Four weeks ago, I was feeling guilty for spending so much time inside playing Tears of the Kingdom, so I took it on myself to plan something for the National Day long weekend. That something turned out to be a hike from the westernmost point to the easternmost point in Luxembourg.
+Maps and Route Planning
+From the Belgian border in the west to the German border in the east is 58.1 km as the crow flies, or 100.3 km on the trails that I chose. I took four days to hike across, spending the nights in Lultzhausen, Ettelbruck and Beaufort. You can check out my route using the map below, or download a KML or GPX file.
+Luxembourg has a fantastic number of marked trails, all fastidiously mapped out and available online via the government run Geoportail. The site and its datasets are administered by the Administration du Cadastre et de la Topographie, which outwardly appears to be a collection of passionate GIS nerds. Alongside the wide range of comprehensive datasets (a high resolution point cloud of the entire country, anyone?), it also offers some more whimsical facilities, like the ability to download any region in Luxembourg as a Minecraft map.
+Prior to departing, I spent a morning in QGIS planning a cross-country route. The trail data from Geoportail along with an OpenStreetMap base layer made route planning as easy as connecting the dots. On the trail, I used Organic Maps, an offline mapping app for An
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Clone-a-Lisa}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2019-01-01 \\
+{\scriptsize\faGlobe}\space 
+vole.wtf \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37192710\&utm\_term=comment}{331} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37192710\&utm\_term=comment}{33} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://vole.wtf/clone-a-lisa/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{Clone-a Lisa
+Paint a forgery in 60 seconds
+Start Game
+Are you warm, are you real, Mona Lisa?
+0
+.
+0
+
+60
+Tweet
+Copy
+WhatsApp
+…
+VOLE.}
+wtf
+Home Page
+info blah
+Twitter
+Mastodon
+Instagram
+SpaceHey
+Buy This Project
+Destroy this page
+Clone-a Lisa forgery game
+Biro + Banana = Art
+BIG BEN word game
+Britain’s Most Boring
+DayBrix daily minigame
+Join our Mastodon server
+Voleflix free movies
+Hampster Invaders
+Apocalypse Recovery Computing Cluster
+Buy This Site
+Kilogram - 1KB photo site
+Childhood Ambitions …vs reality
+Imaginary Friends Reunited
+Crisp Sandwich Day
+GANksy A.I. street artist
+The Kubrick Times - A.I. newspaper
+Penga - penguin physics game
+BOKEH game
+Vmail - not your usual newsletter
+Triple Tautonyms
+Are You a Clickbait Genius?
+ButtyStock
+Augmented Reality Crisp Sandwich
+World’s Biggest Freddo
+The Kilobyte’s Gambit
+Happy Birthday To You public domain
+TrudgeCast podcast
+OVERPRICED BASIC LINK
+This MP Does Not Exist
+Scunthorpe Sans
+What’s Your Webcam Age?
+17th Century Death Roulette
+Avocado’n’Toast comic generator
+How DISGUSTING Are You?
+SIMONS memory game
+Hit the High Notes
+Calm Down Britain
+Can You Draw a Perfect Circle?
+Dog Breeds Chart
+Raybees Font
+What’s Your Sleep Animal?
+Goth or Moth?
+Plaiceholder Images
+Kick the Ball Back
+They Walk Among Us
+Work Reply Soundboard
+Text Generator
+Programming Language Inventor or Serial Killer?
+Sound
+v
+o
+l
+e
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Welcome to Datasette Cloud}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-15 \\
+{\scriptsize\faGlobe}\space 
+datasette.cloud \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37196461\&utm\_term=comment}{316} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37196461\&utm\_term=comment}{20} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://www.datasette.cloud/blog/2023/welcome/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{Welcome to Datasette Cloud
+Aug. 15, 2023, 2:14 p.m. Simon Willison
+Datasette Cloud is the new SaaS hosting platform for the Datasette open source project.}
+ It enables teams to create a private collaboration space, upload and share data securely with each other, and then selectively publish that data to the world.
+Datasette Cloud is the new SaaS hosting platform for the Datasette open source project. It enables teams to create a private collaboration space, upload and share data securely with each other, and then selectively publish that data to the world.
+Datasette was born out of data journalism, and the initial intended audience for Datasette Cloud is newsrooms: we want to help journalists share data with each other and with the public without needing to configure and run Datasette on their own hosting provider.
+We expect that tools which help journalists find stories in data will be of value to all kinds of other companies and organizations as well though, so everyone else is invited to try out the product too!
+New to Datasette? The open source project website includes a video demo, tutorials and more.
+Features
+Teams can create a private space to collaborate on data, hosted in a region close to them. Spaces each run in their own secure container (powered by Fly.io) and get their own
+space-name.datasette.cloud subdomain.
+The space administrator can then invite further members to join their space.
+Team members can import data into their space in multiple different ways:
+- Upl
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Electricity Maps}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faGlobe}\space 
+tmrow.co \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37197903\&utm\_term=comment}{248} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37197903\&utm\_term=comment}{20} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://app.electricitymaps.com?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{For the Electricity Maps app to function properly JavaScript is required, please enable it to continue using the app.}
+
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{Heat your house with a mechanical windmill (2019)}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Kris De Decker \\
+{\scriptsize\faCalendar}\space 
+2019-02-27 \\
+{\scriptsize\faGlobe}\space 
+lowtechmagazine.com \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37201688\&utm\_term=comment}{218} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37201688\&utm\_term=comment}{26} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://solar.lowtechmagazine.com/2019/02/heat-your-house-with-a-mechanical-windmill/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{Image: Illustration by Rona Binay for Low-tech Magazine.
+Renewable energy production is almost entirely aimed at the generation of electricity.}
+ However, we use more energy in the form of heat, which solar panels and wind turbines can produce only indirectly and relatively inefficiently. A solar thermal collector skips the conversion to electricity and supplies renewable thermal energy in a direct and more efficient way.
+Much less known is that a mechanical windmill can do the same in a windy climate – by oversizing its brake system, a windmill can generate lots of direct heat through friction. A mechanical windmill can also be coupled to a mechanical heat pump, which can be cheaper than using a gas boiler or an electric heat pump driven by a wind turbine.
+Heat versus Electricity
+On a global scale, thermal energy demand corresponds to one third of the primary energy supply, while electricity demand is only one-fifth. 1 In temperate or cold climates, the share of thermal energy is even higher. For example in the UK, heat counts for almost half of total energy use. 2 If we only look at households, thermal energy for space and water heating in temperate and cold climates can be 60-80 of total domestic energy demand. 3
+In spite of this, renewable energy sources play a negligible role in heat production. The main exception is the traditional use of biomass for cooking and heating – but in the “developed” world even biomass is often used to produce electricity instead of heat. The 
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{No one wants simplicity}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Luke Plant \\
+{\scriptsize\faCalendar}\space 
+2023-08-22 \\
+{\scriptsize\faGlobe}\space 
+lukeplant.me.uk \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37229435\&utm\_term=comment}{205} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37229435\&utm\_term=comment}{58} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://lukeplant.me.uk/blog/posts/no-one-actually-wants-simplicity/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{The reason that modern web development is swamped with complexity is that no one really wants things to be simple. We just think we do, while our choices prove otherwise.}
+
+A lot of developers want simplicity in the same way that a lot of clients claim they want a fast website. You respond “OK, so we can remove some of these 17 Javascript trackers and other bloat that’s making your website horribly slow?” – no, apparently those are all critical business functionality.
+In other words, they prioritise everything over speed. And then they wonder why using their website is like rowing a boat through a lake of molasses on a cold day using nothing but a small plastic spoon.
+The same is often true of complexity. The real test is the question “what are you willing to sacrifice to achieve simplicity?” If the answer is “nothing”, then you don’t actually love simplicity at all, it’s your lowest priority.
+When I say “sacrifice”, I don’t mean that choosing simplicity will mean you are worse off overall – simplicity brings massive benefits. But it does mean that there will be some things that tempt you to believe you are missing out.
+For every developer, it might be something different. For one, the tedium of having to spend half an hour a month ensuring that two different things are kept in sync easily justifies the adoption of a bulky framework that solves that particular problem. For another, the ability to control how a checkbox animates when you check it is of course a valid reason to a
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\subsection{What helps people get comfortable on the command line?}
+\noindent\begin{minipage}[t]{0.20\linewidth}
+\vspace{0pt}
+\noindent\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Julia Evans \\
+{\scriptsize\faCalendar}\space 
+2023-08-08 \\
+{\scriptsize\faGlobe}\space 
+jvns.ca \\
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37174504\&utm\_term=comment}{14} \\
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37174504\&utm\_term=comment}{4} \\
+}
+\end{minipage} 
+\begin{minipage}[t]{0.80\linewidth}
+\vspace{0pt}
+\begin{multicols}{2}
+
+    \href{https://jvns.ca/blog/2023/08/08/what-helps-people-get-comfortable-on-the-command-line-/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fav}{
+        \includegraphics[width=0.99\linewidth]{notfound.png}
+    }
+  
+\paragraph{Sometimes I talk to friends who need to use the command line, but are intimidated by it.}
+ I never really feel like I have good advice (I’ve been using the command line for too long), and so I asked some people on Mastodon:
+if you just stopped being scared of the command line in the last year or three — what helped you?
+(no need to reply if you don’t remember, or if you’ve been using the command line comfortably for 15 years — this question isn’t for you :) )
+This list is still a bit shorter than I would like, but I’m posting it in the hopes that I can collect some more answers. There obviously isn’t one single thing that works for everyone – different people take different paths.
+I think there are three parts to getting comfortable: reducing risks, motivation and resources. I’ll start with risks, then a couple of motivations and then list some resources.
+ways to reduce risk
+A lot of people are (very rightfully!) concerned about accidentally doing some destructive action on the command line that they can’t undo.
+A few strategies people said helped them reduce risks:
+- regular backups (one person mentioned they accidentally deleted their entire home directory last week in a command line mishap, but it was okay because they had a backup)
+- For code, using git as much as possible
+- Aliasing
+rmto a tool like safe-rm or rmtrash so that you can’t accidentally delete something you shouldn’t (or just
+rm -i)
+- Mostly avoid using wildcards, use tab completion instead. (my shell will tab 
+
+\end{multicols}
+\end{minipage}
+\par\medskip
+\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+
+\newpage
+\section{\#Ask HN}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Where to find open-source house plans?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-23 
+{\scriptsize\faThumbsOUp}\space 
+\href{}{484} 
+{\scriptsize\faComments}\space 
+\href{}{64} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37234111\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=ask\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Earthships are also said to be open source, but the plans are (definitely) not free
+https://earthshipbiotecture.}
+\paragraph{}
+com/
+You can also check Open Source Home, by Studiolada (those are free, but the plans are in french)
+https://www.countryliving.com/remodeling-renovation/news/g46...
+Open Source Ecology is now listing a house in their list of builds
+https://www.opensourceecology.org/extreme-build-of-the-seed-...
+Open Building Institute is also promoting a configurable house
+https://www.openbuildinginstitute.org/
+reply
+The plans aren't on the website anymore, but you can get it from https://web.archive.org/web/20170918182346/http://www.studio...
+The architecture industry is enormous. Real estate is enormous. There's no automatic drawing, electrical, plumbing, insulation, ect... generators given specifications? I'm kind of amazed no one's trying to disrupt that. "Hi Stable Diffusion, please draw me blueprints for a 2000 sq. ft. house, with two stories, given this landscape. Thanks Stable Diffusion."
+There isn’t just one set of building codes for every jurisdiction, different jurisdictions adopt various sets of code.
+Different geographic regions require various things that other areas don’t require. My state doesn’t have earthquakes or hurricanes, but we do have to have stronger roofs for handling snow load. Buildings in Florida need specific methods to handle hurricane force winds. Buildings in California need specific methods to handle earthquakes. And so on. How a building is design
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Why did Microsoft, Meta, and PayPal update their ToS today?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-19 
+{\scriptsize\faThumbsOUp}\space 
+\href{}{197} 
+{\scriptsize\faComments}\space 
+\href{}{21} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37185461\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=ask\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{https://ec.europa.eu/commission/presscorner/detail/en/ip\_23\_...
+reply
+These two bodies tend to counter each other a lot, I would expect to have a court ruling in 2 years that cancels this decision.}
+\paragraph{}
+
+Court: "US law is incompatible with ours"
+Executive: "Yeah but I'm sure we can all get along <wink wink>..."
+https://noyb.eu/en/23-years-illegal-data-transfers-due-inact...
+[0] https://noyb.eu/en/23-years-illegal-data-transfers-due-inact...
+Docacracy did it a decade ago, but closed shop.
+The problem isn’t the tech — it’s coming up with a business model that pays for the system and upkeep. As much as people give lip service about privacy, they sure don’t throw money at lobbying efforts that protect their rights in those areas.
+Or you can use a friendlier service like the one provided by Codeberg.
+https://docs.codeberg.org/getting-started/what-is-codeberg/\#...
+So technically scraping and republishing old ToS'es would be a copyright violation. You might have a case for fair use but then it becomes difficult to monetize the service.
+The similarity between standard contracts does make it harder to demonstrate a copyright violation based on the text alone though.
+That sounds absurd. What country is this?
+No form of intellectual property applies to “in the history of the world” — all IPs expire their monopoly protections after a period of time.
+And yes, contracts must be distinctly different from copyrighted contracts. [1] Just because computers and the internet allow copy-paste of conten
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{What's the biggest red flag you've encountered during a hiring process?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-21 
+{\scriptsize\faThumbsOUp}\space 
+\href{}{176} 
+{\scriptsize\faComments}\space 
+\href{}{78} 
+}
+\par\medskip\noindent
+\href{https://news.ycombinator.com/item?id=37210581\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=ask\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{I'll start.
+A few years back, I was interviewing at a then "hot" startup. At the end of the process, the CTO calls and says they'd like to extend an offer.}
+\paragraph{}
+ I was expecting him to walk me through the offer details, when he goes "well, are you going to take it?" I asked about getting some specifics (cash comp, equity, etc.) and he explains that they ask candidates to commit before sharing any details.
+I told him that didn't seem like such a great idea, and he assured me that comp wouldn't be an issue, and that they do this to avoid hiring mercenaries. I passed and never looked back.
+Then, I sat down with the VP of engineering, and he opened the interview with "so, what do you think it is we do here?" And I naturally stuttered through a canned answer about how they use arbitrage opportunities in the market to profit off of mis-priced securities, etc. Then he asked me, "but what benefit do we provide? Why is working here good for society?"
+I blanked, and didn't answer for about 15 seconds. Then, I tried to start piecing together an answer until he stopped me, told me he had found my Facebook, and wasn't appreciative of my politics (I was moderately lefty in high school, significantly more so now; maybe this conversation is part of why). He had \_printouts\_ of some posts I had made criticizing George W. Bush, talking about why I thought we should be raising taxes on higher earners, supporting Obamacare, etc. He told me that he didn't think I had the "cojones to stomach the job" (di
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Show HN}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{uBlock Origin Lite now available on Firefox}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Raymond Hill 
+{\scriptsize\faCalendar}\space 
+2023-08-11 
+{\scriptsize\faGlobe}\space 
+mozilla.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37215557\&utm\_term=comment}{671} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37215557\&utm\_term=comment}{29} 
+}
+\par\medskip\noindent
+\href{https://addons.mozilla.org/en-US/firefox/addon/ublock-origin-lite/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{uBlock Origin Lite by Raymond Hill
+A permission-less content blocker. Blocks ads, trackers, miners, and more immediately upon installation.}
+\paragraph{}
+
+Download Firefox and get the extension
+You'll need Firefox to use this extension
+Extension Metadata
+Screenshots
+About this extension
+uBO Lite (uBOL) is a *permission-less* MV3-based content blocker.
+The default ruleset corresponds to uBlock Origin's default filterset:
+- uBlock Origin's built-in filter lists
+- EasyList
+- EasyPrivacy
+- Peter Lowe’s Ad and tracking server list
+You can add more rulesets by visiting the options page -- click the \_Cogs\_ icon in the popup panel.
+uBOL is entirely declarative, meaning there is no need for a permanent uBOL process for the filtering to occur, and CSS/JS injection-based content filtering is performed reliably by the browser itself rather than by the extension. This means that uBOL itself does not consume CPU/memory resources while content blocking is ongoing -- uBOL's service worker process is required \_only\_ when you interact with the popup panel or the option pages.
+uBOL does not require broad "read and modify data" permission at install time, hence its limited capabilities out of the box compared to uBlock Origin or other content blockers requiring broad "read and modify data" permissions at install time.
+However, uBOL allows you to *explicitly* grant extended permissions on specific sites of your choice so that it can better filter on those sites using cosmetic filtering and scriptlet injections.
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Aviation navigation log on \$20 receipt printer}
+\textsc{\footnotesize
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37190743\&utm\_term=comment}{372} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37190743\&utm\_term=comment}{21} 
+}
+\par\medskip\noindent
+\href{https://carloslagoa.com/blog/flipreps/flipreps.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Howdy! I’m Carlos and I like tech and planes (among other things like having massive servings of pasta). I’m currently studying for my commercial license in Europe.}
+\paragraph{}
+ So far most of my flight training has happened on a Piper PA28 (the -180 variant)
+It’s from the late 60s, often there are at least 1 or 2 things that don’t work properly and it shows - the thing is old! I imagine at some point I’ll jump into modern jets, and so I am happy to spend the first few hundred hours being as much of an ‘aviator’ as possible.
+As a bit of background, these planes are single pilot operation, so the idea is that whoever is flying is doing the navigating, the radios, the checklist, the flying, the communicating and the looking out and in. It can get busy.
+The one thing on this plane that is just hard to adapt to is how cramped it is and hot it can get - I’m talking about 38C/100F in a vibrating machine for 3h. And I say that with the knowledge of all the other issues this plane has (magnetos may drop excessively, gyro basically useless, fuel pump is old…).
+We get these things called kneeboards, that provide a ‘comfy’ space for us to write down things like the weather reports, the tower instructions and how accurate our routing plan is as we follow it along.
+Whilst this picture looks pretty spacious, my plane is more cramped than that, and I’m sitting at a weirder angle. In my kneeboard / floating around the plane I have:
+All of those documents have to be hot swapped for one another at differen
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Just intonation keyboard – play music without knowing music}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-01 
+{\scriptsize\faGlobe}\space 
+pages.dev 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37194128\&utm\_term=comment}{329} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37194128\&utm\_term=comment}{18} 
+}
+\par\medskip\noindent
+\href{https://ad8e.pages.dev/keyboard?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{This instrument makes harmony clear. Both the instrument and harmony are explained below.
+Click this to play Debussy's Passepied.}
+\paragraph{}
+
+Press keys on the right to play sounds, and occasionally press a key on the left to change the harmony. These green text links will play sound. (Make sure your sound is on. If you're on mobile, you will have to tap once before it'll let you play. On iOS, make sure the Silent Mode switch is off.)
+The biggest difference from a piano is that you can play all the notes together (volume warning). This is a unique set of notes. As a consequence, random keys harmonize with each other, and even rolling your elbow over the keyboard or sweeping your mouse will sound pleasant. If you hold 3 notes and don't hear the 3rd note, then your keyboard can only handle 2 keys at a time, called "2-key rollover". In that case, use the mouse and keyboard simultaneously. On mobile, horizontal view will make the buttons bigger.
+The green numbers are pitch (like 4 → 400 Hz, 5 → 500 Hz). The blue numbers multiply the pitches, and their effect is shown on the green numbers. The purple numbers multiply the pitches the same way, but permanently, and they come in pairs that undo each other. Multipliers on the far left (7/6) are more exotic than ones in the middle (1/2). The yellow square moves right when pitches are multiplied by 5, and the blue, green, and red squares correspond to 2, 3, and 7. These four squares show the current pitch.
+Don't worry if you don't understand some t
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Prettymapp – Create maps from OpenStreetMap data in a Streamlit webapp}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Chrieke 
+{\scriptsize\faCalendar}\space 
+2023-08-25 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37222823\&utm\_term=comment}{322} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37222823\&utm\_term=comment}{13} 
+}
+\par\medskip\noindent
+\href{https://github.com/chrieke/prettymapp?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+prettymapp 🖼️
+Prettymapp is a webapp and Python package to create beautiful maps from OpenStreetMap data
+prettymapp on streamlit 🎈🎈 Try it out here:
+Based on the prettymaps project
+Prettymapp is based on a rewrite of the fantastic prettymaps project by @marceloprates. All credit for the original idea, designs and implementation go to him. The prettymapp rewrite focuses on speed and adapted configuration to interface with the webapp. It drops more complex configuration options in favour of improved speed, reduced code complexity and simplified configuration interfaces. It is partially tested and adds a streamlit webapp component.
+Running the app locally
+git clone https://github.com/chrieke/prettymapp.git cd prettymapp pip install -r streamlit-prettymapp/requirements.txt streamlit run streamlit-prettymapp/app.py
+Python package
+You can also use prettymapp without the webapp, directly in Python. This lets you customize the functionality or build your own application.
+Installation:
+pip install prettymapp
+Define the area, download and plot the OSM data:
+from prettymapp.geo import get\_aoi from prettymapp.osm import get\_osm\_geometries from prettymapp.plotting import Plot from prettymapp.settings import STYLES aoi = get\_aoi(address="Praça Ferreira do Amaral, Macau", radius=1100, rectangular=False) df = get\_osm\_geometries(aoi=aoi) fig = Plot( df=df, aoi\_bounds=aoi.bounds, draw\_settings=STYLES["Peach"] ).plot\_all() fig.savefig("map.jpg")
+To customize the map appearance, use the addition
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{The Uncolouring Book}
+\textsc{\footnotesize
+{\scriptsize\faGlobe}\space 
+potato.horse 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37208248\&utm\_term=comment}{81} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37208248\&utm\_term=comment}{20} 
+}
+\par\medskip\noindent
+\href{https://lines.potato.horse?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=show\_hn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+the uncolouring book
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Code}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Textual: Rapid Application Development framework for Python}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Textualize 
+{\scriptsize\faCalendar}\space 
+2023-08-29 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37174657\&utm\_term=comment}{291} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37174657\&utm\_term=comment}{26} 
+}
+\par\medskip\noindent
+\href{https://github.com/Textualize/textual?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Textual
+Textual is a Rapid Application Development framework for Python.
+Build sophisticated user interfaces with a simple Python API. Run your apps in the terminal and (coming soon) a web browser!}
+\paragraph{}
+
+🎬 Demonstration
+A quick run through of some Textual features.
+Screen.Recording.2022-10-22.at.19.00.48.mov
+About
+Textual adds interactivity to Rich with an API inspired by modern web development.
+On modern terminal software (installed by default on most systems), Textual apps can use 16.7 million colors with mouse support and smooth flicker-free animation. A powerful layout engine and re-usable components makes it possible to build apps that rival the desktop and web experience.
+Compatibility
+Textual runs on Linux, macOS, and Windows. Textual requires Python 3.7 or above.
+Installing
+Install Textual via pip:
+pip install textual
+If you plan on developing Textual apps, you should also install the development tools with the following command:
+pip install textual-dev
+See the docs if you need help getting started.
+Demo
+Run the following command to see a little of what Textual can do:
+python -m textual
+Documentation
+Head over to the Textual documentation to start building!
+Join us on Discord
+Join the Textual developers and community on our Discord Server.
+Examples
+The Textual repository comes with a number of examples you can experiment with or use as a template for your own projects.
+🎬 Code browser
+This is the code\_browser.py example which clocks in at 61 lines (including docstrings and b
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Structured logging with slog}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Jonathan Amsterdam 
+{\scriptsize\faCalendar}\space 
+2023-08-22 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37224651\&utm\_term=comment}{272} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37224651\&utm\_term=comment}{21} 
+}
+\par\medskip\noindent
+\href{https://go.dev/blog/slog?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{The Go Blog
+Structured Logging with slog
+The new
+log/slog package in Go 1.21 brings structured logging to the standard
+library.}
+\paragraph{}
+ Structured logs use key-value pairs so they can be parsed, filtered,
+searched, and analyzed quickly and reliably.
+For servers, logging is an important way for developers to
+observe the detailed behavior of the system, and often the first place they go
+to debug it. Logs therefore tend to be voluminous, and the ability to search and
+filter them quickly is essential.
+The standard library has had a logging package,
+log,
+since Go’s initial release over a decade ago.
+Over time,
+we’ve learned that structured logging is important to Go programmers. It has
+consistently ranked high in our annual survey, and many packages in the Go
+ecosystem provide it. Some of these are quite popular: one of the first structured
+logging packages for Go, logrus,
+is used in over 100,000 other packages.
+With many structured logging packages to choose from, large programs will often end up including more than one through their dependencies. The main program might have to configure each of these logging packages so that the log output is consistent: it all goes to the same place, in the same format. By including structured logging in the standard library, we can provide a common framework that all the other structured logging packages can share.
+A tour of
+slog
+Here is the simplest program that uses
+slog:
+package main import "log/slog" func main() \{ slog.Info("hello, world") \}
+As of
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Architecture diagrams enable better conversations}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Ken Ross 
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faGlobe}\space 
+unravelled.dev 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37222855\&utm\_term=comment}{271} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37222855\&utm\_term=comment}{42} 
+}
+\par\medskip\noindent
+\href{https://www.unravelled.dev/how-architecture-diagrams-enable-better-conversations/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{How architecture diagrams enable better conversations
+Earlier this year myself and a couple others at DrDoctor did some training in C4 Architecture modelling1.}
+\paragraph{}
+ The trainer was really good and over a few sessions with him we got the hang of the method. We went onto use what we had learnt, meeting everything Thursday over the course of 3 months. We focused mainly on modelling our existing architecture into Level 1 (Context) and Level 2 (Container) diagrams. This process was enlightening and we all learnt a lot from it - that alone could easily be a couple of posts.
+I have had two main takeaways:
+- From the training itself, is that the C4 method provides a consistent language which can be used when talking about architecture
+- From using and applying the C4 method, is that diagrams can be an enabler for better conversations
+Before digging into the benefits that come from having C4 diagrams, there are two limitations in particular that I would like to highlight.
+-
+The C4 Model does not provide a standard way of communicating the story of your architecture in written form. Given all the things it does well, provides consistent language, introduce detail/complexity incrementally through different levels of diagrams, this felt like an oversight and something that would be really useful to have.
+-
+The lack of real-world examples available - this obviously isn’t a limitation of the model itself but rather due to the fact that companies don’t want to advertise their architecture in det
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Leaving Haskell behind}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Infinite Negative Utility 
+{\scriptsize\faCalendar}\space 
+2023-08-22 
+{\scriptsize\faGlobe}\space 
+infinitenegativeutility.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37246932\&utm\_term=comment}{268} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37246932\&utm\_term=comment}{44} 
+}
+\par\medskip\noindent
+\href{https://journal.infinitenegativeutility.com/leaving-haskell-behind?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Leaving Haskell behind
+For almost a complete decade—starting with discovering Haskell in about 2009 and right up until switching to a job where I used primarily Ruby and C++ in about 2019—I would have called myself first and foremost a Haskell programmer.
+Not necessarily a dogmatic Haskeller! I was—and still am—proudly a polyglot who bounces between languages depending on the needs of the project. However, Haskell was my default language for new projects, and in the absence of strongly compelling reasons to use other languages I would push for Haskell. I used it for command-line tools, for web services, for graphical applications, for little scripts…
+At this point, though, I think of my Haskell days as effectively behind me. I haven't aggressively sworn it off—this isn't a “Haskell is dead to me!” piece—but it's no longer my default language even for personal projects, and I certainly wouldn't deliberately seek out “a job in Haskell” in the same way I once did.
+So, I wanted to talk about why I fell away from Haskell. I should say up front: this is a piece about why I left Haskell, and not about why you should. I don't think people are wrong for using Haskell, or that Haskell is bad. In fact, if I've written this piece the way I hope to write it, I would hope that people read it and come away with a desire to maybe learn Haskell themselves!
+What drew me to Haskell?
+The absolute biggest pull for me, when first coming to Haskell, wasn't monads or DSLs or even types. The biggest 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{FP-Go: Functional programming library for Golang}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+IBM 
+{\scriptsize\faCalendar}\space 
+2023-08-29 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37171149\&utm\_term=comment}{221} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37171149\&utm\_term=comment}{47} 
+}
+\par\medskip\noindent
+\href{https://github.com/IBM/fp-go?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Functional programming library for golang
+🚧 Work in progress! 🚧 Despite major version 1 because of semantic-release/semantic-release\#1507.}
+\paragraph{}
+ Trying to not make breaking changes, but devil is in the details.
+This library is strongly influenced by the awesome fp-ts.
+Getting started
+go get github.com/IBM/fp-go
+Refer to the samples.
+Design Goal
+This library aims to provide a set of data types and functions that make it easy and fun to write maintainable and testable code in golang. It encourages the following patterns:
+- write many small, testable and pure functions, i.e. functions that produce output only depending on their input and that do not execute side effects
+- offer helpers to isolate side effects into lazily executed functions (IO)
+- expose a consistent set of composition to create new functions from existing ones
+- for each data type there exists a small set of composition functions
+- these functions are called the same across all data types, so you only have to learn a small number of function names
+- the semantic of functions of the same name is consistent across all data types
+🧘🏽 Zen Of Go?How does this play with the
+🧘🏽 Each package fulfils a single purpose
+✔️ Each of the top level packages (e.g. Option, Either, ReaderIOEither, ...) fulfils the purpose of defining the respective data type and implementing the set of common operations for this data type.
+🧘🏽 Handle errors explicitly
+✔️ The library makes a clear distinction between that operations that cannot fail by des
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{A half-hour to learn Rust}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Amos Wenger 
+{\scriptsize\faCalendar}\space 
+2020-01-27 
+{\scriptsize\faGlobe}\space 
+fasterthanli.me 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37236916\&utm\_term=comment}{214} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37236916\&utm\_term=comment}{17} 
+}
+\par\medskip\noindent
+\href{https://fasterthanli.me/articles/a-half-hour-to-learn-rust?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{A half-hour to learn Rust
+In order to increase fluency in a programming language, one has to read a lot of it. But how can you read a lot of it if you don't know what it means?}
+\paragraph{}
+
+In this article, instead of focusing on one or two concepts, I'll try to go through as many Rust snippets as I can, and explain what the keywords and symbols they contain mean.
+Ready? Go!
+let introduces a variable binding:
+let x; // declare "x" x = 42; // assign 42 to "x"
+This can also be written as a single line:
+let x = 42;
+You can specify the variable's type explicitly with
+:, that's a type annotation:
+let x: i32; // `i32` is a signed 32-bit integer x = 42; // there's i8, i16, i32, i64, i128 // also u8, u16, u32, u64, u128 for unsigned
+This can also be written as a single line:
+let x: i32 = 42;
+If you declare a name and initialize it later, the compiler will prevent you from using it before it's initialized.
+let x; foobar(x); // error: borrow of possibly-uninitialized variable: `x` x = 42;
+However, doing this is completely fine:
+let x; x = 42; foobar(x); // the type of `x` will be inferred from here
+The underscore
+\_ is a special name - or rather, a "lack of name". It
+basically means to throw away something:
+// this does *nothing* because 42 is a constant let \_ = 42; // this calls `get\_thing` but throws away its result let \_ = get\_thing();
+Names that start with an underscore are regular names, it's just that the compiler won't warn about them being unused:
+// we may use `\_x` eventually, but our code 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Why does email development have to suck? – Explaining all the <tr>'s and <td>'s}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faGlobe}\space 
+dodov.dev 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37163784\&utm\_term=comment}{190} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37163784\&utm\_term=comment}{23} 
+}
+\par\medskip\noindent
+\href{https://dodov.dev/blog/why-does-email-development-have-to-suck?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=code}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Why Does Email Development Have to Suck?}
+\paragraph{}
+
+Explaining all the <tr>'s and <td>'s…
+Published on
+-/- lines long
+First of all, if you're reading this because you unwillingly have to deal with email development, you have my deepest condolences for being one of the cursed souls condemned to suffer through this absurdity.
+I regard email development as the filthiest job you can do with a laptop. Nothing makes sense and you have to repeatedly test everything like a lunatic, much like trying to scrub dried up shit off a bathroom wall.
+Well, I hope the following will shine a light on this whole mess, give you useful advice, and relieve any potential suicidal thoughts you may be having.
+What is Email Development?
+In theory, developing emails should be very similar to developing websites. An email is essentially just an HTML document, like a web page, except it's visualized in an email client, rather than a web browser. However, both are capable of rendering, which is the process of turning HTML code into text, rectangles, and images, i.e. the visualization of the content.
+If you were a time traveler from 2005, developing websites and emails would've felt very similar indeed. Both browsers and email clients rendered HTML pretty much the same way and had the same functionalities. But while web standards(opens in new tab) evolved and browsers started implementing them, email clients didn't change much.
+When developing websites nowadays, we have support for tons of cool and productive features
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Data}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Dataherald AI – Natural Language to SQL Engine}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Dataherald 
+{\scriptsize\faCalendar}\space 
+2023-08-29 
+{\scriptsize\faGithub}\space 
+github.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37240363\&utm\_term=comment}{198} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37240363\&utm\_term=comment}{27} 
+}
+\par\medskip\noindent
+\href{https://github.com/Dataherald/dataherald?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=data}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{dataherald
+Query your structured data in natural language.
+Dataherald is a natural language-to-SQL engine built for enterprise-level question answering over structured data.}
+\paragraph{}
+ It allows you to set up an API from your database that can answer questions in plain English. You can use Dataherald to:
+- Allow business users to get insights from the data warehouse without going through a data analyst
+- Enable Q+A from your production DBs inside your SaaS application
+- Create a ChatGPT plug-in from your proprietary data
+This project is undergoing swift development, and as such, the API may be subject to change at any time.
+Overview
+Background
+The latest LLMs have gotten remarkably good at writing SQL. However we could not get existing frameworks to work with our structured data at a level which we could incorporate into our application. That is why we built and released this engine.
+Goals
+Dataherald is built to:
+- Be modular, allowing different implementations of core components to be plugged-in
+- Come batteries included: Have best-in-class implementations for components like text to SQL, evaluation
+- Be easy to set-up and use with major data warehouses
+- Get better with usage
+- Be fast
+Get Started
+The simplest way to set up Dataherald is to use the hosted version. We are rolling this service to select customers. Sign up for the waitlist.
+You can also self-host the engine locally using Docker. By default the engine uses Mongo to store application data.
+How to Run Dataherald (with local
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Pg\_later: Asynchronous Queries for Postgres}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Adam Hendel Founding Engineer 
+{\scriptsize\faCalendar}\space 
+2023-08-16 
+{\scriptsize\faGlobe}\space 
+tembo.io 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37172689\&utm\_term=comment}{187} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37172689\&utm\_term=comment}{9} 
+}
+\par\medskip\noindent
+\href{https://tembo.io/blog/introducing-pg-later/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=data}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{We’re working on asynchronous query execution in Postgres and have packaged the work up in an extension we’re calling pg\_later.}
+\paragraph{}
+ If you’ve used Snowflake’s asynchronous queries, then you might already be familiar with this type of feature. Submit your queries to Postgres now, and come back later and get the query’s results.
+Visit pg\_later’s Github repository and give it a star!
+Why async queries?
+Imagine that you’ve initiated a long-running maintenance job. You step away while it is executing, only to come back and discover it was interrupted hours ago due to your laptop shutting down. You don’t want this to happen again, so you spend some time googling or asking your favorite LLM how to run the command in the background with screen or tmux. Having asynchronous query support from the beginning would have saved you a bunch of time and headache!
+Asynchronous processing is a useful development pattern in software engineering. It has advantages such as improved resource utilization, and unblocking of the main execution thread.
+Some examples where async querying can be useful are:
+- For a DBA running ad-hoc maintenance.
+- Developing in interactive environments such as a Jupyter notebook. Rather than submit a long-running query only to have your notebook hang idly and then crash, you can use asynchronous tasks to avoid blocking your Notebook, or simply come back later to check on your task.
+- Having a long-running analytical query, for example fulfilling an ad-hoc request like seein
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{SQLite 3.43}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-24 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37255022\&utm\_term=comment}{125} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37255022\&utm\_term=comment}{8} 
+}
+\par\medskip\noindent
+\href{https://sqlite.org/releaselog/3\_43\_0.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=data}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Small. Fast. Reliable.
+Choose any three.
+SQLite Release 3.43.0 On 2023-08-24
+- Add support for Contentless-Delete FTS5 Indexes.}
+\paragraph{}
+ This is a variety
+of FTS5 full-text search index that omits storing the content that is being indexed
+while also allowing records to be deleted.
+- Enhancements to the date and time functions:
+- Added new time shift modifiers of the form ±YYYY-MM-DD HH:MM:SS.SSS.
+- Added the timediff() SQL function.
+- Added the octet\_length(X) SQL function.
+- Added the sqlite3\_stmt\_explain() API.
+- Query planner enhancements:
+- Generalize the LEFT JOIN strength reduction optimization so that it works
+for RIGHT and FULL JOINs as well. Rename it to
+OUTER JOIN strength reduction.
+- Enhance the theorem prover in the OUTER JOIN strength reduction optimization
+so that it returns fewer false-negatives.
+- Enhancements to the decimal extension:
+- New function decimal\_pow2(N) returns the N-th power of 2 for integer N
+between -20000 and +20000.
+- New function decimal\_exp(X) works like decimal(X) except that it returns
+the result in exponential notation - with a "e+NN" at the end.
+- If X is a floating-point value, then the decimal(X) function now does a full
+expansion of that value into its exact decimal equivalent.
+- Performance enhancements to JSON processing results in a 2x performance
+improvement for some kinds of processing on large JSON strings.
+- New makefile target "verify-source" checks to ensure that there are no
+unintentional changes in the source tree. (Works for
+cano
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Design}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Don't fire your illustrator}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Sam Bleckley 
+{\scriptsize\faCalendar}\space 
+2023-08-20 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37210953\&utm\_term=comment}{377} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37210953\&utm\_term=comment}{32} 
+}
+\par\medskip\noindent
+\href{https://sambleckley.com/writing/dont-fire-your-illustrator.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=design}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{My academic training is in Fine Art, painting, and printmaking. My professional career for the past 20 years has been in software engineering, including machine learning.}
+\paragraph{}
+ This makes me uniquely situated to
+panic about discuss image-generative AI systems like Midjourney, DALL-E, etc.
+This essay comes to you in two parts (both of which are right here on this page).
+Part I is a mostly-un-opinionated technical description of how one popular branch of AI image generation currently works. If you’re already familiar enough with stable diffusion to understand the terms “latent space” and “text transformer,” you can skip ahead.
+Part II is a very opinionated prediction of how this technology will be successfully used and by whom.
+PART I: Stable diffusion
+I a) The Latent Space
+If you want to talk about colors, there are more and less useful ways to name them for different tasks. Take the color “pinkish purplish autumn mist” and make it a little warmer; what color is that? Mix a little ultramarine, a little alizarin crimson, a tiny dot of cadmium yellow, and a good blob of titanium white. Make that a little warmer; what color is that? Take the RGB color
+234, 182, 227, and make it a little warmer; what color is that? Or the HSV color
+308° 22° 92°. Or the Lch color
+80/30/330.
+When we use lists of numbers to name points in a physical space, we don’t do so randomly.
+We pick a numbering to ensure that when the numbers are close, the locations they name are close, and when the numbers are very
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Godly – Astronomically good web design inspiration}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-06-19 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37226805\&utm\_term=comment}{214} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37226805\&utm\_term=comment}{34} 
+}
+\par\medskip\noindent
+\href{https://godly.website/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=design}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Godly
+Astronomically good web design inspiration from all over the internet
+Subscribe
+90 have today
+N° 988
+Open
+Atlas
+Large Type
+Minimal
+Design
+Colourful
+Animation
+Illustrative
+Interactive
+Agency
+Dark
+Scrolling Animation
+Portfolio
+Personal
+Grid
+E-commerce
+Single Page
+Pastel
+Clean
+Big Background Image
+Black \& White
+Transitions
+Gradient
+Fun
+Startup
+Unusual Layout
+Long Scrolling
+3D
+Typographic
+Big Background Video
+Development
+Monochromatic
+Parallax
+WebGL
+Fashion
+Mobile App
+Web App
+Technology
+Custom Cursor
+Art
+Food \& Drink
+SaaS
+Small Type
+Health \& Fitness
+Desktop App
+Horizontal Layout
+Bento Grid
+Infinite Scroll
+Finance
+Music
+Digital Product
+Audio
+Web3
+Homeware
+Photography
+Business \& Finance
+Productivity
+Motion
+Retro
+Cryptocurrency
+Beauty
+Event
+NFT
+Architecture
+Furniture
+Brutalist
+Community
+Education
+Gaming
+Production
+Hospitality
+Enviromental
+Magazine
+Interior Design
+Drag \& Drop
+Security
+Exhibition
+Retail
+Travel
+Restaurant
+Real Estate
+Political
+Marketing
+Museum
+Masonry
+NFT
+Virtual Reality
+Gradients
+Horizontal Scrolling
+All
+N° 987
+Open
+Opal Camera Inc.
+N° 986
+Open
+Christopher Ireland
+N° 985
+Open
+Spring/Summer
+N° 984
+Open
+AndAgain
+N° 983
+Open
+Rishikesh Nighot
+N° 982
+Open
+Endless
+N° 981
+Open
+10x Designers
+N° 980
+Open
+Phantom
+N° 979
+Open
+Threads
+N° 978
+Open
+Cosmos
+N° 977
+Open
+Paste
+N° 976
+Open
+ChainZoku
+Directory
+Shop
+Info
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{On keeping sketchbooks}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Matt Kirkland 
+{\scriptsize\faCalendar}\space 
+2023-08-22 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37227606\&utm\_term=comment}{213} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37227606\&utm\_term=comment}{32} 
+}
+\par\medskip\noindent
+\href{https://attainablefelicity.mattkirkland.com/20230822/Sketchbooks.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=design}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{On keeping sketchbooks
+I carry a sketchbook. I’ve been keeping a sketchbook since 2000. This weekend I stacked them all up to try to get a photo. It was more than I expected.}
+\paragraph{}
+
+My sketchbook is basically attached to my person. If you’ve ever had an in-person meeting with me, my left arm probably looked like this:
+As an art kid, I was always drawing and doodling. The corner convenience store I biked to as a kid had cheap blank notepads - I was always torn between spending my allowance on candy vs those sweet, shiny blank paper notepads.
+My first real sketchbook in this stack was enforced by my Design I professor in college, Jon Swindell. Jon was the quintessential Art School Instructor: helpful but demanding, provocative when you needed him to be, kooky in ways that just delighted this suburban dumbass. An inspiration, truly.
+When Professor Swindell told me designers should always carry a sketchbook, I believed him.
+The second looked like this: I moved into decorating them with ephemera for a while. A bit of cosmic foreshadowing for my future job at a craft/scrapbooking supply company!
+And now they all pretty much look like this.
+Why keep a sketchbook?
+So why do I keep a sketchbook? Really it’s more a notebook these days, but personally I process and remember stuff better in physical media. I also find that I get distracted in meetings, and I can pay better attention to things if my pen is moving.
+But of course I’m a designer too - a lot of my work is planning and sketching, eve
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Books}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Why do old books smell so good?}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Author ScienceSwitch 
+{\scriptsize\faCalendar}\space 
+2023-08-19 
+{\scriptsize\faGlobe}\space 
+scienceswitch.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37188015\&utm\_term=comment}{316} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37188015\&utm\_term=comment}{31} 
+}
+\par\medskip\noindent
+\href{https://scienceswitch.com/2023/08/19/why-do-old-books-smell-so-good/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Have you ever wandered into an old library or dusty bookshop and paused to breathe in that familiar vanilla-coffee-grassy scent wafting off the aged tomes?}
+\paragraph{}
+ That nostalgic olfactory experience is thanks to a bouquet of chemical compounds.
+Modern books smell different because of changes in manufacturing, while old books release distinctive volatile organic compounds (VOCs) as they slowly decay. Scientists are sniffing out these VOCs to reveal secrets about a book’s age, condition, and history.
+The Chemistry of Paper
+Paper is made of cellulose fibers bound by lignin, while inks and bindings add other organic compounds. Cellulose is a polymer made of long glucose chains, while lignin is a complex polymer found in plant cells.
+Over time, light, heat, and moisture cause the paper and compounds to break down, releasing VOCs that vaporize into the air. The manufacturing process also affects the VOCs released as the book ages.
+Telltale Scents
+An almond scent comes from benzaldehyde in the paper. Vanillin, the main compound in vanilla, is responsible for a sweet vanilla fragrance. Ethylbenzene, used in inks and paints, has a sweet plastic smell. 2-Ethyl hexanol, found in solvents and scents, smells lightly floral.
+New books use modern chemicals like hydrogen peroxide and alkyl ketene dimers, so they give off different VOCs. The VOCs can also indicate exposure to smoke, water damage, or other aging factors.
+Reading the Chemical Clues
+Scientists can analyze the VOCs from an old book to d
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Close to the Machine: Technophilia and its discontents}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-22 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37221487\&utm\_term=comment}{214} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37221487\&utm\_term=comment}{18} 
+}
+\par\medskip\noindent
+\href{https://manu.zone/books/close-to-the-machine/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=books}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+(These are some notes and quotes on Ellen Ullman’s memoir Close to the Machine: Technophilia and its discontents )
+Annotations
+- About the programming process and how the experience descends from the portrait of concise plans and propositions to chaos managing, she writes:
+“The project begins in the programmer’s mind with the beauty of a crystal. The knowledge I am to represent in code seems lovely in its structuredness. For a time, the world is a calm, mathematical place. […] Yes, I understand. Yes, it can be done. Yes, how straightforward. Oh yes. I see. […] Then something happens. The irregularities of human thinking start to emerge. Now begins a process of frustration.”
+- Programming is a terribly immersive activity, that swallows you away from any clear goal or intention that doesn’t reside in the machine. “The goal becomes the creation of the system itself.”
+- She approaches the topic of life as a performance attached more to its context than to its performer (you are and do what you think you are supposed to, not what you deeply intend) when discussing revolutionary positions, pg 29.
+- “He has the relentless, cheerful smoothness of the salesman, which makes me distrust him implicitly.” - This especifically reminds me, deeply, of some real estate agent Alfonso and I had to interact with to rent our flat in Madrid. I felt about to be scammed since the moment he looked at me. Trust was an antinatural exercise.
+- “When I watch the users try the Internet, it slowly becomes 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Working}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Common mistakes in salary negotiation}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Aline Lerner 
+{\scriptsize\faCalendar}\space 
+2023-08-23 
+{\scriptsize\faGlobe}\space 
+interviewing.io 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37239747\&utm\_term=comment}{577} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37239747\&utm\_term=comment}{58} 
+}
+\par\medskip\noindent
+\href{https://interviewing.io/blog/sabotage-salary-negotiation-before-even-start?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Note: If you’d like a practical primer on negotiation, read my previous post on negotiation first — it tells you exactly what to say in a bunch of situations.}
+\paragraph{}
+ This post is longer and more academic, but of course I include some practical tips and teach you what to say in a few situations, as well.
+At interviewing.io, we’ve coached hundreds of people through salary negotiation. We’re good at it — our average user gets \$50k more in cash, and we have a 94 success rate.
+Having done this a lot, we’ve seen our users make the same two mistakes, over and over, BEFORE they start working with us. These mistakes are costly and make it harder for us to do our jobs. Our advice is applicable to everyone, but I wrote this post primarily to share with interviewing.io’s user base, so that future clients of our negotiation service don’t shoot themselves in the foot.
+These are the two things you must avoid. Both involve how you talk to recruiters at the start of your job search, way before there’s an offer:
+In this post, I’ll explain why these two mistakes routinely sabotage salary negotiation efforts and what to say to recruiters instead. In a nutshell, if you can just be in “passive information gathering” mode (more on that later) for most of your recruiter interactions, you’ll be golden. It’s hard to not to share info about your job search with your recruiter, especially as you build more rapport with them, but we’ll tell you exactly what to say instead.
+Before we get into all of that, I wan
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{A good measurement culture where numbers don’t replace common sense}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Ágoston Török 
+{\scriptsize\faCalendar}\space 
+2023-08-22 
+{\scriptsize\faGlobe}\space 
+promaton.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37220667\&utm\_term=comment}{484} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37220667\&utm\_term=comment}{73} 
+}
+\par\medskip\noindent
+\href{https://blog.promaton.com/how-to-avoid-kpi-psychosis-in-your-organization-5ffc83967f2b?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{How to avoid KPI psychosis in your organization?
+A practical guide to a good measurement culture where numbers don’t replace common sense
+We live in a world where we collect data about everything.}
+\paragraph{}
+ Think of the data we track on our navigation, our customer behavior, our health, and our company/team/individual performance. Unfortunately, this abundance of data led to a growing prevalence of KPI* psychosis in technology companies.
+What do I mean by this? Let’s take the definition of Merriam-Webster for psychosis: “a serious mental illness characterized by defective or lost contact with reality”. This means KPI psychosis is a state of mind where a company has dysfunctional contact with its reality and makes decisions only based on numbers.
+Human subjectivity
+So why are companies so obsessed with collecting data to guide decisions? Data is seen as a way to fight biases, and when it comes to biases humans lead the way. We are so much biased that the people who collected the sorts of biases that feature human cognition received a Nobel prize for their work.
+Just to give a glimpse: we take information that is easiest to gather (availability bias), often that is heavily affected by the latest info we got (recency bias) and when we make conclusions we tend to overgeneralize (halo/horn effect) with more confidence than it was justified by our lintels (overconfidence bias). On top, we are typically stubborn and seldom change our opinions and worldview (anchoring bias, confirmation bias).
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{A retiring consultant’s advice on consultants}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-17 
+{\scriptsize\faGlobe}\space 
+economist.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37207237\&utm\_term=comment}{263} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37207237\&utm\_term=comment}{21} 
+}
+\par\medskip\noindent
+\href{https://www.economist.com/business/2023/08/17/a-retiring-consultants-advice-on-consultants?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=working}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{A retiring consultant’s advice on consultants
+How to manage the snake-oil salesmen
+DEAR Robin, I was delighted when you commissioned me to prepare this report for you after our discussion at the club.}
+\paragraph{}
+ As a newly appointed chief executive at a Fortune 500 company, a thrilling yet perilous adventure awaits you. I commend your wisdom in choosing to hire a management consultant to guide you on your way.
+I, naturally, would have been ideally positioned, given my many years of experience serving your company’s principal rival. Alas, the time comes in every man’s life when he must hang up his hat and retire to his home in the Bahamas. As my swan song, I have thrown together, as requested, a few thoughts on how to handle my kind. I hope you find the attached 120-page PowerPoint presentation useful. Below you will find a brief summary.
+Be ready for the “bait and switch”: Do not be fooled by the eloquent veterans who will turn up to your office to plead for your business. The work will mostly be done by clever but pimply 20-somethings, armed with two-by-two matrix frameworks recycled from client to client. What they lack in wisdom will be made up for in long hours. You need not feel sorry for them. They are cocooned in a shell of fancy meals, lavish hotels and private drivers—at your expense.
+At first you will find them to be of no use at all—detrimental, even—as they harry your management team with endless questions and urgent requests for data. Eventually, they will win you over with
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Learn}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Shouldn't distant objects appear magnified?}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Orion Elenzil Orion Elenzil 
+{\scriptsize\faCalendar}\space 
+2023-08-21 
+{\scriptsize\faGlobe}\space 
+stackexchange.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37198954\&utm\_term=comment}{549} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37198954\&utm\_term=comment}{17} 
+}
+\par\medskip\noindent
+\href{https://astronomy.stackexchange.com/questions/54499/shouldnt-very-very-distant-objects-appear-magnified?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Yes. And they are! This is called the "Angular diameter distance turnaround" (or turnover). In the usual model for expansion \$Lambda CDM\$, it is at a redshift of about 1.}
+\paragraph{}
+5 or about 15 billion light-years (corresponding to a light travel time of about 10 billion years, or about 4 billion years after the big bang, the distance is greater due to the expansion of space) I'm using rounded values here, because the actual distance is quite sensitive to the exact parameters of expansion.
+A galaxy from 400 million years after the big bang (a distance of 32 billion light-years) would look as big as a galaxy that is 2.7 billion light-years away. (These figures from Ned Wright's calculator)
+It's illustrated in this xkcd comic. You can see nearby "galaxies" are large and bright, more distant galaxies are smaller, very distant galaxies are large, dim, and red. More details about this phenomena are answered by Understanding The Turnover Point of Angular Diameter Distance
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{So you want to learn physics}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-01 
+{\scriptsize\faGlobe}\space 
+susanrigetti.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37200615\&utm\_term=comment}{526} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37200615\&utm\_term=comment}{31} 
+}
+\par\medskip\noindent
+\href{https://www.susanrigetti.com/physics?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+So You Want to Learn Physics…
+SECOND EDITION
+Introduction to the Second Edition
+April 20th, 2021
+Nearly six years ago, I sat down at my desk and typed up a detailed guide for anyone who wanted to learn physics on their own. At the time, I had no idea how many people would read it and use it — my only goal was to put the information out there in a clear and straightforward way so that anyone who wanted to learn physics would have the self-study curriculum they needed. Since then, over six hundred thousand people have turned to this guide to study physics.
+According to the emails I’ve received from readers, many of you have gone on to get undergraduate degrees in physics after following the curriculum in this guide (some of you are even now in graduate programs!), but the majority of those who have bookmarked and followed this guide — even all the way to the end! — have done so out of pure curiosity and for the sheer joy of understanding the incredible universe we inhabit.
+The success of this guide is, I believe, a testament to two things.
+First, that one of the most impactful things you can do is to share what you know with others, even if it doesn’t seem like a lot. I wasn’t able to become a professional physicist, but I was able to use my knowledge of undergraduate and graduate-level physics to type up a comprehensive and accessible curriculum that has helped hundreds of thousands of people learn physics. That’s pretty remarkable. If you are wondering what you have to offer 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Shit life syndrome}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2019-04-05 
+{\scriptsize\faGlobe}\space 
+wikipedia.org 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37197155\&utm\_term=comment}{392} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37197155\&utm\_term=comment}{32} 
+}
+\par\medskip\noindent
+\href{https://en.wikipedia.org/wiki/Shit\_life\_syndrome?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Shit life syndrome
+Shit life syndrome (SLS) is a phrase used by physicians in the United Kingdom and the United States for the effect that a variety of poverty or abuse-induced disorders can have on patients.
+Sarah O'Connor's 2017 article for the Financial Times "Left behind: can anyone save the towns the economy forgot?" on shit life syndrome in the English coastal town of Blackpool won the 2018 Orwell Prize for Exposing Britain's Social Evils.[1][2] O'Connor wrote that
+Blackpool exports healthy skilled people and imports the unskilled, the unemployed and the unwell. As people overlooked by the modern economy wash up in a place that has also been left behind, the result is a quietly unfolding health crisis. More than a tenth of the town's working-age inhabitants live on state benefits paid to those deemed too sick to work. Antidepressant prescription rates are among the highest in the country. Life expectancy, already the lowest in England, has recently started to fall. Doctors in places such as this have a private diagnosis for what ails some of their patients: "Shit Life Syndrome" ... People with SLS really do have mental or physical health problems, doctors say. But they believe the causes are a tangled mix of economic, social and emotional problems that they — with 10- to 15-minute slots per patient — feel powerless to fix. The relationship between economics and health is blurry, complex and politically fraught. But it is too important to ignore.— Sarah O'Connor, "Left b
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Modernity has made us allergic}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Theresa MacPhail 
+{\scriptsize\faCalendar}\space 
+2023-08-08 
+{\scriptsize\faGlobe}\space 
+noemamag.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37195905\&utm\_term=comment}{247} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37195905\&utm\_term=comment}{32} 
+}
+\par\medskip\noindent
+\href{https://www.noemamag.com/modernity-has-made-us-allergic/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Theresa MacPhail is a medical anthropologist, former journalist and associate professor of science and technology studies.}
+\paragraph{}
+ She is the author of “Allergic: Our Irritated Bodies In a Changing World” (Random House, 2023), from which this piece has been adapted.
+Elizabeth, an engineer in her late-30s, has three children, all with some form of allergy. Her eldest daughter, Viola, 12, had eczema as a baby; has environmental allergies to pollen; and allergies to corn, tree nuts and peanuts.
+Her youngest son, Brian, 3, also had eczema as a baby and subsequently developed allergies to peanuts and barley, though Elizabeth fears there could be more. Her middle daughter, five-year-old Amelia, had a dairy allergy as an infant, but is now just lactose intolerant. She’s the easiest of the three, at least in terms of allergy.
+By the time I hear her story, Elizabeth is already a veteran at dealing with her children’s irritated immune systems. She began a support group for parents of children with corn allergies and is heavily involved in trying to educate other parents about food allergies.
+The parents share their theories about why their children have allergies. Her own is that Viola and Brian both went to the emergency room with high fevers as babies and were given precautionary antibiotics. She blames the antibiotics for altering her children’s gut microbiome and herself for agreeing to the treatment in the first place.
+Part of Elizabeth’s rationale is that no one else in her family has al
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Coffee grounds make concrete 30\% stronger}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-23 
+{\scriptsize\faGlobe}\space 
+rmit.edu.au 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37234404\&utm\_term=comment}{198} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37234404\&utm\_term=comment}{22} 
+}
+\par\medskip\noindent
+\href{https://www.rmit.edu.au/news/all-news/2023/aug/coffee-concrete?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=learn}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Titanium micro-spikes skewer resistant superbugs
+A new study suggests rough surfaces inspired by the bacteria-killing spikes on insect wings may be more effective at combatting drug-resistant superbugs, including fungus, than previously understood.
+Coffee offers performance boost for concrete
+Engineers in Australia have found a way of making stronger concrete with roasted used-coffee grounds, to give the drink-additive a “double shot” at life and reduce waste going to landfills.
+Recycled roads pave the way to a sustainable future
+New roads mixed with recycled plastics at 10 sites across Victoria will demonstrate a viable circular-economy solution to the nation, experts say.
+Proton battery promises cheap energy storage that’s kinder to nature
+Engineers in Melbourne are vying for pole position in the global race to make a cheap rechargeable battery for storing solar energy that does not rely on scarce natural resources.
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Watching}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Chandrayaan-3 Soft-landing}
+\textsc{\footnotesize
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37233936\&utm\_term=comment}{1911} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37233936\&utm\_term=comment}{94} 
+}
+\par\medskip\noindent
+\href{https://www.isro.gov.in/LIVE\_telecast\_of\_Soft\_landing.html?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Telecast of Chandrayaan-3 Soft-landing Chandrayaan-3 Soft-landing Video Home More Details Chandrayaan-3 Chandrayaan-3 Details Launch Streaming Brochure PDF - 5.}
+\paragraph{}
+6 MB Curtain Raiser Video LVM3 M4 Onboard Video Chandrayaan-3 Videos Gallery Appraisal Press Release on Aug 05, 2023 More Details Chandrayaan-3 Chandrayaan-3 Details Launch Streaming Brochure PDF - 5.6 MB Curtain Raiser Video LVM3 M4 Onboard Video Chandrayaan-3 Videos Gallery Appraisal Press Release on Aug 05, 2023
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{How to use a Breadboard. How do breadboards work?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2021-11-15 
+{\scriptsize\faYoutube}\space 
+youtube.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37210146\&utm\_term=comment}{97} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37210146\&utm\_term=comment}{10} 
+}
+\par\medskip\noindent
+\href{https://www.youtube.com/watch?v=BYOiYvdaCis\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Over
+Pers
+Auteursrecht
+Contact
+Creators
+Adverteren
+Ontwikkelaars
+Voorwaarden
+Privacy
+Beleid en veiligheid
+Zo werkt YouTube
+Nieuwe functies testen
+© 2023 Google LLC
+YouTube, een bedrijf van Google
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Emulating the 6502 CPU in C++}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2020-08-23 
+{\scriptsize\faYoutube}\space 
+youtube.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37172769\&utm\_term=comment}{60} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37172769\&utm\_term=comment}{3} 
+}
+\par\medskip\noindent
+\href{https://www.youtube.com/watch?v=qJgsuQoy9bc\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Over
+Pers
+Auteursrecht
+Contact
+Creators
+Adverteren
+Ontwikkelaars
+Voorwaarden
+Privacy
+Beleid en veiligheid
+Zo werkt YouTube
+Nieuwe functies testen
+© 2023 Google LLC
+YouTube, een bedrijf van Google
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{A Novel OS Built Just for Databases}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-15 
+{\scriptsize\faYoutube}\space 
+youtube.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37179905\&utm\_term=comment}{20} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37179905\&utm\_term=comment}{4} 
+}
+\par\medskip\noindent
+\href{https://www.youtube.com/watch?v=fuDeLnbUkT4\&utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=watching}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Over
+Pers
+Auteursrecht
+Contact
+Creators
+Adverteren
+Ontwikkelaars
+Voorwaarden
+Privacy
+Beleid en veiligheid
+Zo werkt YouTube
+Nieuwe functies testen
+© 2023 Google LLC
+YouTube, een bedrijf van Google
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Startup News}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Hugging Face raises \$235M from investors including Salesforce and Nvidia}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Kyle Wiggers 
+{\scriptsize\faCalendar}\space 
+2023-08-24 
+{\scriptsize\faGlobe}\space 
+techcrunch.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37248895\&utm\_term=comment}{334} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37248895\&utm\_term=comment}{23} 
+}
+\par\medskip\noindent
+\href{https://techcrunch.com/2023/08/24/hugging-face-raises-235m-from-investors-including-salesforce-and-nvidia/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+AI startup Hugging Face has raised \$235 million in a Series D funding round, as first reported by The Information, then seemingly verified by Salesforce CEO Marc Benioff on X (formerly known as Twitter). The tranche, which had participation from Google, Amazon, Nvidia, Intel, AMD, Qualcomm, IBM, Salesforce and Sound Ventures, values Hugging Face at \$4.5 billion. That’s double the startup’s valuation from May 2022 and reportedly more than 100 times Hugging Face’s annualized revenue, reflecting the enormous appetite for AI and platforms to support its development.
+Hugging Face offers a number of data science hosting and development tools, including a GitHub-like hub for AI code repositories, models and datasets, as well as web apps to demo AI-powered applications. It also provides libraries for tasks like dataset processing and evaluating models in addition to an enterprise version of the hub that supports software-as-a-service and on-premises deployments.
+The company’s paid functionality includes AutoTrain, which helps to automate the task of training AI models; Inference API, which allows developers to host models without managing the underlying infrastructure; and Infinity, which is designed to increase the speed with which an in-production model processes data.
+“AI is the new way of building all software. It’s the most important paradigm shift of the decade and, compared to the software shift, it’s going to be bigger because of new capabilities and faster because software p
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Nvidia announces financial results for second quarter fiscal 2024}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-23 
+{\scriptsize\faGlobe}\space 
+nvidia.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37241487\&utm\_term=comment}{323} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37241487\&utm\_term=comment}{29} 
+}
+\par\medskip\noindent
+\href{https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2024?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{- Record revenue of \$13.51 billion, up 88 from Q1, up 101 from year ago
+- Record Data Center revenue of \$10.}
+\paragraph{}
+32 billion, up 141 from Q1, up 171 from year ago
+NVIDIA (NASDAQ: NVDA) today reported revenue for the second quarter ended July 30, 2023, of \$13.51 billion, up 101 from a year ago and up 88 from the previous quarter.
+GAAP earnings per diluted share for the quarter were \$2.48, up 854 from a year ago and up 202 from the previous quarter. Non-GAAP earnings per diluted share were \$2.70, up 429 from a year ago and up 148 from the previous quarter.
+“A new computing era has begun. Companies worldwide are transitioning from general-purpose to accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA.
+“NVIDIA GPUs connected by our Mellanox networking and switch technologies and running our CUDA AI software stack make up the computing infrastructure of generative AI.
+“During the quarter, major cloud service providers announced massive NVIDIA H100 AI infrastructures. Leading enterprise IT system and software providers announced partnerships to bring NVIDIA AI to every industry. The race is on to adopt generative AI,” he said.
+During the second quarter of fiscal 2024, NVIDIA returned \$3.38 billion to shareholders in the form of 7.5 million shares repurchased for \$3.28 billion, and cash dividends. As of the end of the second quarter, the company had \$3.95 billion remaining under its share repurchase authorization. On August 21, 2023, the Board 
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Arm Announces Public Filing for Proposed Initial Public Offering}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Arm Ltd 
+{\scriptsize\faCalendar}\space 
+2023-08-01 
+{\scriptsize\faGlobe}\space 
+arm.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37219779\&utm\_term=comment}{308} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37219779\&utm\_term=comment}{17} 
+}
+\par\medskip\noindent
+\href{https://www.arm.com/company/news/2023/08/arm-announces-public-filing-of-registration-statement-for-proposed-initial-public-offering?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+Arm Announces Public Filing of Registration Statement for Proposed Initial Public Offering
+Cambridge, UK, August 21, 2023 – Arm Holdings Limited (“Arm”) today announced that it has publicly filed a registration statement on Form F-1 with the U.S. Securities and Exchange Commission (“SEC”) relating to the proposed initial public offering of American depositary shares (“ADS”) representing its ordinary shares. Arm has applied to list the ADSs on the Nasdaq Global Select Market under the symbol “ARM”. The number of ADSs to be offered and the price range for the proposed offering have yet to be determined.
+Raine Securities LLC is acting as financial advisor in connection with the proposed offering. Barclays, Goldman Sachs \& Co. LLC, J.P. Morgan, and Mizuho are acting as joint book-running managers for the proposed offering.
+The proposed offering will be made only by means of a prospectus. Copies of the preliminary prospectus relating to this offering, when available, may be obtained by visiting EDGAR on the SEC's website at www.sec.gov. Alternatively, copies of the preliminary prospectus, when available, may be obtained from Barclays Capital Inc., c/o Broadridge Financial Solutions, 1155 Long Island Avenue, Edgewood, NY 11717, by telephone at 1-888-603-5847 or by email at barclaysprospectus@broadridge.com; Goldman Sachs \& Co. LLC, Attn: Prospectus Department, 200 West Street, New York, NY 10282, by telephone at 866-471-2526 or by email at prospectus-ny@ny.email.gs.com; J.P. Morgan
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{Upcoming .com and .xyz domain price increase}
+\textsc{\footnotesize
+{\scriptsize\faUser}\space 
+Keeping you connected; Namecheap Staff 
+{\scriptsize\faCalendar}\space 
+2023-08-21 
+{\scriptsize\faGlobe}\space 
+namecheap.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37211675\&utm\_term=comment}{233} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37211675\&utm\_term=comment}{57} 
+}
+\par\medskip\noindent
+\href{https://www.namecheap.com/blog/upcoming-com-and-xyz-domain-price-increase/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{Upcoming .COM and .XYZ domain price increase
+At Namecheap, we’ve consistently stood up for our users by challenging arbitrary domain price increases. As we approach another price increase for .}
+\paragraph{}
+COM and .XYZ domains this September, we wanted to ensure our customers are informed so you can continue to get the best value for your investments.
+Key information for Namecheap users
+All .COM domain renewals will see an approximate 9 increase. This price increase will happen across registrars, not just Namecheap. The new prices will take effect on September 1st. .XYZ domains will also experience a price increase.
+We recommend our existing domain customers renew .COM domains before September to lock in the current rates for the coming year. Prospective registrants should likewise consider registering before the price increase to lock in existing prices.
+Alternatively, you might consider alternatives to .COM. Depending on the top-level domain, these options could be more budget-friendly
+Namecheap’s pricing beginning September 1
+- .COM: Renewals – \$15.88
+- .XYZ: Registrations/Transfers – \$12.98
+- .XYZ Renewals – \$14.98
+Verisign’s pattern of increases
+Verisign, the entity overseeing .COM domains, has pricing authority based on their agreement with the Internet Corporation for Assigned Names and Numbers (ICANN). The periodic price changes for .COM domains are in line with this arrangement.
+While we at Namecheap understand how this cost compounds over time, especially for those managing mul
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{HashiCorp switching to BSL shows a need for open charter companies}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-23 
+{\scriptsize\faGlobe}\space 
+opencoreventures.com 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37239979\&utm\_term=comment}{184} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37239979\&utm\_term=comment}{31} 
+}
+\par\medskip\noindent
+\href{https://opencoreventures.com/blog/2023-08-23-hashicorp-switching-bsl-shows-need-for-open-charter-companies/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=startup\_news}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{In recent years, several high-profile open source companies have made headlines by shifting their licensing agreements away from purely open source models.}
+\paragraph{}
+ MariaDB was first with its introduction of the Business Source License (BSL) in 2016 and was closely followed by MongoDB, Confluent, Redis Labs, and others. Now, HashiCorp is the latest company to follow this trend and announce its switch from an open source to a non-compete license.
+Non-compete licenses mimic open source by allowing users to copy, modify, and redistribute code but only for specific purposes. Unlike open source, non-compete licenses restrict code redistribution to non-competitive use. Adopting a non-compete license isn’t problematic in itself, it’s the trend of switching from an open source to a non-compete license after gaining significant success that is causing distrust in commercial open source software.
+HashiCorp is just the latest company to switch its licensing model and probably won’t be the last. As OSS companies gain commercial success the financial benefit of being open source diminishes. Open source companies generally have a low rake, creating more value than they capture, and high growth. Over time, growth slows, prompting the need for a higher rake. Companies seek to cut off “freeloaders’’ to gain more market share. They then adopt open source-adjacent licenses in an attempt to cut off competition. From a shareholder perspective, the short-term benefit is clear: capturing more value can quic
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\section{\#Fun}
+
+\begin{multicols*}{2}
+
+\noindent\begin{minipage}{\linewidth}
+\subsection{Just intonation keyboard – play music without knowing music}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-01-01 
+{\scriptsize\faGlobe}\space 
+pages.dev 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37194128\&utm\_term=comment}{329} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37194128\&utm\_term=comment}{18} 
+}
+\par\medskip\noindent
+\href{https://ad8e.pages.dev/keyboard?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fun}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{This instrument makes harmony clear. Both the instrument and harmony are explained below.
+Click this to play Debussy's Passepied.}
+\paragraph{}
+
+Press keys on the right to play sounds, and occasionally press a key on the left to change the harmony. These green text links will play sound. (Make sure your sound is on. If you're on mobile, you will have to tap once before it'll let you play. On iOS, make sure the Silent Mode switch is off.)
+The biggest difference from a piano is that you can play all the notes together (volume warning). This is a unique set of notes. As a consequence, random keys harmonize with each other, and even rolling your elbow over the keyboard or sweeping your mouse will sound pleasant. If you hold 3 notes and don't hear the 3rd note, then your keyboard can only handle 2 keys at a time, called "2-key rollover". In that case, use the mouse and keyboard simultaneously. On mobile, horizontal view will make the buttons bigger.
+The green numbers are pitch (like 4 → 400 Hz, 5 → 500 Hz). The blue numbers multiply the pitches, and their effect is shown on the green numbers. The purple numbers multiply the pitches the same way, but permanently, and they come in pairs that undo each other. Multipliers on the far left (7/6) are more exotic than ones in the middle (1/2). The yellow square moves right when pitches are multiplied by 5, and the blue, green, and red squares correspond to 2, 3, and 7. These four squares show the current pitch.
+Don't worry if you don't understand some t
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{TimeGuessr: Guess what year a photograph was taken}
+\textsc{\footnotesize
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37203511\&utm\_term=comment}{251} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37203511\&utm\_term=comment}{49} 
+}
+\par\medskip\noindent
+\href{https://timeguessr.com/?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fun}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+TimeGuessr PLAY DAILY
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\noindent\begin{minipage}{\linewidth}
+\subsection{QR codes appearing in Google street view?}
+\textsc{\footnotesize
+{\scriptsize\faCalendar}\space 
+2023-08-16 
+{\scriptsize\faGlobe}\space 
+nso.group 
+{\scriptsize\faThumbsOUp}\space 
+\href{http://news.ycombinator.com/item?id=37155574\&utm\_term=comment}{223} 
+{\scriptsize\faComments}\space 
+\href{http://news.ycombinator.com/item?id=37155574\&utm\_term=comment}{16} 
+}
+\par\medskip\noindent
+\href{https://nso.group/@haifisch/110901720830132689\#.?utm\_source=hackernewsletter\&utm\_medium=email\&utm\_term=fun}{
+    \includegraphics[width=0.99\linewidth]{notfound.png}
+}
+\end{minipage}
+\paragraph{}
+\textbf{To use the Mastodon web application, please enable JavaScript. Alternatively, try one of the
+native apps
+for Mastodon for your platform.}
+\paragraph{}
+
+\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
+\vfill
+\null
+\end{multicols*}
+
+\newpage
+\end{document} 

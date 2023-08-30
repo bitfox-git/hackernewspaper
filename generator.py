@@ -11,7 +11,7 @@ from fake_useragent import UserAgent
 if len(sys.argv) > 1:
     ISSUE = sys.argv[1]
 else:
-    ISSUE = "665" 
+    ISSUE = "665_9" 
 
 paperdata = {
     "issue": ISSUE
@@ -82,19 +82,21 @@ def get_articles(soup):
             if nextSibling.name == "p":
                 
                 a = nextSibling.find("a")
-                mainurl = a.get("href")
-                title = a.get("title")
-                text = a.get_text()
-                
-                span = nextSibling.find("span") 
-                if span is not None:
-                    subtext = span.text
-                    suburla = span.find("a") 
-                    if suburla is not None: 
-                        suburl = suburla.get("href")
-                art = article(mainurl, title, text, subtext, suburl,category)    
-                articles.append(art)
-                print(art)       
+                if a is not None:
+                    mainurl = a.get("href")
+                    title = a.get("title")
+                    text = a.get_text()
+                    subtext =""
+                    suburl = ""
+                    span = nextSibling.find("span") 
+                    if span is not None:
+                        subtext = span.text
+                        suburla = span.find("a") 
+                        if suburla is not None: 
+                            suburl = suburla.get("href")
+                    art = article(mainurl, title, text, subtext, suburl,category)    
+                    articles.append(art)
+                    print(art)       
     return articles, categories
 
 #check if url is a youtube url using the regex ^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+
@@ -168,6 +170,11 @@ def splitFirstSentenceParagraph(data):
             return data[:firstdot+1], data[firstdot+1:]
     return None, data
 
+def removeEmptyLines(data):
+    # remove empty lines
+    lines = data.split("\n")
+    lines = [line for line in lines if line.strip() != ""]
+    return "\n".join(lines)
 
 # map the site to a fontawesome symbol
 def faSymbolPerHostname(hostname):
@@ -181,29 +188,6 @@ def faSymbolPerHostname(hostname):
 def isValidDictItem(item, dict):
     return item in dict and dict[item] is not None and dict[item] != ""
 
-# def removeUnicode(data):
-#     emoj = re.compile("["
-#         u"\U0001F600-\U0001F64F"  # emoticons
-#         u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-#         u"\U0001F680-\U0001F6FF"  # transport & map symbols
-#         u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-#         u"\U00002500-\U00002BEF"  # chinese char
-#         u"\U00002702-\U000027B0"
-#         u"\U00002702-\U000027B0"
-#         u"\U000024C2-\U0001F251"
-#         u"\U0001f926-\U0001f937"
-#         u"\U00010000-\U0010ffff"
-#         u"\u2640-\u2642" 
-#         u"\u2600-\u2B55"
-#         u"\u200d"
-#         u"\u23cf"
-#         u"\u23e9"
-#         u"\u231a"
-#         u"\ufe0f"  # dingbats
-#         u"\u3030"
-#                       "]+", re.UNICODE)
-#     return re.sub(emoj, '', data)
-
 
 for index, art in enumerate(articles):
     sitecontent= loadordownload(index, art)
@@ -211,6 +195,8 @@ for index, art in enumerate(articles):
 
     if data is None:
         data = ""
+    # remove empty lines
+    data = removeEmptyLines(data)
     # temp remove all emoji stuff, until found decent solutions in latex
     # solved : no longer necessary with Tectonic Typesetting.
     # data = removeUnicode(data)
