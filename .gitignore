@@ -12,6 +12,8 @@ __pycache__/
 *.png
 *.html
 
+output.pdf
+
 !notfound.png
 !bflogo.jpg
 

@@ -11,7 +11,7 @@ from fake_useragent import UserAgent
 if len(sys.argv) > 1:
     ISSUE = sys.argv[1]
 else:
-    ISSUE = "665_9" 
+    ISSUE = "667" 
 
 paperdata = {
     "issue": ISSUE
@@ -25,11 +25,16 @@ def download_html(url):
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
         # check if the request was successful
-            html = response.read()
-            #convert to string
-            html = html.decode("utf-8")
+            content_type = response.getheader("Content-Type")
+            # todo : check if the header is text/html
+            if content_type.startswith("video"):
+                html = "This is a video url."
+            else:
+                html = response.read()
+                #convert to string
+                html = html.decode("utf-8")
     except urllib.error.HTTPError as e:
-        html = "Could not download this url.."
+        html = "Could not download this url."
     return html
 
 
@@ -130,17 +135,21 @@ with sync_playwright() as p:
         if os.path.isfile(f'{index}.png') or os.path.isfile(f'{index}.jpg'):
             continue
 
-        if (is_youtube_url(art.mainurl)):    
-            # youtube stores it as JPG  
-            t = Thumbnail(art.mainurl)
-            t.fetch()
-            t.save(dir=".", filename=f'{index}', overwrite=True)
-        else:
-            try:
+        # todo : sometimes the url is valid, but it is not a single video url , but a playlist url
+        # in that case we should skip it
+        # for now the Thumbnail class will throw an exception, but we should catch it and skip it
+        
+        try:
+            if (is_youtube_url(art.mainurl)):    
+                # youtube stores it as JPG  
+                t = Thumbnail(art.mainurl)
+                t.fetch()
+                t.save(dir=".", filename=f'{index}', overwrite=True)
+            else:
                 generate_screenshot(index, art.mainurl, browser)
-            except:
-                #TODO : create a timeout/404 default jpg.
-                storeAFakeUrlLater=True
+        except:
+            #TODO : create a timeout/404 default jpg.
+            storeAFakeUrlLater=True
     browser.close()
 
 # parse the content of each link
