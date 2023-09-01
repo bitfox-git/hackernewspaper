@@ -33,6 +33,9 @@ jobs:
       - name: run Tectonic
         run: tectonic output.tex
 
+      - name: Rename output.pdf
+        run: mv output.pdf HackerNewsPaper-${{ vars.HN_ISSUE }}.pdf
+
       - name: Upload a Build Artifact
         if: always()
         uses: actions/upload-artifact@v3.1.2
@@ -45,5 +48,7 @@ jobs:
           allowUpdates: true
           tag: ${{ vars.HN_ISSUE }}
           name: "HackerNewsPaper #${{ vars.HN_ISSUE }}" 
-          artifacts: "output.pdf"
+          body: "HackerNewsPaper #${{ vars.HN_ISSUE }}"
+          artifacts: "HackerNewsPaper-${{ vars.HN_ISSUE }}.pdf"
+          removeArtifacts: true
           
