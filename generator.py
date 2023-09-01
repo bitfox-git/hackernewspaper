@@ -195,16 +195,18 @@ for index, art in enumerate(articles):
 
     if data is None:
         data = ""
-    # remove empty lines
-    data = removeEmptyLines(data)
+
     # temp remove all emoji stuff, until found decent solutions in latex
     # solved : no longer necessary with Tectonic Typesetting.
     # data = removeUnicode(data)
     # data can contain a lot of characters, we only want the first 1500
-    data = data[0:min(1500, len(data))]
+    data = data[0:min(1100, len(data))]
     # santize the data by removing % and / 
     data = data.replace("%", "")
     data = data.replace("\\", "")
+
+    # remove empty lines
+    data = removeEmptyLines(data)
     firstSentence, data = splitFirstSentenceParagraph(data)
 
     # the string art.title might contain text and numbers  of the format "Votes: 521 Comments: 83"
@@ -229,15 +231,14 @@ for index, art in enumerate(articles):
     if (comments > 0):
         metadatadict["comments"] = comments
 
+    # fall back 
+    image = "notfound.png"
     #image url can be either a png or a jpg
     if os.path.isfile(f'{index}.png'):
         image = f'{index}.png'
     
     if os.path.isfile(f'{index}.jpg'):
         image = f'{index}.jpg'
-
-    # fall back 
-    image = "notfound.png"
 
     #potential interested metadata fields are: author, date, image, sitename
     #not used , but for future reference : 

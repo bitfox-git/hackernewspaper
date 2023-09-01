@@ -13,6 +13,7 @@ __pycache__/
 *.html
 
 !notfound.png
+!bflogo.jpg
 
 # Distribution / packaging
 .Python
