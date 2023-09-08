@@ -18,8 +18,8 @@ Or `pythumb` in case of a YouTube link, to get the main thumb of the video.
 
 ## Credits
 Praise and credits for [Kale Davis](http://www.kaledavis.com), as he is doing all the hard work of handpicking/organizing the articles each week. 
-
 If you like this hacker**news***paper*, please also subscribe to the original hacker**news**letter at [hackernewsletter.com](https://hackernewsletter.com)!
+Disclaimer: Hackernewsletter and Hackernewspaper are not affiliated with Y Combinator in any way.
 
 ## Want to help?
 I'm not a Latex expert. And there are also a lot of nice to have refinements to think of:
