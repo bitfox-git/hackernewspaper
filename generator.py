@@ -3,15 +3,15 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 from pythumb import Thumbnail
 import urllib.request
+import urllib.parse
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 
 #read the first argument from the command line and use it as the issue number
-
 if len(sys.argv) > 1:
     ISSUE = sys.argv[1]
 else:
-    ISSUE = "667" 
+    ISSUE = "668" 
 
 paperdata = {
     "issue": ISSUE
@@ -22,6 +22,11 @@ ua = UserAgent()
 # download the html from a given url 
 def download_html(url):
     header = {'User-Agent':str(ua.random)}
+
+    #In issue 668 there is a url with a space in it, which is not allowed, so we need to encode it.
+    url = urllib.parse.quote(url, safe='/:?=&')
+
+
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
         # check if the request was successful
@@ -119,7 +124,7 @@ def generate_screenshot(index, url, browser):
     page.goto(url)
     #TODO Solve the cookie accept problem 
     page.screenshot(path=f'{index}.png')
-
+    page.close()
 
 html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
 soup = parse_html(html)
@@ -153,7 +158,6 @@ with sync_playwright() as p:
     browser.close()
 
 # parse the content of each link
-
 newsitems = []
 
 # load or download art.mainurl contents
@@ -298,7 +302,7 @@ DICT_VALS = {
     }
 
 # Do the latex stuff
-from latexbuild import build_pdf, build_html, build_docx, render_latex_template
+from latexbuild import render_latex_template
 
 PATH_JINJA2 = "."
 PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2 = "template.tex"
