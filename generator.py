@@ -11,7 +11,7 @@ from fake_useragent import UserAgent
 if len(sys.argv) > 1:
     ISSUE = sys.argv[1]
 else:
-    ISSUE = "668" 
+    ISSUE = "670" 
 
 paperdata = {
     "issue": ISSUE
@@ -37,7 +37,11 @@ def download_html(url):
             else:
                 html = response.read()
                 #convert to string
-                html = html.decode("utf-8")
+                #Check if the encoding is utf-8, otherwise convert to utf-8
+                if response.info().get_content_charset() == 'utf-8':
+                    html = html.decode("utf-8")
+                else:
+                    html = html.decode("latin-1")                    
     except urllib.error.HTTPError as e:
         html = "Could not download this url."
     return html
