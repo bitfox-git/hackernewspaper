@@ -36,6 +36,8 @@ def download_html(url):
         with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
         # check if the request was successful
             content_type = response.getheader("Content-Type")
+            if content_type is None:
+                content_type = "text/html"
             # todo : check if the header is text/html
             if content_type.startswith("video"):
                 html = "This is a video url."
