@@ -11,11 +11,16 @@ from fake_useragent import UserAgent
 if len(sys.argv) > 1:
     ISSUE = sys.argv[1]
 else:
-    ISSUE = "670" 
+    ISSUE = "675" 
 
 paperdata = {
     "issue": ISSUE
 }
+
+#Some weird url workarounds....
+if ISSUE == "675":
+    ISSUE= "674-2563024"
+    
 
 ua = UserAgent()
 
@@ -36,7 +41,6 @@ def download_html(url):
                 html = "This is a video url."
             else:
                 html = response.read()
-                #convert to string
                 #Check if the encoding is utf-8, otherwise convert to utf-8
                 if response.info().get_content_charset() == 'utf-8':
                     html = html.decode("utf-8")
