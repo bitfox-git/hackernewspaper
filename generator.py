@@ -50,6 +50,8 @@ def download_html(url):
                     html = html.decode("latin-1")                    
     except urllib.error.HTTPError as e:
         html = "Could not download this url."
+    except urllib.error.URLError as e:
+        html = "Could not download this url."
     return html
 
 
