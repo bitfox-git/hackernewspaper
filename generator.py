@@ -52,9 +52,10 @@ def download_html(url):
         html = "Could not download this url."
     except urllib.error.URLError as e:
         html = "Could not download this url."
-    except e: 
+    except: 
         html = "Could not download this url."
     return html
+
 
 
 # use BeautifulSoup to parse the html version of the newsletter
