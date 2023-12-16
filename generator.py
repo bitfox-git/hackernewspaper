@@ -52,8 +52,6 @@ def download_html(url):
         html = "Could not download this url."
     except urllib.error.URLError as e:
         html = "Could not download this url."
-    except urllib.error.RemoteDisconnected as e:
-        html = "Could not download this url."
     except e: 
         html = "Could not download this url."
     return html
