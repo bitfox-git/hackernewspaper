@@ -3,7 +3,7 @@
 This is the hacker**news**letter but in the format of a magazine, a pdf edition. Well, at least I tried to look like a magazine :smile: 
 The latex based pdf contains the hackernewsletter edition including the categories, screenshots of all the url's, some metadata, and the  'gather' text from the url, but don't expect too much of the text sofar.
 
-As an example: [HackerNewsPaper-665_9](https://github.com/bitfox-git/hackernewspaper/releases/download/665_9/HackerNewsPaper-665_9.pdf).
+As an example: [HackerNewsPaper-667](https://github.com/bitfox-git/hackernewspaper/releases/download/667/HackerNewsPaper-667.pdf).
 All the hackernewspaper editions can be found [here](https://github.com/bitfox-git/hackernewspaper/releases), in the releases of this repo. 
 
 ## Motivation
