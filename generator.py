@@ -21,6 +21,8 @@ paperdata = {
 if ISSUE == "675":
     ISSUE= "674-2563024"
     
+asset_dir = f"dist/{ISSUE}/"
+os.makedirs(asset_dir, exist_ok=True)
 
 ua = UserAgent()
 
@@ -138,7 +140,7 @@ def generate_screenshot(index, url, browser):
     page = browser.new_page()
     page.goto(url)
     #TODO Solve the cookie accept problem 
-    page.screenshot(path=f'{index}.png')
+    page.screenshot(path=f'{asset_dir}{index}.png')
     page.close()
 
 html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
@@ -152,7 +154,7 @@ with sync_playwright() as p:
     for index, art in enumerate(articles):
         
         #if file exists skip
-        if os.path.isfile(f'{index}.png') or os.path.isfile(f'{index}.jpg'):
+        if os.path.isfile(f'{asset_dir}{index}.png') or os.path.isfile(f'{asset_dir}{index}.jpg'):
             continue
 
         # todo : sometimes the url is valid, but it is not a single video url , but a playlist url
@@ -164,7 +166,7 @@ with sync_playwright() as p:
                 # youtube stores it as JPG  
                 t = Thumbnail(art.mainurl)
                 t.fetch()
-                t.save(dir=".", filename=f'{index}', overwrite=True)
+                t.save(dir=".", filename=f'{asset_dir}{index}', overwrite=True)
             else:
                 generate_screenshot(index, art.mainurl, browser)
         except:
@@ -177,7 +179,7 @@ newsitems = []
 
 # load or download art.mainurl contents
 def loadordownload(index, art):
-    fname = f'{index}.html'
+    fname = f'{asset_dir}{index}.html'
     if os.path.isfile(fname):
         with open(fname, encoding="utf-8") as f:
             sitecontent = f.read()
@@ -262,11 +264,11 @@ for index, art in enumerate(articles):
     # fall back 
     image = "notfound.png"
     #image url can be either a png or a jpg
-    if os.path.isfile(f'{index}.png'):
-        image = f'{index}.png'
+    if os.path.isfile(f'{asset_dir}{index}.png'):
+        image = f'{asset_dir}{index}.png'
     
-    if os.path.isfile(f'{index}.jpg'):
-        image = f'{index}.jpg'
+    if os.path.isfile(f'{asset_dir}{index}.jpg'):
+        image = f'{asset_dir}{index}.jpg'
 
     #potential interested metadata fields are: author, date, image, sitename
     #not used , but for future reference : 
