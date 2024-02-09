@@ -13,8 +13,7 @@ jobs:
         run: |
           git fetch --tags
           git fetch origin --tags
-          git describe --tags
-          echo "EDITION=$(($(git describe --tags --abbrev=0) +1))" >> "$GITHUB_ENV"
+          echo "EDITION=$(($(git describe --tags $(git rev-list --tags --max-count=1)) +1))" >> "$GITHUB_ENV"
 
       - name: Check if edition exists
         id: check-edition
