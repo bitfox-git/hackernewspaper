@@ -5,24 +5,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo content
+      - name: Checkout repo content
         uses: actions/checkout@v3
       
-      - name: setup python
+      - name: Fetch last tag
+        id: fetch-tag
+        run: echo "::set-output name=TAG::$(git describe --tags --abbrev=0)"
+
+      - name: Determine next edition
+        id: determine-edition
+        run: |
+          echo "::set-output name=EDITION::$(( ${TAG: -3} + 1 ))"
+
+      - name: Check if edition exists
+        id: check-edition
+        run: |
+          if curl -I "https://mailchi.mp/hackernewsletter/${{ steps.determine-edition.outputs.EDITION }}" | grep -q "200 OK"; then
+            echo "Edition exists, continuing workflow."
+          else
+            echo "Edition does not exist, exiting workflow." && exit 1
+          fi
+
+      - name: Setup Python
         uses: actions/setup-python@v4.7.0
       
-      - name: install python packages
+      - name: Install Python packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: setup playwright
+      - name: Setup Playwright
         run: playwright install chromium
 
-      - name: execute py script
-        run: python generator.py ${{ vars.HN_ISSUE }}
+      - name: Execute Python script
+        run: python generator.py ${{ steps.determine-edition.outputs.EDITION }}
 
-      - name: setup Tectonic 
+      - name: Setup Tectonic 
         uses: WtfJoke/setup-tectonic@v2.1.1
         with:
            github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -30,11 +48,11 @@ jobs:
       - name: Print Tectonic version
         run: tectonic --version
 
-      - name: run Tectonic
+      - name: Run Tectonic
         run: tectonic output.tex
 
       - name: Rename output.pdf
-        run: mv output.pdf HackerNewsPaper-${{ vars.HN_ISSUE }}.pdf
+        run: mv output.pdf HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf
 
       - name: Upload a Build Artifact
         if: always()
@@ -46,9 +64,8 @@ jobs:
         uses: ncipollo/release-action@v1.13.0
         with:
           allowUpdates: true
-          tag: ${{ vars.HN_ISSUE }}
-          name: "HackerNewsPaper #${{ vars.HN_ISSUE }}" 
-          body: "HackerNewsPaper #${{ vars.HN_ISSUE }}"
-          artifacts: "HackerNewsPaper-${{ vars.HN_ISSUE }}.pdf"
+          tag: ${{ steps.determine-edition.outputs.EDITION }}
+          name: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}" 
+          body: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}"
+          artifacts: "HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf"
           removeArtifacts: true
-          
