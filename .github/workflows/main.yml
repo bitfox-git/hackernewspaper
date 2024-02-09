@@ -18,13 +18,11 @@ jobs:
       - name: Check if edition exists
         id: check-edition
         run: |
-          if wget --spider "https://mailchi.mp/hackernewsletter/$EDITION" 2>&1 | grep -q "200 OK"; then
+          if wget --spider "https://mailchi.mp/hackernewsletter/${{steps.determine-edition.outputs.EDITION}}" 2>&1 | grep -q "200 OK"; then
             echo "Edition exists, continuing workflow."
           else
             echo "Edition does not exist, exiting workflow." && exit 1
           fi
-        env:
-          EDITION: ${{steps.determine-edition.outputs.EDITION}}
 
       - name: Setup Python
         uses: actions/setup-python@v4.7.0
@@ -38,9 +36,8 @@ jobs:
         run: playwright install chromium
 
       - name: Execute Python script
-        run: python generator.py $EDITION
-        env:
-          EDITION: ${{steps.determine-edition.outputs.EDITION }}
+        run: python generator.py ${{steps.determine-edition.outputs.EDITION }}
+
       - name: Setup Tectonic 
         uses: WtfJoke/setup-tectonic@v2.1.1
         with:
