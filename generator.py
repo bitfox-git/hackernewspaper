@@ -207,12 +207,35 @@ def removeEmptyLines(data):
     return "\n".join(lines)
 
 # map the site to a fontawesome symbol
-def faSymbolPerHostname(hostname):
+# https://www.comet.com/standardizing-experiment/eda-hackernews-data/reports/standardizing-the-experiment-exploring-the-hackernews-dataset
+def faSymbolPerHostname(hostname: str):
     match hostname:
-        case "youtube.com": return "Youtube"
         case "flikr.com": return "Flikr"
         case "github.com": return "Github"
         case "medium.com": return "Medium"
+        case "twitter.com": return "Twitter"
+        case "nytimes.com": return "NewspaperO"
+        case "wikipedia.org": return "WikipediaW"
+        case "reddit.com": return "Reddit"
+        case "ycombinator.com": return "YCombinator"
+        # Youtube
+        case "youtube.com": return "Youtube"
+        case "youtu.be": return "Youtube"
+        # Github
+        case "github.io": return "Github"
+        case "github.com": return "Github"
+        case "github.blog": return "Github"
+        # News Papers
+        case "theguardian.com": return "NewspaperO"
+        case "dev.to": return "NewspaperO"
+        case "techcrunch.com": return "NewspaperO"
+        case "wsj.com": return "NewspaperO"
+        case "arstechnica.com": return "NewspaperO"
+        case "theverge.com": return "NewspaperO"
+        case "bbc.com": return "NewspaperO"
+        case "bloomberg.com": return "NewspaperO"
+        case "reuters.com": return "NewspaperO"
+        # Globe for others
         case _ : return "Globe"
 
 def isValidDictItem(item, dict):
