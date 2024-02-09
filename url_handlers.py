@@ -10,6 +10,7 @@ from config import asset_dir
 import yt_dlp
 import json
 from pypdf import PdfReader
+from PIL import Image
 
 ua = UserAgent()
 
@@ -209,6 +210,10 @@ class YoutubeHandler():
         image = "notfound.png"
         if cached_download(video_info["thumbnail"], index, "jpg"):
             image = f"{asset_dir}{index}.jpg"
+            # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
+            im = Image.open(image)
+            image = f"{asset_dir}{index}.png"
+            im.save(image)
 
         newsproperties = []
 
