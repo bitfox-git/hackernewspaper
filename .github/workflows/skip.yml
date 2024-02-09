@@ -20,3 +20,4 @@ jobs:
           with:
             allowUpdates: true
             tag: ${{ steps.determine-edition.outputs.EDITION }}
+            draft: true
