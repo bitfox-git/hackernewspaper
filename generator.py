@@ -8,7 +8,7 @@ from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir,ISSUE
 
-from url_handlers import DefaultHandler,YoutubeHandler, download_html
+from url_handlers import DefaultHandler, PDFHandler, YoutubeHandler, download_html
 
 os.makedirs(asset_dir, exist_ok=True)
 
@@ -101,7 +101,7 @@ newsitems = []
 
 
 
-handlers = [YoutubeHandler(), DefaultHandler()]
+handlers = [YoutubeHandler(), PDFHandler(), DefaultHandler()]
 
 with sync_playwright() as p:
     browser = p.chromium.launch()

@@ -7,6 +7,9 @@ import urllib.parse
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir
+import yt_dlp
+import json
+from pypdf import PdfReader
 
 ua = UserAgent()
 
@@ -129,7 +132,6 @@ def faSymbolPerHostname(hostname: str):
         # Globe for others
         case _ : return "Globe"
 
-import json
 def write(index:int, data):
     with open(f'{asset_dir}{index}.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
@@ -156,78 +158,193 @@ def cached_download(url:str, index:int, ext:str):
         sitecontent = download_bin(url)
         if sitecontent is None:
             return False
-        with open(fname, "wb", encoding="utf-8") as f:
+        with open(fname, "wb") as f:
             f.write(sitecontent)
         return True
 
+
+def get_url_extension(url):
+    parsed_url = urllib.parse.urlparse(url)
+    path = parsed_url.path
+    return os.path.splitext(path)[1]
+
+
 class YoutubeHandler():
-  def test(self, art):
+    def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
-        
-  def work(self,index,art,browser):
-    import yt_dlp;
-    ydl = yt_dlp.YoutubeDL()
-    
-    video_info = read(index);
-    if video_info is None:
-        video_info = ydl.extract_info(art.mainurl, download=False)
-        write(index, video_info)
 
-    votes = 0
-    comments = 0
-    if (art.title is not None):
-        numbers = re.findall(r'\d+', art.title) 
-        if (len(numbers) ==2):
-            votes = int(numbers[0])
-            comments = int(numbers[1])
-    metadatadict =  {}
-    if (votes > 0):
-        metadatadict["votes"] = votes
-    if (comments > 0):
-        metadatadict["comments"] = comments
+    def work(self, index, art, browser):
+        ydl = yt_dlp.YoutubeDL()
 
+        video_info = read(index)
+        if video_info is None:
+            video_info = ydl.extract_info(art.mainurl, download=False)
+            write(index, video_info)
 
-    # temp remove all emoji stuff, until found decent solutions in latex
-    # solved : no longer necessary with Tectonic Typesetting.
-    # data = removeUnicode(data)
-    # data can contain a lot of characters, we only want the first 1500
-    data = video_info["description"][0:min(1100, len(video_info["description"]))]
-    # santize the data by removing % and / 
-    data = data.replace("%", "").replace("\\", "")
+        votes = 0
+        comments = 0
+        if art.title is not None:
+            numbers = re.findall(r"\d+", art.title)
+            if len(numbers) == 2:
+                votes = int(numbers[0])
+                comments = int(numbers[1])
+        metadatadict = {}
+        if votes > 0:
+            metadatadict["votes"] = votes
+        if comments > 0:
+            metadatadict["comments"] = comments
 
-    # remove empty lines
-    data = removeEmptyLines(data)
-    firstSentence, data = splitFirstSentenceParagraph(data)
+        # temp remove all emoji stuff, until found decent solutions in latex
+        # solved : no longer necessary with Tectonic Typesetting.
+        # data = removeUnicode(data)
+        # data can contain a lot of characters, we only want the first 1500
+        data = video_info["description"][0 : min(1100, len(video_info["description"]))]
+        # santize the data by removing % and /
+        data = data.replace("%", "").replace("\\", "")
 
-    
-    image = "notfound.png"
-    if cached_download(video_info["thumbnail"], index, "jpg"):
-        image = f'{asset_dir}{index}.jpg'
+        # remove empty lines
+        data = removeEmptyLines(data)
+        firstSentence, data = splitFirstSentenceParagraph(data)
 
+        image = "notfound.png"
+        if cached_download(video_info["thumbnail"], index, "jpg"):
+            image = f"{asset_dir}{index}.jpg"
 
-    newsproperties = []
+        newsproperties = []
 
+        newsproperties.append(
+            {"symbol": "User", "value": video_info["channel"], "url": None}
+        )
+        upload = video_info["upload_date"]
+        newsproperties.append(
+            {
+                "symbol": "Calendar",
+                "value": f"{upload[:4]}-{upload[4:6]}-{upload[6:]}",
+                "url": None,
+            }
+        )
+        newsproperties.append(
+            {
+                "symbol": faSymbolPerHostname("youtube.com"),
+                "value": "youtube.com",
+                "url": None,
+            }
+        )
 
-    newsproperties.append({ "symbol": "User", "value" : video_info["channel"], "url": None})
-    upload = video_info["upload_date"];
-    newsproperties.append({ "symbol": "Calendar", "value" : f"{upload[:4]}-{upload[4:6]}-{upload[6:]}", "url": None})
-    newsproperties.append({ "symbol": faSymbolPerHostname("youtube.com"), "value" : "youtube.com", "url": None})
-    
-    if ("votes" in metadatadict):
-        newsproperties.append({ "symbol": "ThumbsOUp", "value" : metadatadict["votes"], "url": art.suburl})
-    if ("comments" in metadatadict):
-        newsproperties.append({ "symbol": "Comments", "value" : metadatadict["comments"], "url": art.suburl})
+        if "votes" in metadatadict:
+            newsproperties.append(
+                {
+                    "symbol": "ThumbsOUp",
+                    "value": metadatadict["votes"],
+                    "url": art.suburl,
+                }
+            )
+        if "comments" in metadatadict:
+            newsproperties.append(
+                {
+                    "symbol": "Comments",
+                    "value": metadatadict["comments"],
+                    "url": art.suburl,
+                }
+            )
 
-    return {
-            "title": art.text, 
-            "url" : art.mainurl,
-            "image": image, 
-            "category" : art.category,
+        return {
+            "title": art.text,
+            "url": art.mainurl,
+            "image": image,
+            "category": art.category,
             "firstline": firstSentence,
-            "content": data, 
-            "properties": newsproperties 
+            "content": data,
+            "properties": newsproperties,
         }
-    
+
+
+class PDFHandler:
+    def test(self, art):
+        # print(art.mainurl)
+        # Ofcourse this check isnt perfect but shoulod catch 99% of all pdf's
+        return get_url_extension(art.mainurl) == ".pdf"
+
+    def work(self, index, art, browser):
+        # TODO: fix screenshots for pdf's they currently do not work!
+        # if not os.path.isfile(f"{asset_dir}{index}.png") and not os.path.isfile(
+        #     f"{asset_dir}{index}.jpg"
+        # ):
+        #     try:
+        #         generate_screenshot(index, art.mainurl, browser)
+        #     except:  # noqa: E722
+        #         # TODO : create a timeout/404 default jpg.
+        #         pass
+
+        votes = 0
+        comments = 0
+        if art.title is not None:
+            numbers = re.findall(r"\d+", art.title)
+            if len(numbers) == 2:
+                votes = int(numbers[0])
+                comments = int(numbers[1])
+        metadatadict = {}
+        if votes > 0:
+            metadatadict["votes"] = votes
+        if comments > 0:
+            metadatadict["comments"] = comments
+
+        data = ""
+
+        if cached_download(art.mainurl, index, "pdf"):
+            pdf = f"{asset_dir}{index}.pdf"
+            reader = PdfReader(pdf)
+            number_of_pages = len(reader.pages)
+            page = reader.pages[0]
+            text = page.extract_text()
+            if number_of_pages != 1:
+                text += " " + reader.pages[1].extract_text()
+            data = text[0 : min(1100, len(text))]
+        # temp remove all emoji stuff, until found decent solutions in latex
+        # solved : no longer necessary with Tectonic Typesetting.
+        # data = removeUnicode(data)
+        # data can contain a lot of characters, we only want the first 1500
+        # santize the data by removing % and /
+        data = data.replace("%", "").replace("\\", "")
+
+        # remove empty lines
+        data = removeEmptyLines(data)
+        firstSentence, data = splitFirstSentenceParagraph(data)
+
+        image = "notfound.png"
+
+        if os.path.isfile(f"{asset_dir}{index}.png"):
+            image = f"{asset_dir}{index}.png"
+
+        newsproperties = []
+
+        if "votes" in metadatadict:
+            newsproperties.append(
+                {
+                    "symbol": "ThumbsOUp",
+                    "value": metadatadict["votes"],
+                    "url": art.suburl,
+                }
+            )
+        if "comments" in metadatadict:
+            newsproperties.append(
+                {
+                    "symbol": "Comments",
+                    "value": metadatadict["comments"],
+                    "url": art.suburl,
+                }
+            )
+
+        return {
+            "title": art.text,
+            "url": art.mainurl,
+            "image": image,
+            "category": art.category,
+            "firstline": firstSentence,
+            "content": data,
+            "properties": newsproperties,
+        }
+
 
 class DefaultHandler(UrlHandler):
     def test(self, art):
@@ -236,23 +353,14 @@ class DefaultHandler(UrlHandler):
         # TODO clean this up
 
         #if file exists skip
-        if not os.path.isfile(f'{asset_dir}{index}.png') and not os.path.isfile(f'{asset_dir}{index}.jpg'):
-            # todo : sometimes the url is valid, but it is not a single video url , but a playlist url
-            # in that case we should skip it
-            # for now the Thumbnail class will throw an exception, but we should catch it and skip it
-            
+        if not os.path.isfile(f"{asset_dir}{index}.png") and not os.path.isfile(
+            f"{asset_dir}{index}.jpg"
+        ):
             try:
-                if (is_youtube_url(art.mainurl)):    
-                    # youtube stores it as JPG  
-                    t = Thumbnail(art.mainurl)
-                    t.fetch()
-                    t.save(dir=".", filename=f'{asset_dir}{index}', overwrite=True)
-                else:
-                    generate_screenshot(index, art.mainurl, browser)
-            except:
-                #TODO : create a timeout/404 default jpg.
-                storeAFakeUrlLater=True
-
+                generate_screenshot(index, art.mainurl, browser)
+            except:  # noqa: E722
+                # TODO : create a timeout/404 default jpg.
+                pass
 
         sitecontent = loadordownload(index, art)
         data  = extract(sitecontent)
