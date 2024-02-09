@@ -129,6 +129,106 @@ def faSymbolPerHostname(hostname: str):
         # Globe for others
         case _ : return "Globe"
 
+import json
+def write(index:int, data):
+    with open(f'{asset_dir}{index}.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+def read(index:int):
+    try:
+        with open(f'{asset_dir}{index}.json') as data_file:
+            return json.load(data_file)
+    except:
+        return None
+
+def download_bin(url):
+    header = {'User-Agent':str(ua.random)}
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
+            return response.read()
+    except: 
+        return None
+
+def cached_download(url:str, index:int, ext:str):
+    fname = f'{asset_dir}{index}.{ext}'
+    if os.path.isfile(fname):
+        return True
+    else:
+        sitecontent = download_bin(url)
+        if sitecontent is None:
+            return False
+        with open(fname, "wb", encoding="utf-8") as f:
+            f.write(sitecontent)
+        return True
+
+class YoutubeHandler():
+  def test(self, art):
+        return art.mainurl.startswith("https://www.youtube.com/watch?v=")
+        
+  def work(self,index,art,browser):
+    import yt_dlp;
+    ydl = yt_dlp.YoutubeDL()
+    
+    video_info = read(index);
+    if video_info is None:
+        video_info = ydl.extract_info(art.mainurl, download=False)
+        write(index, video_info)
+
+    votes = 0
+    comments = 0
+    if (art.title is not None):
+        numbers = re.findall(r'\d+', art.title) 
+        if (len(numbers) ==2):
+            votes = int(numbers[0])
+            comments = int(numbers[1])
+    metadatadict =  {}
+    if (votes > 0):
+        metadatadict["votes"] = votes
+    if (comments > 0):
+        metadatadict["comments"] = comments
+
+
+    # temp remove all emoji stuff, until found decent solutions in latex
+    # solved : no longer necessary with Tectonic Typesetting.
+    # data = removeUnicode(data)
+    # data can contain a lot of characters, we only want the first 1500
+    data = video_info["description"][0:min(1100, len(video_info["description"]))]
+    # santize the data by removing % and / 
+    data = data.replace("%", "").replace("\\", "")
+
+    # remove empty lines
+    data = removeEmptyLines(data)
+    firstSentence, data = splitFirstSentenceParagraph(data)
+
+    
+    image = "notfound.png"
+    if cached_download(video_info["thumbnail"], index, "jpg"):
+        image = f'{asset_dir}{index}.jpg'
+
+
+    newsproperties = []
+
+
+    newsproperties.append({ "symbol": "User", "value" : video_info["channel"], "url": None})
+    upload = video_info["upload_date"];
+    newsproperties.append({ "symbol": "Calendar", "value" : f"{upload[:4]}-{upload[4:6]}-{upload[6:]}", "url": None})
+    newsproperties.append({ "symbol": faSymbolPerHostname("youtube.com"), "value" : "youtube.com", "url": None})
+    
+    if ("votes" in metadatadict):
+        newsproperties.append({ "symbol": "ThumbsOUp", "value" : metadatadict["votes"], "url": art.suburl})
+    if ("comments" in metadatadict):
+        newsproperties.append({ "symbol": "Comments", "value" : metadatadict["comments"], "url": art.suburl})
+
+    return {
+            "title": art.text, 
+            "url" : art.mainurl,
+            "image": image, 
+            "category" : art.category,
+            "firstline": firstSentence,
+            "content": data, 
+            "properties": newsproperties 
+        }
+    
+
 class DefaultHandler(UrlHandler):
     def test(self, art):
         return True

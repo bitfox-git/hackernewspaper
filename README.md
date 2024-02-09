@@ -29,5 +29,5 @@ I'm not a Latex expert. And there are also a lot of nice to have refinements to 
 - [ ] Solve the GDPR Cookie problems on some screenshot. 
 - [ ] Better text formatting. Maybe with the help of a LLM? 
 - [ ] For non-html links, devise another method to generate a screenshot and extract text and metadata. The link in the newsletter is not always pointing to html content (think of direct links to MP4 files, PDF files, etc. )       
-- [ ] In case of YouTube / Vimeo url's , get the duration as metadata + description from the platform. Which requires a Youtube Video API v3 key...
+- [X/50%] In case of YouTube / Vimeo url's , get the duration as metadata + description from the platform. Which requires a Youtube Video API v3 key...
 
