@@ -11,7 +11,9 @@ jobs:
       - name: Determine next edition
         id: determine-edition
         run: |
-          git pull
+          git fetch --tags
+          git fetch origin --tags
+          git describe --tags
           echo "EDITION=$(($(git describe --tags --abbrev=0) +1))" >> "$GITHUB_ENV"
 
       - name: Check if edition exists
