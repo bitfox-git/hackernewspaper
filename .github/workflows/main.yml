@@ -11,18 +11,19 @@ jobs:
       - name: Determine next edition
         id: determine-edition
         run: |
+          git pull
           echo "EDITION=$(($(git describe --tags --abbrev=0) +1))" >> "$GITHUB_ENV"
 
       - name: Check if edition exists
         id: check-edition
         run: |
-          if curl -I "https://mailchi.mp/hackernewsletter/$EDITION" | grep -q "200 OK"; then
+          if wget --spider "https://mailchi.mp/hackernewsletter/$EDITION" 2>&1 | grep -q "200 OK"; then
             echo "Edition exists, continuing workflow."
           else
             echo "Edition does not exist, exiting workflow." && exit 1
           fi
         env:
-          EDITION: ${{steps.determine-edition.outputs.EDITION }}
+          EDITION: ${{steps.determine-edition.outputs.EDITION}}
 
       - name: Setup Python
         uses: actions/setup-python@v4.7.0
