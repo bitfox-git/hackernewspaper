@@ -264,6 +264,11 @@ class YoutubeHandler():
         }
 
 
+class GithubHandler:
+    def test(self, art):
+        pass
+
+
 class PDFHandler:
     def test(self, art):
         # print(art.mainurl)
