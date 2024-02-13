@@ -164,6 +164,7 @@ def cached_download(url:str, index:int, ext:str):
         return True
 
 
+
 def get_url_extension(url):
     parsed_url = urllib.parse.urlparse(url)
     path = parsed_url.path
@@ -396,12 +397,18 @@ class PDFHandler:
             text = page.extract_text()
             if number_of_pages != 1:
                 text += " " + reader.pages[1].extract_text()
-            data = text[0 : min(1100, len(text))]
+            data = (
+                text[0 : min(1100, len(text))]
+                # Some weird pdf had these characters so we remove them lets hope this doesnt happen again....
+                .replace("\u001b", "")
+                .replace("\u000F", "")
+            )
         # temp remove all emoji stuff, until found decent solutions in latex
         # solved : no longer necessary with Tectonic Typesetting.
         # data = removeUnicode(data)
         # data can contain a lot of characters, we only want the first 1500
         # santize the data by removing % and /
+
         data = data.replace("%", "").replace("\\", "")
 
         # remove empty lines

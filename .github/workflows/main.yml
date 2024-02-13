@@ -59,8 +59,6 @@ jobs:
             exit 1
           fi
 
-
-
       - name: Setup Playwright
         run: playwright install chromium
 
