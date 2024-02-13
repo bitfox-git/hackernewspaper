@@ -148,7 +148,7 @@ def download_bin(url):
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
             return response.read()
-    except: 
+    except:
         return None
 
 def cached_download(url:str, index:int, ext:str):

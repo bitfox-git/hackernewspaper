@@ -11,13 +11,35 @@ jobs:
     steps:
       - name: Checkout repo content
         uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.0
+        with:
+          cache: "pip"
+      
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       
       - name: Determine next edition
         id: determine-edition
         run: |
           git fetch --tags
           git fetch origin --tags
-          echo "EDITION=$(($(git tag | sort -n | tail -n 1) + 1))" >> "$GITHUB_OUTPUT"
+          latest_git_tag=$(($(git tag | sort -n | tail -n 1)))
+
+          # Get the latest edition from Python script
+          latest_edition=$(python get_latest_edition.py)
+
+          # Compare the outputs
+          if [ "$latest_git_tag" -eq "$latest_edition" ]; then
+              echo "Latest Git tag and latest edition are equal. Exiting workflow."
+              exit 1
+          else
+              echo "Latest Git tag and latest edition are not equal. Continuing workflow."
+              # Continue with your workflow commands here
+          fi
 
       - name: Check if edition exists
         id: check-edition
@@ -32,13 +54,7 @@ jobs:
             exit 1
           fi
 
-      - name: Setup Python
-        uses: actions/setup-python@v4.7.0
-      
-      - name: Install Python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+
 
       - name: Setup Playwright
         run: playwright install chromium

@@ -1,4 +1,6 @@
 {
     "ruff.lint.enable": false,
-    "editor.defaultFormatter": "charliermarsh.ruff"
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
 }
