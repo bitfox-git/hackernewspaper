@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v4.7.0
@@ -66,7 +66,7 @@ jobs:
         run: python generator.py ${{steps.determine-edition.outputs.EDITION }}
 
       - name: Setup Tectonic 
-        uses: WtfJoke/setup-tectonic@v2.1.1
+        uses: WtfJoke/setup-tectonic@v3
         with:
            github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -81,12 +81,12 @@ jobs:
 
       - name: Upload a Build Artifact
         if: always()
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v4.3.1
         with:
           path: ./*.*
 
       - name: Create release
-        uses: ncipollo/release-action@v1.13.0
+        uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true
           tag: ${{ steps.determine-edition.outputs.EDITION }}
