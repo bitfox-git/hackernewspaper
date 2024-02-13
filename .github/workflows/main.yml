@@ -32,6 +32,11 @@ jobs:
           # Get the latest edition from Python script
           latest_edition=$(python get_latest_edition.py)
 
+          if [ $? -eq 1 ]; then
+            echo "Error: Unable to get the latest edition. Exiting..."
+            exit 1
+          fi
+
           # Compare the outputs
           if [ "$latest_git_tag" -eq "$latest_edition" ]; then
               echo "Latest Git tag and latest edition are equal. Exiting workflow."
@@ -40,7 +45,7 @@ jobs:
               echo "Latest Git tag and latest edition are not equal. Continuing workflow."
               # Continue with your workflow commands here
           fi
-
+          echo "EDITION=$(latest_edition)" >> "$GITHUB_OUTPUT"
       - name: Check if edition exists
         id: check-edition
         run: |
