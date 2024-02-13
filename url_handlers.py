@@ -171,6 +171,41 @@ def get_url_extension(url):
     return os.path.splitext(path)[1]
 
 
+def get_metadata(title: str, metadatadict: dict = {}) -> dict:
+    votes = 0
+    comments = 0
+    if title is not None:
+        numbers = re.findall(r"\d+", title)
+        if len(numbers) == 2:
+            votes = int(numbers[0])
+            comments = int(numbers[1])
+
+    if votes > 0:
+        metadatadict["votes"] = votes
+    if comments > 0:
+        metadatadict["comments"] = comments
+    return metadatadict
+
+
+def add_stats(props: list[dict], metadatadict: dict, link: str):
+    if "votes" in metadatadict:
+        props.append(
+            {
+                "symbol": "ThumbsOUp",
+                "value": metadatadict["votes"],
+                "url": link,
+            }
+        )
+    if "comments" in metadatadict:
+        props.append(
+            {
+                "symbol": "Comments",
+                "value": metadatadict["comments"],
+                "url": link,
+            }
+        )
+
+
 class YoutubeHandler():
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
@@ -183,28 +218,13 @@ class YoutubeHandler():
             video_info = ydl.extract_info(art.mainurl, download=False)
             write(index, video_info)
 
-        votes = 0
-        comments = 0
-        if art.title is not None:
-            numbers = re.findall(r"\d+", art.title)
-            if len(numbers) == 2:
-                votes = int(numbers[0])
-                comments = int(numbers[1])
-        metadatadict = {}
-        if votes > 0:
-            metadatadict["votes"] = votes
-        if comments > 0:
-            metadatadict["comments"] = comments
+        metadatadict = get_metadata(art.title)
 
-        # temp remove all emoji stuff, until found decent solutions in latex
-        # solved : no longer necessary with Tectonic Typesetting.
-        # data = removeUnicode(data)
-        # data can contain a lot of characters, we only want the first 1500
-        data = video_info["description"][0 : min(1100, len(video_info["description"]))]
-        # santize the data by removing % and /
+        desc = video_info["description"]
+        data = desc[0 : min(1100, len(desc))]
+
         data = data.replace("%", "").replace("\\", "")
 
-        # remove empty lines
         data = removeEmptyLines(data)
         firstSentence, data = splitFirstSentenceParagraph(data)
 
@@ -222,6 +242,7 @@ class YoutubeHandler():
             {"symbol": "User", "value": video_info["channel"], "url": None}
         )
         upload = video_info["upload_date"]
+
         newsproperties.append(
             {
                 "symbol": "Calendar",
@@ -229,6 +250,7 @@ class YoutubeHandler():
                 "url": None,
             }
         )
+
         newsproperties.append(
             {
                 "symbol": faSymbolPerHostname("youtube.com"),
@@ -237,22 +259,7 @@ class YoutubeHandler():
             }
         )
 
-        if "votes" in metadatadict:
-            newsproperties.append(
-                {
-                    "symbol": "ThumbsOUp",
-                    "value": metadatadict["votes"],
-                    "url": art.suburl,
-                }
-            )
-        if "comments" in metadatadict:
-            newsproperties.append(
-                {
-                    "symbol": "Comments",
-                    "value": metadatadict["comments"],
-                    "url": art.suburl,
-                }
-            )
+        add_stats(newsproperties, metadatadict, art.suburl)
 
         return {
             "title": art.text,
@@ -269,6 +276,25 @@ def is_github_repo(url):
     pattern = r"^https?://github\.com/[\w.-]+/[\w.-]+(?:\?.*)?$"
     return bool(re.match(pattern, url))
 
+def prep_body(text: str | None):
+    if text is None:
+        text = ""
+
+    text = text[0 : min(1100, len(text))]
+
+    text = (
+        text.replace("%", "")
+        .replace("\u001b", "")
+        .replace("\u000F", "")
+        .replace("\\", "")
+    )
+
+    # remove empty lines
+    text = removeEmptyLines(text)
+    firstSentence, text = splitFirstSentenceParagraph(text)
+
+    return firstSentence, text
+
 
 class GithubHandler:
     def test(self, art):
@@ -281,36 +307,11 @@ class GithubHandler:
         metadata = extract_metadata(sitecontent)
         data = metadata.description + " " + extract(sitecontent)
 
-        if data is None:
-            data = ""
+        firstSentence, data = prep_body(data)
 
-        data = data[0 : min(1100, len(data))]
-
-        data = data.replace("%", "")
-        data = data.replace("\\", "")
-
-        # remove empty lines
-        data = removeEmptyLines(data)
-        firstSentence, data = splitFirstSentenceParagraph(data)
-
-        votes = 0
-        comments = 0
-        if art.title is not None:
-            numbers = re.findall(r"\d+", art.title)
-            if len(numbers) == 2:
-                votes = int(numbers[0])
-                comments = int(numbers[1])
-
-        if metadata is None:
-            metadatadict = {}
-        else:
-            metadatadict = metadata.as_dict()
-
-        # we extend the metadata with the votes and comments counts if they are > 0
-        if votes > 0:
-            metadatadict["votes"] = votes
-        if comments > 0:
-            metadatadict["comments"] = comments
+        metadatadict = get_metadata(
+            art.title, metadata.as_dict() if metadata is not None else {}
+        )
 
         newsproperties = []
 
@@ -330,22 +331,9 @@ class GithubHandler:
                     "url": None,
                 }
             )
-        if "votes" in metadatadict:
-            newsproperties.append(
-                {
-                    "symbol": "ThumbsOUp",
-                    "value": metadatadict["votes"],
-                    "url": art.suburl,
-                }
-            )
-        if "comments" in metadatadict:
-            newsproperties.append(
-                {
-                    "symbol": "Comments",
-                    "value": metadatadict["comments"],
-                    "url": art.suburl,
-                }
-            )
+
+        add_stats(newsproperties, metadatadict, art.suburl)
+
         cached_download(metadata.image, index, "png")
         return {
             "title": art.text,
@@ -365,27 +353,8 @@ class PDFHandler:
 
     def work(self, index, art, browser):
         # TODO: fix screenshots for pdf's they currently do not work!
-        # if not os.path.isfile(f"{asset_dir}{index}.png") and not os.path.isfile(
-        #     f"{asset_dir}{index}.jpg"
-        # ):
-        #     try:
-        #         generate_screenshot(index, art.mainurl, browser)
-        #     except:  # noqa: E722
-        #         # TODO : create a timeout/404 default jpg.
-        #         pass
 
-        votes = 0
-        comments = 0
-        if art.title is not None:
-            numbers = re.findall(r"\d+", art.title)
-            if len(numbers) == 2:
-                votes = int(numbers[0])
-                comments = int(numbers[1])
-        metadatadict = {}
-        if votes > 0:
-            metadatadict["votes"] = votes
-        if comments > 0:
-            metadatadict["comments"] = comments
+        metadatadict = get_metadata(art.title)
 
         data = ""
 
@@ -397,23 +366,14 @@ class PDFHandler:
             text = page.extract_text()
             if number_of_pages != 1:
                 text += " " + reader.pages[1].extract_text()
-            data = (
-                text[0 : min(1100, len(text))]
-                # Some weird pdf had these characters so we remove them lets hope this doesnt happen again....
-                .replace("\u001b", "")
-                .replace("\u000F", "")
-            )
+            data = text
         # temp remove all emoji stuff, until found decent solutions in latex
         # solved : no longer necessary with Tectonic Typesetting.
         # data = removeUnicode(data)
         # data can contain a lot of characters, we only want the first 1500
         # santize the data by removing % and /
 
-        data = data.replace("%", "").replace("\\", "")
-
-        # remove empty lines
-        data = removeEmptyLines(data)
-        firstSentence, data = splitFirstSentenceParagraph(data)
+        firstSentence, data = prep_body(data)
 
         image = "notfound.png"
 
@@ -422,22 +382,7 @@ class PDFHandler:
 
         newsproperties = []
 
-        if "votes" in metadatadict:
-            newsproperties.append(
-                {
-                    "symbol": "ThumbsOUp",
-                    "value": metadatadict["votes"],
-                    "url": art.suburl,
-                }
-            )
-        if "comments" in metadatadict:
-            newsproperties.append(
-                {
-                    "symbol": "Comments",
-                    "value": metadatadict["comments"],
-                    "url": art.suburl,
-                }
-            )
+        add_stats(newsproperties, metadatadict, art.suburl)
 
         return {
             "title": art.text,
@@ -485,27 +430,11 @@ class DefaultHandler(UrlHandler):
         data = removeEmptyLines(data)
         firstSentence, data = splitFirstSentenceParagraph(data)
 
-        # the string art.title might contain text and numbers  of the format "Votes: 521 Comments: 83"
-        # we want to extract the numbers
-        votes= 0
-        comments = 0
-        if (art.title is not None):
-            numbers = re.findall(r'\d+', art.title) 
-            if (len(numbers) ==2):
-                votes = int(numbers[0])
-                comments = int(numbers[1])
-
         metadata = extract_metadata(sitecontent)
-        if metadata is None:
-            metadatadict   = {}
-        else:
-            metadatadict = metadata.as_dict()
-        
-        # we extend the metadata with the votes and comments counts if they are > 0
-        if (votes > 0):
-            metadatadict["votes"] = votes
-        if (comments > 0):
-            metadatadict["comments"] = comments
+
+        metadatadict = get_metadata(
+            art.title, metadata.as_dict() if metadata is not None else {}
+        )
 
         # fall back 
         image = "notfound.png"
@@ -530,10 +459,8 @@ class DefaultHandler(UrlHandler):
             newsproperties.append({ "symbol": "Calendar", "value" : metadatadict["date"], "url": None})
         if (isValidDictItem("hostname", metadatadict)):
             newsproperties.append({ "symbol": faSymbolPerHostname(metadatadict["hostname"]), "value" : metadatadict["hostname"], "url": None})
-        if ("votes" in metadatadict):
-            newsproperties.append({ "symbol": "ThumbsOUp", "value" : metadatadict["votes"], "url": art.suburl})
-        if ("comments" in metadatadict):
-            newsproperties.append({ "symbol": "Comments", "value" : metadatadict["comments"], "url": art.suburl})
+
+        add_stats(newsproperties, metadatadict, art.suburl)
 
         return {
                 "title": art.text, 
