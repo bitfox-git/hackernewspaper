@@ -1,0 +1,4 @@
+{
+    "ruff.lint.enable": false,
+    "editor.defaultFormatter": "charliermarsh.ruff"
+}

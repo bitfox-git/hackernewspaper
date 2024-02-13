@@ -264,14 +264,101 @@ class YoutubeHandler():
         }
 
 
+def is_github_repo(url):
+    pattern = r"^https?://github\.com/[\w.-]+/[\w.-]+(?:\?.*)?$"
+    return bool(re.match(pattern, url))
+
+
 class GithubHandler:
     def test(self, art):
-        pass
+        return is_github_repo(art.mainurl)
+
+    def work(self, index, art, browser):
+        # TODO clean this up
+
+        sitecontent = loadordownload(index, art)
+        metadata = extract_metadata(sitecontent)
+        data = metadata.description + " " + extract(sitecontent)
+
+        if data is None:
+            data = ""
+
+        data = data[0 : min(1100, len(data))]
+
+        data = data.replace("%", "")
+        data = data.replace("\\", "")
+
+        # remove empty lines
+        data = removeEmptyLines(data)
+        firstSentence, data = splitFirstSentenceParagraph(data)
+
+        votes = 0
+        comments = 0
+        if art.title is not None:
+            numbers = re.findall(r"\d+", art.title)
+            if len(numbers) == 2:
+                votes = int(numbers[0])
+                comments = int(numbers[1])
+
+        if metadata is None:
+            metadatadict = {}
+        else:
+            metadatadict = metadata.as_dict()
+
+        # we extend the metadata with the votes and comments counts if they are > 0
+        if votes > 0:
+            metadatadict["votes"] = votes
+        if comments > 0:
+            metadatadict["comments"] = comments
+
+        newsproperties = []
+
+        if isValidDictItem("author", metadatadict):
+            newsproperties.append(
+                {"symbol": "User", "value": metadatadict["author"], "url": None}
+            )
+        if isValidDictItem("date", metadatadict):
+            newsproperties.append(
+                {"symbol": "Calendar", "value": metadatadict["date"], "url": None}
+            )
+        if isValidDictItem("hostname", metadatadict):
+            newsproperties.append(
+                {
+                    "symbol": faSymbolPerHostname(metadatadict["hostname"]),
+                    "value": metadatadict["hostname"],
+                    "url": None,
+                }
+            )
+        if "votes" in metadatadict:
+            newsproperties.append(
+                {
+                    "symbol": "ThumbsOUp",
+                    "value": metadatadict["votes"],
+                    "url": art.suburl,
+                }
+            )
+        if "comments" in metadatadict:
+            newsproperties.append(
+                {
+                    "symbol": "Comments",
+                    "value": metadatadict["comments"],
+                    "url": art.suburl,
+                }
+            )
+        cached_download(metadata.image, index, "png")
+        return {
+            "title": art.text,
+            "url": art.mainurl,
+            "image": f"{asset_dir}/{index}.png",
+            "category": art.category,
+            "firstline": firstSentence,
+            "content": data,
+            "properties": newsproperties,
+        }
 
 
 class PDFHandler:
     def test(self, art):
-        # print(art.mainurl)
         # Ofcourse this check isnt perfect but shoulod catch 99% of all pdf's
         return get_url_extension(art.mainurl) == ".pdf"
 

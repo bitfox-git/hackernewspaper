@@ -8,7 +8,13 @@ from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir,ISSUE
 
-from url_handlers import DefaultHandler, PDFHandler, YoutubeHandler, download_html
+from url_handlers import (
+    DefaultHandler,
+    GithubHandler,
+    PDFHandler,
+    YoutubeHandler,
+    download_html,
+)
 
 os.makedirs(asset_dir, exist_ok=True)
 
@@ -101,13 +107,14 @@ newsitems = []
 
 
 
-handlers = [YoutubeHandler(), PDFHandler(), DefaultHandler()]
+handlers = [YoutubeHandler(), PDFHandler(), GithubHandler(), DefaultHandler()]
 
 with sync_playwright() as p:
     browser = p.chromium.launch()
     for index, art in enumerate(articles):
         for handler in handlers:
             if handler.test(art):
+                # TODO maybe make it so if it throws a exception fallback to another handler
                 newsitems.append(handler.work(index, art, browser))
                 break
     browser.close()
