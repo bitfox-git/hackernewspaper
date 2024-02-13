@@ -206,6 +206,32 @@ def add_stats(props: list[dict], metadatadict: dict, link: str):
         )
 
 
+
+def is_github_repo(url):
+    pattern = r"^https?://github\.com/[\w.-]+/[\w.-]+(?:\?.*)?$"
+    return bool(re.match(pattern, url))
+
+
+def prep_body(text: str | None):
+    if text is None:
+        text = ""
+
+    text = text[0 : min(1100, len(text))]
+
+    text = (
+        text.replace("%", "")
+        .replace("\u001b", "")
+        .replace("\u000F", "")
+        .replace("\\", "")
+    )
+
+    # remove empty lines
+    text = removeEmptyLines(text)
+    firstSentence, text = splitFirstSentenceParagraph(text)
+
+    return firstSentence, text
+
+
 class YoutubeHandler():
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
@@ -220,13 +246,7 @@ class YoutubeHandler():
 
         metadatadict = get_metadata(art.title)
 
-        desc = video_info["description"]
-        data = desc[0 : min(1100, len(desc))]
-
-        data = data.replace("%", "").replace("\\", "")
-
-        data = removeEmptyLines(data)
-        firstSentence, data = splitFirstSentenceParagraph(data)
+        firstSentence, data = prep_body(video_info["description"])
 
         image = "notfound.png"
         if cached_download(video_info["thumbnail"], index, "jpg"):
@@ -272,28 +292,6 @@ class YoutubeHandler():
         }
 
 
-def is_github_repo(url):
-    pattern = r"^https?://github\.com/[\w.-]+/[\w.-]+(?:\?.*)?$"
-    return bool(re.match(pattern, url))
-
-def prep_body(text: str | None):
-    if text is None:
-        text = ""
-
-    text = text[0 : min(1100, len(text))]
-
-    text = (
-        text.replace("%", "")
-        .replace("\u001b", "")
-        .replace("\u000F", "")
-        .replace("\\", "")
-    )
-
-    # remove empty lines
-    text = removeEmptyLines(text)
-    firstSentence, text = splitFirstSentenceParagraph(text)
-
-    return firstSentence, text
 
 
 class GithubHandler:
@@ -335,6 +333,7 @@ class GithubHandler:
         add_stats(newsproperties, metadatadict, art.suburl)
 
         cached_download(metadata.image, index, "png")
+
         return {
             "title": art.text,
             "url": art.mainurl,
@@ -414,21 +413,7 @@ class DefaultHandler(UrlHandler):
         sitecontent = loadordownload(index, art)
         data  = extract(sitecontent)
 
-        if data is None:
-            data = ""
-
-        # temp remove all emoji stuff, until found decent solutions in latex
-        # solved : no longer necessary with Tectonic Typesetting.
-        # data = removeUnicode(data)
-        # data can contain a lot of characters, we only want the first 1500
-        data = data[0:min(1100, len(data))]
-        # santize the data by removing % and / 
-        data = data.replace("%", "")
-        data = data.replace("\\", "")
-
-        # remove empty lines
-        data = removeEmptyLines(data)
-        firstSentence, data = splitFirstSentenceParagraph(data)
+        firstSentence, data = prep_body(data)
 
         metadata = extract_metadata(sitecontent)
 
@@ -440,10 +425,7 @@ class DefaultHandler(UrlHandler):
         image = "notfound.png"
         #image url can be either a png or a jpg
         if os.path.isfile(f'{asset_dir}{index}.png'):
-            image = f'{asset_dir}{index}.png'
-        
-        if os.path.isfile(f'{asset_dir}{index}.jpg'):
-            image = f'{asset_dir}{index}.jpg'
+            image = f"{asset_dir}{index}.png"
 
         #potential interested metadata fields are: author, date, image, sitename
         #not used , but for future reference : 
