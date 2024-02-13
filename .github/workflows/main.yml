@@ -45,7 +45,7 @@ jobs:
               echo "Latest Git tag and latest edition are not equal. Continuing workflow."
               # Continue with your workflow commands here
           fi
-          echo "EDITION=$(latest_edition)" >> "$GITHUB_OUTPUT"
+          echo "EDITION=$latest_edition" >> "$GITHUB_OUTPUT"
       - name: Check if edition exists
         id: check-edition
         run: |
