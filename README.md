@@ -63,3 +63,9 @@ Run project:
 ```sh
 python generator.py $(python ./get_latest_edition.py)
 ```
+
+Compile PDF with [Tectonic](https://github.com/tectonic-typesetting/tectonic):
+
+```sh
+tectonic output.tex
+```
