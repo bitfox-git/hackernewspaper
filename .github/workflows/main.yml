@@ -1,9 +1,7 @@
 on:
   workflow_dispatch:
   schedule:
-     - cron: '0 6 * * *'
-
-
+    - cron: '0 6 * * *'
 
 jobs:
   build:
@@ -46,14 +44,32 @@ jobs:
               # Continue with your workflow commands here
           fi
           echo "EDITION=$latest_edition" >> "$GITHUB_OUTPUT"
+
       - name: Check if edition exists
         id: check-edition
         run: |
-          if wget -qO- "https://mailchi.mp/hackernewsletter/${{ steps.determine-edition.outputs.EDITION }}" | grep -q "trying to reach a page that was built by Mailchimp bu"; then
-            echo "Mailchimp page not found, exiting workflow."
-            exit 1
-          elif wget --spider "https://mailchi.mp/hackernewsletter/${{ steps.determine-edition.outputs.EDITION }}" 2>&1 | grep -q "200 OK"; then
-            echo "Edition exists, continuing workflow."
+          URL="https://mailchi.mp/hackernewsletter/${{ steps.determine-edition.outputs.EDITION }}"
+          echo "Using URL: $URL"
+
+          # Fetch the content and HTTP status code
+          response=$(curl -s -w "%{http_code}" -o /dev/stdout "$URL")
+
+          # Extract the HTTP status code (last 3 characters)
+          status_code=$(echo "$response" | tail -c 4)
+
+          # Extract the response body (everything except the last 3 characters)
+          content=$(echo "$response" | head -c -4)
+
+          # Check if the status code is 200 OK
+          if [ "$status_code" = "200" ]; then
+            # Check if the content includes the specific Mailchimp error message
+            echo "$content" | grep -q "trying to reach a page that was built by Mailchimp bu"
+            if [ $? -eq 0 ]; then
+              echo "Mailchimp page not found, exiting workflow."
+              exit 1
+            else
+              echo "Edition exists, continuing workflow."
+            fi
           else
             echo "Edition does not exist, exiting workflow."
             exit 1
@@ -63,12 +79,12 @@ jobs:
         run: playwright install chromium
 
       - name: Execute Python script
-        run: python generator.py ${{steps.determine-edition.outputs.EDITION }}
+        run: python generator.py ${{ steps.determine-edition.outputs.EDITION }}
 
-      - name: Setup Tectonic 
+      - name: Setup Tectonic
         uses: WtfJoke/setup-tectonic@v3
         with:
-           github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Tectonic version
         run: tectonic --version
