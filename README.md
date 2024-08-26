@@ -57,3 +57,9 @@ Install dependencies:
 pip install -r requirements.txt
 playwright install chromium
 ```
+
+Run project:
+
+```sh
+python generator.py $(python ./get_latest_edition.py)
+```
