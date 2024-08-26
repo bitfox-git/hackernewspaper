@@ -31,3 +31,29 @@ I'm not a Latex expert. And there are also a lot of nice to have refinements to 
 - [ ] For non-html links, devise another method to generate a screenshot and extract text and metadata. The link in the newsletter is not always pointing to html content (think of direct links to MP4 files, PDF files, etc. )       
 - [X/50%] In case of YouTube / Vimeo url's , get the duration as metadata + description from the platform. Which requires a Youtube Video API v3 key...
 
+## Quick start
+
+Create a Virtual Environment:
+
+```sh
+python -m venv .venv
+```
+
+Activate the Virtual Environment on Linux:
+
+```sh
+source .venv/bin/activate
+```
+
+Or activate the Virtual Environment on Windows:
+
+```sh
+.venv\Scripts\activate
+```
+
+Install dependencies:
+
+```sh
+pip install -r requirements.txt
+playwright install chromium
+```
