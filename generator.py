@@ -75,11 +75,16 @@ def get_articles(soup):
     categories = []
     articles = []
     content = soup.find(id="content")
-    # all content starts with a h2
+
+    if content is None:
+        print("No content found with id='content'.")
+        return articles, categories
+
+    # Proceed only if content is found
     for h2element in content.find_all("h2"):
         category = h2element.get_text()
         categories.append(category)
-        # print(h2element.get_text())
+
         for nextSibling in h2element.next_siblings:
             if nextSibling.name == "h2":
                 break
