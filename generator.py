@@ -1,3 +1,4 @@
+from latexbuild import render_latex_template
 import os
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
@@ -95,7 +96,8 @@ def get_articles(soup):
                         suburla = span.find("a")
                         if suburla is not None:
                             suburl = suburla.get("href")
-                    art = article(mainurl, title, text, subtext, suburl, category)
+                    art = article(mainurl, title, text,
+                                  subtext, suburl, category)
                     articles.append(art)
                     print(art)
     return articles, categories
@@ -112,7 +114,8 @@ def download_html_with_playwright(url):
     return html
 
 
-html = download_html_with_playwright("https://mailchi.mp/hackernewsletter/" + ISSUE)
+html = download_html_with_playwright(
+    "https://mailchi.mp/hackernewsletter/" + ISSUE)
 soup = parse_html(html)
 header = get_header(soup)
 
@@ -143,11 +146,10 @@ paperdata["quoteLine"] = quoteLine
 paperdata["quoteAuthor"] = quoteAuthor
 
 
-DICT_VALS = {"data": paperdata, "categories": categories, "newsitems": newsitems}
+DICT_VALS = {"data": paperdata,
+             "categories": categories, "newsitems": newsitems}
 
 # Do the latex stuff
-from latexbuild import render_latex_template
-
 PATH_JINJA2 = "."
 PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2 = "template.tex"
 PATH_OUTPUT_PDF = "MYOUTPUTFILE.pdf"
