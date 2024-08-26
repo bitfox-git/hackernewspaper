@@ -7,6 +7,7 @@ import urllib.parse
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir, ISSUE
+from playwright.sync_api import sync_playwright
 
 from url_handlers import (
     DefaultHandler,
@@ -75,6 +76,7 @@ def get_articles(soup):
     categories = []
     articles = []
     content = soup.find(id="content")
+
     # all content starts with a h2
     for h2element in content.find_all("h2"):
         category = h2element.get_text()
@@ -103,7 +105,18 @@ def get_articles(soup):
     return articles, categories
 
 
-html = download_html("https://mailchi.mp/hackernewsletter/" + ISSUE)
+def download_html_with_playwright(url):
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto(url)
+        page.wait_for_selector("#content")  # Wait for the content to load
+        html = page.content()
+        browser.close()
+    return html
+
+
+html = download_html_with_playwright("https://mailchi.mp/hackernewsletter/" + ISSUE)
 soup = parse_html(html)
 header = get_header(soup)
 
