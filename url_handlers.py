@@ -1,4 +1,7 @@
-import os , re
+import os , sys , re
+from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
+from pythumb import Thumbnail
 import urllib.request
 import urllib.parse
 from trafilatura import extract, extract_metadata
