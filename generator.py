@@ -58,9 +58,8 @@ class article:
 def get_articles(soup):
     categories =[]
     articles = []
-    print(soup)
+    # TODO: Fails here, cant find content div, only gets the script tag that loads the content, how to only get the div if the script tag has been resolved?
     content = soup.find(id="content")
-    print(content)
     #all content starts with a h2
     for h2element in content.find_all("h2"):
         category = h2element.get_text()
