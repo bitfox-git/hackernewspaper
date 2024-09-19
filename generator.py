@@ -58,6 +58,7 @@ class article:
 def get_articles(soup):
     categories =[]
     articles = []
+    print(soup)
     content = soup.find(id="content")
     print(content)
     #all content starts with a h2
