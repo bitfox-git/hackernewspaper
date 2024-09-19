@@ -1,10 +1,6 @@
-import os , sys , re
+import os
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
-from pythumb import Thumbnail
-import urllib.request
-import urllib.parse
-from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir,ISSUE
 
