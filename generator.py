@@ -59,6 +59,7 @@ def get_articles(soup):
     categories =[]
     articles = []
     content = soup.find(id="content")
+    print(content)
     #all content starts with a h2
     for h2element in content.find_all("h2"):
         category = h2element.get_text()
