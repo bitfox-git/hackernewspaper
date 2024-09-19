@@ -230,6 +230,7 @@ def prep_body(text: str | None):
 
 
 class YoutubeHandler():
+    print("Entering development YoutubeHandler")
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
