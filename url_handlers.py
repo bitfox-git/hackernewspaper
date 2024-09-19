@@ -234,24 +234,24 @@ class YoutubeHandler():
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
     def work(self, index, art, browser):
-        try:
-            ydl = yt_dlp.YoutubeDL()
-        except:
-            print("YoutubeDL failed")
-            return {
-                "title": art.text,
-                "url": art.mainurl,
-                "image": "notfound.png",
-                "category": art.category,
-                "firstline": "",
-                "content": "",
-                "properties": [],
-            } 
+        ydl = yt_dlp.YoutubeDL()
 
         video_info = read(index)
         if video_info is None:
-            video_info = ydl.extract_info(art.mainurl, download=False)
-            write(index, video_info)
+            try:
+                video_info = ydl.extract_info(art.mainurl, download=False)
+                write(index, video_info)
+            except:
+                print("YoutubeDL failed")
+                return {
+                    "title": art.text,
+                    "url": art.mainurl,
+                    "image": "notfound.png",
+                    "category": art.category,
+                    "firstline": "",
+                    "content": "",
+                    "properties": [],
+                } 
 
         metadatadict = get_metadata(art.title)
 
