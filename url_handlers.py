@@ -1,7 +1,4 @@
-import os , sys , re
-from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
-from pythumb import Thumbnail
+import os , re
 import urllib.request
 import urllib.parse
 from trafilatura import extract, extract_metadata
@@ -237,7 +234,19 @@ class YoutubeHandler():
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
     def work(self, index, art, browser):
-        ydl = yt_dlp.YoutubeDL()
+        try:
+            ydl = yt_dlp.YoutubeDL()
+        except:
+            print("YoutubeDL failed")
+            return {
+                "title": art.text,
+                "url": art.mainurl,
+                "image": "notfound.png",
+                "category": art.category,
+                "firstline": "",
+                "content": "",
+                "properties": [],
+            } 
 
         video_info = read(index)
         if video_info is None:
