@@ -32,4 +32,4 @@ for link in newsletter_links:
 if weekly_number == None:
     exit(1)
 
-print(weekly_number)
+print(711)
