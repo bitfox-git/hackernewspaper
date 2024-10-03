@@ -46,7 +46,6 @@ jobs:
               # Continue with your workflow commands here
           fi
           echo "EDITION=$latest_edition" >> "$GITHUB_OUTPUT"
-          echo "LATEST_GIT_TAG=$latest_git_tag" >> "$GITHUB_OUTPUT"
       - name: Check if edition exists
         id: check-edition
         run: |
@@ -64,7 +63,7 @@ jobs:
         run: playwright install chromium
 
       - name: Execute Python script
-        run: python generator.py ${{steps.determine-edition.outputs.EDITION }} ${{steps.determine-edition.outputs.LATEST_GIT_TAG }}
+        run: python generator.py ${{steps.determine-edition.outputs.EDITION }}
 
       - name: Setup Tectonic 
         uses: WtfJoke/setup-tectonic@v3
