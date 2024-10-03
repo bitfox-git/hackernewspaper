@@ -255,18 +255,22 @@ class YoutubeHandler():
                     "url": None,
                 }
             )
+
         # Steps if youtube dl fails
         else:
-            simplified_metadata = urllib.requests.get(f"https://youtube.com/oembed?url={art.mainurl}&format=json")
-            simplified_metadata = simplified_metadata.json()
-            author = simplified_metadata["author_name"]
-            author_url = simplified_metadata["author_url"]
+            header = {'User-Agent':str(ua.random)}
+            metadata_url = f"https://youtube.com/oembed?url={art.mainurl}&format=json"
+            request = urllib.request.Request(metadata_url, headers=header)
+            with urllib.request.urlopen(request).read() as metadata:
+                metadata_json = metadata.json()
+            author = metadata_json["author_name"]
+            author_url = metadata_json["author_url"]
             if author and author_url is not None:
                 newsproperties.append(
                     {"symbol": "User", "value": author, "url": author_url}
                 )
             
-            thumbnail_url = simplified_metadata["thumbnail_url"]
+            thumbnail_url = metadata_json["thumbnail_url"]
             if thumbnail_url is not None:
                 if cached_download(thumbnail_url, index, "jpg"):
                     thumbnail_url = f"{asset_dir}{index}.jpg"
@@ -276,7 +280,6 @@ class YoutubeHandler():
                     newsproperties.append(
                         {"symbol": "Thumbnail", "value": thumbnail_url, "url": art.mainurl}
                     )
-
 
         newsproperties.append(
             {
