@@ -8,8 +8,20 @@ import yt_dlp
 import json
 from pypdf import PdfReader
 from PIL import Image
+from selenium import webdriver
 
 ua = UserAgent()
+
+# TODO Issue is here, use Selenium?
+
+def download_html_selenium(url):
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    browser = webdriver.Chrome(options=options)
+    browser.get(url)
+    html = browser.page_source
+    browser.close()
+    return html
 
 # download the html from a given url 
 def download_html(url):
@@ -47,10 +59,7 @@ def download_html(url):
 #check if url is a youtube url using the regex ^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+
 def is_youtube_url(url):
     regex = "^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+"
-    if re.match(regex, url):
-        return True
-    else:
-        return False
+    return re.match(regex, url)
 
 # load or download art.mainurl contents
 def loadordownload(index, art):

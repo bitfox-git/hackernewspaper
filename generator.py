@@ -10,7 +10,7 @@ from url_handlers import (
     GithubHandler,
     PDFHandler,
     YoutubeHandler,
-    download_html,
+    download_html_selenium,
 )
 
 os.makedirs(asset_dir, exist_ok=True)
@@ -93,7 +93,7 @@ def get_articles(soup):
 
 
 
-html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
+html = download_html_selenium("https://mailchi.mp/hackernewsletter/"+ISSUE)
 soup = parse_html(html)
 header = get_header(soup)
 
