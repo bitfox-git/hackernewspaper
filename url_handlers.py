@@ -217,7 +217,7 @@ class YoutubeHandler():
         video_info = read(index)
         if video_info is None:
             try:
-                # TODO: Explore other options for extracting metadata, currently seems very hard (but in what way should this work, in earlier editions there is a very limited amount of actual information (for example description is not accurate as is author))
+                # TODO: Explore other options for extracting metadata, currently, upload date & description seem hard (we could try scraping this from a video page however this is prone to breaking if Youtube changes their layout) 
                 video_info = ydl.extract_info(art.mainurl, download=False)
                 write(index, video_info)
             except:
