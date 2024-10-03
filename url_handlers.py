@@ -12,7 +12,7 @@ from selenium import webdriver
 
 ua = UserAgent()
 
-# download the html from a given url 
+# download the html from a given url, renewed function, not as fast but way more reliable, as this will later be triggered by a scheduled task reliability is preferred
 def download_html(url):
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
