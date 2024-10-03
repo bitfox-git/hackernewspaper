@@ -167,8 +167,9 @@ def cached_download(url:str, index:int, ext:str):
             return False
         with open(fname, "wb") as f:
             f.write(sitecontent)
-        return True
-
+        if os.path.isfile(fname):
+            return True
+    return False
 
 
 def get_url_extension(url):
@@ -351,12 +352,15 @@ class GithubHandler:
 
         add_stats(newsproperties, metadatadict, art.suburl)
 
-        cached_download(metadata.image, index, "png")
+        image = "notfound.png"
+
+        if cached_download(metadata.image, index, "png"):
+            image = f"{asset_dir}{index}.png"
 
         return {
             "title": art.text,
             "url": art.mainurl,
-            "image": f"{asset_dir}/{index}.png",
+            "image": image,
             "category": art.category,
             "firstline": firstSentence,
             "content": data,
