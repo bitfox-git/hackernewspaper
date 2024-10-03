@@ -205,6 +205,7 @@ def prep_body(text: str | None):
     return firstSentence, text
 
 
+# TODO: Fix YoutubeDL problems, the github actions bot fails continuously as it gets flagged by youtube as a bot (the idea is probably to remove youtubedl altogether as it also gives multiple dependabot issues)
 class YoutubeHandler():
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
@@ -215,6 +216,7 @@ class YoutubeHandler():
         video_info = read(index)
         if video_info is None:
             try:
+                # TODO: Explore other options for extracting metadata, currently seems very hard (but in what way should this work, in earlier editions there is a very limited amount of actual information (for example description is not accurate as is author))
                 video_info = ydl.extract_info(art.mainurl, download=False)
                 write(index, video_info)
             except:
@@ -233,6 +235,8 @@ class YoutubeHandler():
 
         firstSentence, data = prep_body(video_info["description"])
 
+        # TODO: Explore other options for extracting thumbnails than youtubedl (its disabled as it downloads full videos(against youtubes guidelines), we dont need that, we only get the thumbnail, upload date and description)
+        # There are multiple easily accessible ways to get the thumbnail (Youtube shares the links itself or via NoEmbed) however see if we can bundle it with other video information
         image = "notfound.png"
         if cached_download(video_info["thumbnail"], index, "jpg"):
             image = f"{asset_dir}{index}.jpg"
