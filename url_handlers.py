@@ -205,13 +205,14 @@ def prep_body(text: str | None):
     return firstSentence, text
 
 
-# TODO: Fix YoutubeDL problems, the github actions bot fails continuously as it gets flagged by youtube as a bot (the idea is probably to remove youtubedl altogether as it also gives multiple dependabot issues)
+# TODO: Fix YoutubeDL problems, the github actions bot fails continuously as it gets flagged by youtube as a bot
 class YoutubeHandler():
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
     def work(self, index, art, browser):
         ydl = yt_dlp.YoutubeDL()
+        youtube_dl_working = True
 
         video_info = read(index)
         if video_info is None:
@@ -221,44 +222,58 @@ class YoutubeHandler():
                 write(index, video_info)
             except:
                 print("YoutubeDL failed")
-                return {
-                    "title": art.text,
-                    "url": art.mainurl,
-                    "image": "notfound.png",
-                    "category": art.category,
-                    "firstline": "",
-                    "content": "",
-                    "properties": [],
-                } 
+                youtube_dl_working = False
 
         metadatadict = get_metadata(art.title)
 
-        firstSentence, data = prep_body(video_info["description"])
-
-        # TODO: Explore other options for extracting thumbnails than youtubedl (its disabled as it downloads full videos(against youtubes guidelines), we dont need that, we only get the thumbnail, upload date and description)
-        # There are multiple easily accessible ways to get the thumbnail (Youtube shares the links itself or via NoEmbed) however see if we can bundle it with other video information
-        image = "notfound.png"
-        if cached_download(video_info["thumbnail"], index, "jpg"):
-            image = f"{asset_dir}{index}.jpg"
-            # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
-            im = Image.open(image)
-            image = f"{asset_dir}{index}.png"
-            im.save(image)
-
         newsproperties = []
 
-        newsproperties.append(
-            {"symbol": "User", "value": video_info["channel"], "url": None}
-        )
-        upload = video_info["upload_date"]
+        # Steps if youtube dl works
+        if youtube_dl_working:
+            firstSentence, data = prep_body(video_info["description"])
 
-        newsproperties.append(
-            {
-                "symbol": "Calendar",
-                "value": f"{upload[:4]}-{upload[4:6]}-{upload[6:]}",
-                "url": None,
-            }
-        )
+            # TODO: Explore other options for extracting thumbnails than youtubedl (its disabled as it downloads full videos(against youtubes guidelines), we dont need that, we only get the thumbnail, upload date and description)
+            # There are multiple easily accessible ways to get the thumbnail (Youtube shares the links itself or via NoEmbed) however see if we can bundle it with other video information
+            image = "notfound.png"
+            if cached_download(video_info["thumbnail"], index, "jpg"):
+                image = f"{asset_dir}{index}.jpg"
+                # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
+                im = Image.open(image)
+                image = f"{asset_dir}{index}.png"
+                im.save(image)
+
+
+            newsproperties.append(
+                {"symbol": "User", "value": video_info["channel"], "url": None}
+            )
+            upload = video_info["upload_date"]
+
+            newsproperties.append(
+                {
+                    "symbol": "Calendar",
+                    "value": f"{upload[:4]}-{upload[4:6]}-{upload[6:]}",
+                    "url": None,
+                }
+            )
+        # Steps if youtube dl fails
+        else:
+            simplified_metadata = urllib.requests.get(f"https://youtube.com/oembed?url={art.mainurl}&format=json")
+            simplified_metadata = simplified_metadata.json()
+            author = simplified_metadata["author_name"]
+            author_url = simplified_metadata["author_url"]
+            if author and author_url is not None:
+                newsproperties.append(
+                    {"symbol": "User", "value": author, "url": author_url}
+                )
+            
+            thumbnail_url = simplified_metadata["thumbnail_url"]
+            if thumbnail_url is not None:
+                if cached_download(thumbnail_url, index, "jpg"):
+                    thumbnail_url = f"{asset_dir}{index}.jpg"
+                    newsproperties.append(
+                        {"symbol": "Thumbnail", "value": thumbnail_url, "url": art.mainurl}
+                    )
+
 
         newsproperties.append(
             {
