@@ -261,7 +261,8 @@ class YoutubeHandler():
             header = {'User-Agent':str(ua.random)}
             metadata_url = f"https://youtube.com/oembed?url={art.mainurl}&format=json"
             request = urllib.request.Request(metadata_url, headers=header)
-            with urllib.request.urlopen(request).read() as metadata:
+            with urllib.request.urlopen(request) as response:
+                metadata = response.read()
                 metadata_json = metadata.json()
             author = metadata_json["author_name"]
             author_url = metadata_json["author_url"]
