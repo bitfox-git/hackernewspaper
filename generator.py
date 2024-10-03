@@ -3,14 +3,14 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 import urllib.parse
 from fake_useragent import UserAgent
-from config import asset_dir,ISSUE
+from config import asset_dir,ISSUE,LATEST_GIT_TAG
 
 from url_handlers import (
     DefaultHandler,
     GithubHandler,
     PDFHandler,
     YoutubeHandler,
-    download_html_selenium,
+    download_html,
 )
 
 os.makedirs(asset_dir, exist_ok=True)
@@ -58,7 +58,7 @@ class article:
 def get_articles(soup):
     categories =[]
     articles = []
-    # TODO: Fails here, cant find content div, only gets the script tag that loads the content, how to only get the div if the script tag has been resolved?
+
     content = soup.find(id="content")
     #all content starts with a h2
     for h2element in content.find_all("h2"):
@@ -91,65 +91,66 @@ def get_articles(soup):
 
 
 
+# Because of how ranges work we do plus one (it starts indexing at the first number, since that is the latest git tag we already have that, it does not index the last number, that is the latest edition so we also plus one to make the range include it)
+for edition in range(int(LATEST_GIT_TAG) + 1, int(ISSUE) + 1): 
+    print("Creating edition " + str(edition))
+    html = download_html("https://mailchi.mp/hackernewsletter/"+str(edition))
+    soup = parse_html(html)
+    header = get_header(soup)
+
+    articles, categories = get_articles(soup)
+
+    # parse the content of each link
+    newsitems = []
 
 
-html = download_html_selenium("https://mailchi.mp/hackernewsletter/"+ISSUE)
-soup = parse_html(html)
-header = get_header(soup)
-
-articles, categories = get_articles(soup)
-
-# parse the content of each link
-newsitems = []
 
 
+    handlers = [YoutubeHandler(), PDFHandler(), GithubHandler(), DefaultHandler()]
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        for index, art in enumerate(articles):
+            for handler in handlers:
+                if handler.test(art):
+                    # TODO maybe make it so if it throws a exception fallback to another handler
+                    newsitems.append(handler.work(index, art, browser))
+                    break
+        browser.close()
+
+    quoteLine, quoteAuthor = parse_header(header)
+
+    # remove any line breaks from quoteLine
+    quoteLine = quoteLine.replace("\n", "")
+
+    paperdata["quoteLine"] = quoteLine
+    paperdata["quoteAuthor"] = quoteAuthor
 
 
-handlers = [YoutubeHandler(), PDFHandler(), GithubHandler(), DefaultHandler()]
+    DICT_VALS = {
+        'data' : paperdata,
+        'categories': categories,
+        'newsitems': newsitems
+        }
 
-with sync_playwright() as p:
-    browser = p.chromium.launch()
-    for index, art in enumerate(articles):
-        for handler in handlers:
-            if handler.test(art):
-                # TODO maybe make it so if it throws a exception fallback to another handler
-                newsitems.append(handler.work(index, art, browser))
-                break
-    browser.close()
+    # Do the latex stuff
+    from latexbuild import render_latex_template
 
-quoteLine, quoteAuthor = parse_header(header)
+    PATH_JINJA2 = "."
+    PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2 = "template.tex"
+    PATH_OUTPUT_PDF = "MYOUTPUTFILE.pdf"
 
-# remove any line breaks from quoteLine
-quoteLine = quoteLine.replace("\n", "")
+    # Build Jinja2 template, compile result latex, move compiled file to output path,
+    # and clean up all intermediate files
+    #build_pdf(PATH_JINJA2, PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2, PATH_OUTPUT_PDF, DICT_VALS)
 
-paperdata["quoteLine"] = quoteLine
-paperdata["quoteAuthor"] = quoteAuthor
+    latexresult = render_latex_template(
+        PATH_JINJA2,
+        PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2,
+        DICT_VALS
+        )
 
-
-DICT_VALS = {
-    'data' : paperdata,
-    'categories': categories,
-    'newsitems': newsitems
-    }
-
-# Do the latex stuff
-from latexbuild import render_latex_template
-
-PATH_JINJA2 = "."
-PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2 = "template.tex"
-PATH_OUTPUT_PDF = "MYOUTPUTFILE.pdf"
-
-# Build Jinja2 template, compile result latex, move compiled file to output path,
-# and clean up all intermediate files
-#build_pdf(PATH_JINJA2, PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2, PATH_OUTPUT_PDF, DICT_VALS)
-
-latexresult = render_latex_template(
-    PATH_JINJA2,
-    PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2,
-    DICT_VALS
-    )
-
-# store latexresult in a file using utf8 encoding
-with open("output.tex", "w", encoding="utf-8") as f:
-    f.write(latexresult)
-    
+    # store latexresult in a file using utf8 encoding
+    with open("output.tex", "w", encoding="utf-8") as f:
+        f.write(latexresult)
+        
