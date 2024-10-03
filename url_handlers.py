@@ -12,9 +12,8 @@ from selenium import webdriver
 
 ua = UserAgent()
 
-# TODO Issue is here, use Selenium?
-
-def download_html_selenium(url):
+# download the html from a given url 
+def download_html(url):
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     browser = webdriver.Chrome(options=options)
@@ -22,39 +21,6 @@ def download_html_selenium(url):
     html = browser.page_source
     browser.close()
     return html
-
-# download the html from a given url 
-def download_html(url):
-    header = {'User-Agent':str(ua.random)}
-
-    #In issue 668 there is a url with a space in it, which is not allowed, so we need to encode it.
-    url = urllib.parse.quote(url, safe='/:?=&')
-
-
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
-        # check if the request was successful
-            content_type = response.getheader("Content-Type")
-            if content_type is None:
-                content_type = "text/html"
-            # todo : check if the header is text/html
-            if content_type.startswith("video"):
-                html = "This is a video url."
-            else:
-                html = response.read()
-                #Check if the encoding is utf-8, otherwise convert to utf-8
-                if response.info().get_content_charset() == 'utf-8':
-                    html = html.decode("utf-8")
-                else:
-                    html = html.decode("latin-1")                    
-    except urllib.error.HTTPError as e:
-        html = "Could not download this url."
-    except urllib.error.URLError as e:
-        html = "Could not download this url."
-    except: 
-        html = "Could not download this url."
-    return html
-
 
 #check if url is a youtube url using the regex ^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+
 def is_youtube_url(url):
@@ -240,7 +206,6 @@ def prep_body(text: str | None):
 
 
 class YoutubeHandler():
-    print("Entering development YoutubeHandler")
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
