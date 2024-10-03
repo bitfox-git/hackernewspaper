@@ -1,6 +1,7 @@
 import os , re
 import urllib.request
 import urllib.parse
+import urllib3
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir
@@ -212,7 +213,7 @@ class YoutubeHandler():
 
     def work(self, index, art, browser):
         ydl = yt_dlp.YoutubeDL()
-        youtube_dl_working = True
+        youtube_dl_working = False
 
         video_info = read(index)
         if video_info is None:
@@ -258,12 +259,14 @@ class YoutubeHandler():
 
         # Steps if youtube dl fails
         else:
-            header = {'User-Agent':str(ua.random)}
+            # Give variables default values, yet to determine what they actually show
+            firstSentence = ""
+            data = ""
             metadata_url = f"https://youtube.com/oembed?url={art.mainurl}&format=json"
-            request = urllib.request.Request(metadata_url, headers=header)
-            with urllib.request.urlopen(request) as response:
-                metadata = response.read()
-                metadata_json = metadata.json()
+            with urllib3.PoolManager() as pool_manager:
+                response = pool_manager.request('GET', metadata_url)
+                metadata = response.data
+                metadata_json = json.loads(metadata)
             author = metadata_json["author_name"]
             author_url = metadata_json["author_url"]
             if author and author_url is not None:
@@ -274,12 +277,12 @@ class YoutubeHandler():
             thumbnail_url = metadata_json["thumbnail_url"]
             if thumbnail_url is not None:
                 if cached_download(thumbnail_url, index, "jpg"):
-                    thumbnail_url = f"{asset_dir}{index}.jpg"
-                    im = Image.open(thumbnail_url)
-                    thumbnail_url = f"{asset_dir}{index}.png"
-                    im.save(thumbnail_url)
+                    image = f"{asset_dir}{index}.jpg"
+                    im = Image.open(image)
+                    image = f"{asset_dir}{index}.png"
+                    im.save(image)
                     newsproperties.append(
-                        {"symbol": "Thumbnail", "value": thumbnail_url, "url": art.mainurl}
+                        {"symbol": "Thumbnail", "value": image, "url": art.mainurl}
                     )
 
         newsproperties.append(
