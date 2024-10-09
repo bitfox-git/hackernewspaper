@@ -4,8 +4,7 @@ import urllib.parse
 import urllib3
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
-from config import asset_dir
-from env_init import YOUTUBE_API_KEY
+from config import asset_dir, YOUTUBE_API_KEY
 import json
 from pypdf import PdfReader
 from PIL import Image
