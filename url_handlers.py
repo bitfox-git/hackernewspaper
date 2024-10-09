@@ -270,6 +270,7 @@ class YoutubeHandler():
             "image": image,
             "category": art.category,
             "firstline": firstSentence,
+            # TODO: Find a way to parse this content, currently some links cause an overflow outside of the designated colum
             "content": data,
             "properties": newsproperties,
         }
