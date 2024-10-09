@@ -277,11 +277,12 @@ class YoutubeHandler():
             
             thumbnail_url = metadata_json["thumbnail_url"]
             if thumbnail_url is not None:
-                if cached_download(thumbnail_url, index, "jpg"):
-                    image = f"{asset_dir}{index}.jpg"
-                    im = Image.open(image)
-                    image = f"{asset_dir}{index}.png"
-                    im.save(image)
+                # if cached_download(thumbnail_url, index, "jpg"):
+                #     image = f"{asset_dir}{index}.jpg"
+                #     im = Image.open(image)
+                #     image = f"{asset_dir}{index}.png"
+                #     im.save(image)
+                image = thumbnail_url
 
         newsproperties.append(
             {
