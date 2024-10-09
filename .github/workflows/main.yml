@@ -63,7 +63,9 @@ jobs:
           fi
 
       - name: Setup Playwright
-        run: playwright install chromium
+        run: |
+          source .venv/bin/activate
+          playwright install chromium
 
       - name: Execute Python script
         env: 
