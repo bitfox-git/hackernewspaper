@@ -212,19 +212,17 @@ class YoutubeHandler():
     def work(self, index, art, browser):
         video_info = read(index)
         if video_info is None:
+            # Sometimes there are parameters which means it will match pattern 1 (the & at the end), otherwise it will match pattern 2 (no &)
             try:
-                # Sometimes there are parameters which means it will match pattern 1 (the & at the end), otherwise it will match pattern 2 (no &)
-                try:
-                    video_id = re.search('v=(.+?)&', art.mainurl).group(1)
-                except:
-                    video_id = re.search('v=(.+?)', art.mainurl).group(1)
-                #TODO: Youtube API here
-                with urllib3.PoolManager() as http:
-                    response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={YOUTUBE_API_KEY}")
-                    video_info = json.loads(response.data)
-                write(index, video_info)
+                video_id = re.search('v=(.+?)&', art.mainurl).group(1)
             except:
-                print("YoutubeDL failed")
+                video_id = re.search('v=(.+?)', art.mainurl).group(1)
+            #TODO: Youtube API here
+            with urllib3.PoolManager() as http:
+                response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={YOUTUBE_API_KEY}")
+                video_info = json.loads(response.data)
+            write(index, video_info)
+
 
         metadatadict = get_metadata(art.title)
 
