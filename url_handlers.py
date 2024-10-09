@@ -213,7 +213,7 @@ class YoutubeHandler():
 
     def work(self, index, art, browser):
         ydl = yt_dlp.YoutubeDL()
-        youtube_dl_working = False
+        youtube_dl_working = True
 
         video_info = read(index)
         if video_info is None:
@@ -282,9 +282,6 @@ class YoutubeHandler():
                     im = Image.open(image)
                     image = f"{asset_dir}{index}.png"
                     im.save(image)
-                    newsproperties.append(
-                        {"symbol": "Thumbnail", "value": image, "url": ''}
-                    )
 
         newsproperties.append(
             {
