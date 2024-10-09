@@ -220,19 +220,10 @@ class YoutubeHandler():
             try:
                 # TODO: Explore other options for extracting metadata, currently, upload date & description seem hard (we could try scraping this from a video page however this is prone to breaking if Youtube changes their layout) 
                 video_info = ydl.extract_info(art.mainurl, download=False)
-                # write(index, video_info)
+                write(index, video_info)
             except:
                 print("YoutubeDL failed")
                 youtube_dl_working = False
-                # return {
-                #     "title": art.text,
-                #     "url": art.mainurl,
-                #     "image": "",
-                #     "category": "",
-                #     "firstline": "",
-                #     "content": "",
-                #     "properties": [],
-                # }
 
         metadatadict = get_metadata(art.title)
 
@@ -266,7 +257,7 @@ class YoutubeHandler():
                 }
             )
 
-        # # Steps if youtube dl fails
+        # Steps if youtube dl fails
         else:
             print("Non-YoutubeDL route")
             # Give variables default values, yet to determine what they actually show
@@ -292,7 +283,7 @@ class YoutubeHandler():
                     image = f"{asset_dir}{index}.png"
                     im.save(image)
                     newsproperties.append(
-                        {"symbol": "Thumbnail", "value": image, "url": art.mainurl}
+                        {"symbol": "Thumbnail", "value": image, "url": ''}
                     )
 
         newsproperties.append(
