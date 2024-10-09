@@ -206,7 +206,6 @@ def prep_body(text: str | None):
     return firstSentence, text
 
 
-# TODO: Fix YoutubeDL problems, the github actions bot fails continuously as it gets flagged by youtube as a bot
 class YoutubeHandler():
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
