@@ -249,7 +249,7 @@ class YoutubeHandler():
         newsproperties.append(
             {
                 "symbol": "Calendar",
-                "value": f"{upload[:4]}-{upload[4:6]}-{upload[6:8]}",
+                "value": f"{upload[:4]}-{upload[5:7]}-{upload[8:10]}",
                 "url": None,
             }
         )
