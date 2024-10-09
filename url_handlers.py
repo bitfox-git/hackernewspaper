@@ -5,7 +5,7 @@ import urllib3
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir
-import yt_dlp
+from env_init import YOUTUBE_API_KEY
 import json
 from pypdf import PdfReader
 from PIL import Image
@@ -212,81 +212,46 @@ class YoutubeHandler():
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
     def work(self, index, art, browser):
-        ydl = yt_dlp.YoutubeDL()
-        youtube_dl_working = True
-
         video_info = read(index)
         if video_info is None:
             try:
-                # TODO: Explore other options for extracting metadata, currently, upload date & description seem hard (we could try scraping this from a video page however this is prone to breaking if Youtube changes their layout) 
-                video_info = ydl.extract_info(art.mainurl, download=False)
+                #TODO: Youtube API here
+                with urllib3.PoolManager() as http:
+                    response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=4Y4YSpF6d6w&key={YOUTUBE_API_KEY}")
+                    video_info = json.loads(response.data)
                 write(index, video_info)
             except:
                 print("YoutubeDL failed")
-                youtube_dl_working = False
 
         metadatadict = get_metadata(art.title)
 
         newsproperties = []
 
-        # Steps if youtube dl works
-        if youtube_dl_working:
-            firstSentence, data = prep_body(video_info["description"])
+        metadata_list = video_info["items"][0]["snippet"]
 
-            # TODO: Explore other options for extracting thumbnails than youtubedl (its disabled as it downloads full videos(against youtubes guidelines), we dont need that, we only get the thumbnail, upload date and description)
-            # There are multiple easily accessible ways to get the thumbnail (Youtube shares the links itself or via NoEmbed) however see if we can bundle it with other video information
-            image = "notfound.png"
-            if cached_download(video_info["thumbnail"], index, "jpg"):
-                image = f"{asset_dir}{index}.jpg"
-                # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
-                im = Image.open(image)
-                image = f"{asset_dir}{index}.png"
-                im.save(image)
+        firstSentence, data = prep_body(metadata_list["description"])
 
+        image = 'notfound.png'
+        if(cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg")):
+            image = f"{asset_dir}{index}.jpg"
+            # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
+            im = Image.open(image)
+            image = f"{asset_dir}{index}.png"
+            im.save(image)
 
-            newsproperties.append(
-                {"symbol": "User", "value": video_info["channel"], "url": None}
-            )
-            upload = video_info["upload_date"]
+        newsproperties.append(
+            {"symbol" : "User", "value" : metadata_list["channelTitle"], "url" : None}
+        )
 
-            newsproperties.append(
-                {
-                    "symbol": "Calendar",
-                    "value": f"{upload[:4]}-{upload[4:6]}-{upload[6:]}",
-                    "url": None,
-                }
-            )
+        upload = metadata_list["publishedAt"]
 
-        # Steps if youtube dl fails
-        else:
-            print("Non-YoutubeDL route")
-            # Give variables default values, yet to determine what they actually show
-            firstSentence = ""
-            data = ""
-            metadata_url = f"https://youtube.com/oembed?url={art.mainurl}&format=json"
-            with urllib3.PoolManager() as pool_manager:
-                response = pool_manager.request('GET', metadata_url)
-                metadata = response.data
-                metadata_json = json.loads(metadata)
-            author = metadata_json["author_name"]
-            author_url = metadata_json["author_url"]
-            if author and author_url is not None:
-                newsproperties.append(
-                    {"symbol": "User", "value": author, "url": author_url}
-                )
-            
-            try:
-                video_id = re.search('v=(.+?)&', art.mainurl).group(1)
-            except:
-                video_id = re.search('v=(.+?)', art.mainurl).group(1)
-        
-            thumbnail_url = f"https://img.youtube.com/vi/{video_id}/mqdefault.jpg"
-            if thumbnail_url is not None:
-                if cached_download(thumbnail_url, index, "jpg"):
-                    image = f"{asset_dir}{index}.jpg"
-                    im = Image.open(image)
-                    image = f"{asset_dir}{index}.png"
-                    im.save(image)
+        newsproperties.append(
+            {
+                "symbol": "Calendar",
+                "value": f"{upload[:4]}-{upload[4:6]}-{upload[6:8]}",
+                "url": None,
+            }
+        )
 
         newsproperties.append(
             {
