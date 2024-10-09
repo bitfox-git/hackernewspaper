@@ -275,7 +275,12 @@ class YoutubeHandler():
                     {"symbol": "User", "value": author, "url": author_url}
                 )
             
-            thumbnail_url = metadata_json["thumbnail_url"]
+            try:
+                video_id = re.search('v=(.+?)&', art.mainurl).group(1)
+            except:
+                video_id = re.search('v=(.+?)', art.mainurl).group(1)
+        
+            thumbnail_url = f"https://img.youtube.com/vi/{video_id}/mqdefault.jpg"
             if thumbnail_url is not None:
                 if cached_download(thumbnail_url, index, "jpg"):
                     image = f"{asset_dir}{index}.jpg"
