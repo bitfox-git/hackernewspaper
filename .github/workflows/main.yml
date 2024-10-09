@@ -19,8 +19,8 @@ jobs:
       
       - name: Install Python packages
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt --break-system-packages
+          python -m pipx install --upgrade pipx
+          pipx install -r requirements.txt --break-system-packages
       
       - name: Determine next edition
         id: determine-edition
