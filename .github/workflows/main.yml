@@ -32,7 +32,7 @@ jobs:
           latest_git_tag=$(($(git tag | sort -n | tail -n 1)))
 
           # Get the latest edition from Python script
-          latest_edition=$(python get_latest_edition.py)
+          latest_edition=$(python3 get_latest_edition.py)
 
           if [ $? -eq 1 ]; then
             echo "Error: Unable to get the latest edition. Exiting..."
@@ -67,7 +67,7 @@ jobs:
       - name: Execute Python script
         env: 
           YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
-        run: python generator.py ${{steps.determine-edition.outputs.EDITION }}
+        run: python3 generator.py ${{steps.determine-edition.outputs.EDITION }}
 
       - name: Setup Tectonic 
         uses: WtfJoke/setup-tectonic@v3
