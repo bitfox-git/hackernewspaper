@@ -74,7 +74,7 @@ jobs:
         run: tectonic --version
 
       - name: Run Tectonic
-        run: tectonic -X compile output.tex
+        run: tectonic -X compile output.tex -Z continue-on-errors
 
       - name: Rename output.pdf
         run: mv output.pdf HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf
