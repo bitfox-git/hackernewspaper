@@ -63,6 +63,8 @@ jobs:
         run: playwright install chromium
 
       - name: Execute Python script
+        env: 
+          YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
         run: python generator.py ${{steps.determine-edition.outputs.EDITION }}
 
       - name: Setup Tectonic 
