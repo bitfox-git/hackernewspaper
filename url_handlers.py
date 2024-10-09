@@ -224,15 +224,15 @@ class YoutubeHandler():
             except:
                 print("YoutubeDL failed")
                 youtube_dl_working = False
-                return {
-                    "title": art.text,
-                    "url": art.mainurl,
-                    "image": "",
-                    "category": "",
-                    "firstline": "",
-                    "content": "",
-                    "properties": [],
-                }
+                # return {
+                #     "title": art.text,
+                #     "url": art.mainurl,
+                #     "image": "",
+                #     "category": "",
+                #     "firstline": "",
+                #     "content": "",
+                #     "properties": [],
+                # }
 
         metadatadict = get_metadata(art.title)
 
