@@ -317,9 +317,10 @@ class GithubHandler:
         add_stats(newsproperties, metadatadict, art.suburl)
 
         image = "notfound.png"
-
-        if cached_download(metadata.image, index, "png"):
-            image = f"{asset_dir}{index}.png"
+        # Add a check if the image provided is not a gif, these cannot be converted to png and cause issues in creating the pdf
+        if not metadata.image.endswith('.gif'):
+            if cached_download(metadata.image, index, "png"):
+                image = f"{asset_dir}{index}.png"
 
         return {
             "title": art.text,
