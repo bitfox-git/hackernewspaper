@@ -92,7 +92,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4.3.1
         with:
-          path: ./*.*
+          path: |
+            ./*.*
+            !./.venv
 
       # - name: Create release
       #   uses: ncipollo/release-action@v1.14.0
