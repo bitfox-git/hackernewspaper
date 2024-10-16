@@ -62,10 +62,11 @@ jobs:
             exit 1
           fi
 
-      - name: Setup Playwright
+      - name: Setup Playwright And Python Magic
         run: |
           source .venv/bin/activate
           playwright install chromium
+          pip install python-magic-bin==0.4.14
 
       - name: Execute Python script
         env: 
