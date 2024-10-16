@@ -66,7 +66,7 @@ jobs:
         run: |
           source .venv/bin/activate
           playwright install chromium
-          pip install python-magic-bin==0.4.14
+          pip install python-magic-bin
 
       - name: Execute Python script
         env: 
