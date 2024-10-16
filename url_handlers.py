@@ -9,6 +9,7 @@ import json
 from pypdf import PdfReader
 from PIL import Image
 from selenium import webdriver
+import magic
 
 ua = UserAgent()
 
@@ -133,6 +134,9 @@ def cached_download(url:str, index:int, ext:str):
             return False
         with open(fname, "wb") as f:
             f.write(sitecontent)
+        if magic.from_file(fname).startswith("GIF image data"):
+            os.remove(fname)
+            return False
         if os.path.isfile(fname):
             return True
     return False
