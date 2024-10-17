@@ -1,59 +1,32 @@
-import os , sys , re
-from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
-from pythumb import Thumbnail
+import os , re
 import urllib.request
 import urllib.parse
+import urllib3
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
-from config import asset_dir
-import yt_dlp
+from config import asset_dir, YOUTUBE_API_KEY
 import json
 from pypdf import PdfReader
 from PIL import Image
+from selenium import webdriver
+import magic
 
 ua = UserAgent()
 
-# download the html from a given url 
+# download the html from a given url, renewed function, not as fast but way more reliable, as this will later be triggered by a scheduled task reliability is preferred
 def download_html(url):
-    header = {'User-Agent':str(ua.random)}
-
-    #In issue 668 there is a url with a space in it, which is not allowed, so we need to encode it.
-    url = urllib.parse.quote(url, safe='/:?=&')
-
-
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
-        # check if the request was successful
-            content_type = response.getheader("Content-Type")
-            if content_type is None:
-                content_type = "text/html"
-            # todo : check if the header is text/html
-            if content_type.startswith("video"):
-                html = "This is a video url."
-            else:
-                html = response.read()
-                #Check if the encoding is utf-8, otherwise convert to utf-8
-                if response.info().get_content_charset() == 'utf-8':
-                    html = html.decode("utf-8")
-                else:
-                    html = html.decode("latin-1")                    
-    except urllib.error.HTTPError as e:
-        html = "Could not download this url."
-    except urllib.error.URLError as e:
-        html = "Could not download this url."
-    except: 
-        html = "Could not download this url."
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    browser = webdriver.Chrome(options=options)
+    browser.get(url)
+    html = browser.page_source
+    browser.close()
     return html
-
 
 #check if url is a youtube url using the regex ^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+
 def is_youtube_url(url):
     regex = "^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+"
-    if re.match(regex, url):
-        return True
-    else:
-        return False
+    return re.match(regex, url)
 
 # load or download art.mainurl contents
 def loadordownload(index, art):
@@ -161,8 +134,12 @@ def cached_download(url:str, index:int, ext:str):
             return False
         with open(fname, "wb") as f:
             f.write(sitecontent)
-        return True
-
+        if magic.from_file(fname).startswith("GIF image data"):
+            os.remove(fname)
+            return False
+        if os.path.isfile(fname):
+            return True
+    return False
 
 
 def get_url_extension(url):
@@ -237,36 +214,45 @@ class YoutubeHandler():
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
     def work(self, index, art, browser):
-        ydl = yt_dlp.YoutubeDL()
-
         video_info = read(index)
         if video_info is None:
-            video_info = ydl.extract_info(art.mainurl, download=False)
+            # Sometimes there are parameters which means it will match pattern 1 (the & at the end), otherwise it will match pattern 2 (no &)
+            try:
+                video_id = re.search('v=(.+?)&', art.mainurl).group(1)
+            except:
+                video_id = re.search('v=(.+?)', art.mainurl).group(1)
+            with urllib3.PoolManager() as http:
+                response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={YOUTUBE_API_KEY}")
+                video_info = json.loads(response.data)
             write(index, video_info)
+
 
         metadatadict = get_metadata(art.title)
 
-        firstSentence, data = prep_body(video_info["description"])
+        newsproperties = []
 
-        image = "notfound.png"
-        if cached_download(video_info["thumbnail"], index, "jpg"):
+        metadata_list = video_info["items"][0]["snippet"]
+
+        firstSentence, data = prep_body(metadata_list["description"])
+
+        image = 'notfound.png'
+        if(cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg")):
             image = f"{asset_dir}{index}.jpg"
             # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
             im = Image.open(image)
             image = f"{asset_dir}{index}.png"
             im.save(image)
 
-        newsproperties = []
-
         newsproperties.append(
-            {"symbol": "User", "value": video_info["channel"], "url": None}
+            {"symbol" : "User", "value" : metadata_list["channelTitle"], "url" : None}
         )
-        upload = video_info["upload_date"]
+
+        upload = metadata_list["publishedAt"]
 
         newsproperties.append(
             {
                 "symbol": "Calendar",
-                "value": f"{upload[:4]}-{upload[4:6]}-{upload[6:]}",
+                "value": f"{upload[:4]}-{upload[5:7]}-{upload[8:10]}",
                 "url": None,
             }
         )
@@ -287,6 +273,7 @@ class YoutubeHandler():
             "image": image,
             "category": art.category,
             "firstline": firstSentence,
+            # TODO: Find a way to parse this content, currently some links cause an overflow outside of the designated colum
             "content": data,
             "properties": newsproperties,
         }
@@ -332,12 +319,14 @@ class GithubHandler:
 
         add_stats(newsproperties, metadatadict, art.suburl)
 
-        cached_download(metadata.image, index, "png")
+        image = "notfound.png"
+        if cached_download(metadata.image, index, "png"):
+            image = f"{asset_dir}{index}.png"
 
         return {
             "title": art.text,
             "url": art.mainurl,
-            "image": f"{asset_dir}/{index}.png",
+            "image": image,
             "category": art.category,
             "firstline": firstSentence,
             "content": data,

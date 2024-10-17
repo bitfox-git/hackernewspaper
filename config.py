@@ -1,4 +1,5 @@
 import sys
+from os import environ
 
 #read the first argument from the command line and use it as the issue number
 if len(sys.argv) > 1:
@@ -6,7 +7,7 @@ if len(sys.argv) > 1:
 else:
     ISSUE = "675" 
 
-
+YOUTUBE_API_KEY = environ["YOUTUBE_API_KEY"]
 
 #Some weird url workarounds....
 if ISSUE == "675":

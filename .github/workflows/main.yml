@@ -19,8 +19,10 @@ jobs:
       
       - name: Install Python packages
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python3 -m venv .venv
+          source .venv/bin/activate
+          python3 -m pip install -r requirements.txt
+
       
       - name: Determine next edition
         id: determine-edition
@@ -29,6 +31,7 @@ jobs:
           git fetch origin --tags
           latest_git_tag=$(($(git tag | sort -n | tail -n 1)))
 
+          source .venv/bin/activate
           # Get the latest edition from Python script
           latest_edition=$(python get_latest_edition.py)
 
@@ -60,10 +63,16 @@ jobs:
           fi
 
       - name: Setup Playwright
-        run: playwright install chromium
+        run: |
+          source .venv/bin/activate
+          playwright install chromium
 
       - name: Execute Python script
-        run: python generator.py ${{steps.determine-edition.outputs.EDITION }}
+        env: 
+          YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
+        run: |
+          source .venv/bin/activate
+          python generator.py ${{steps.determine-edition.outputs.EDITION }}
 
       - name: Setup Tectonic 
         uses: WtfJoke/setup-tectonic@v3
@@ -74,7 +83,7 @@ jobs:
         run: tectonic --version
 
       - name: Run Tectonic
-        run: tectonic output.tex
+        run: tectonic -X compile output.tex -Z continue-on-errors
 
       - name: Rename output.pdf
         run: mv output.pdf HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf
@@ -83,7 +92,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4.3.1
         with:
-          path: ./*.*
+          path: |
+            ./*.*
+            !./.venv
 
       - name: Create release
         uses: ncipollo/release-action@v1.14.0

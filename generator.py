@@ -1,10 +1,7 @@
-import os , sys , re
+import os
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
-from pythumb import Thumbnail
-import urllib.request
 import urllib.parse
-from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
 from config import asset_dir,ISSUE
 
@@ -61,6 +58,7 @@ class article:
 def get_articles(soup):
     categories =[]
     articles = []
+
     content = soup.find(id="content")
     #all content starts with a h2
     for h2element in content.find_all("h2"):
@@ -86,8 +84,7 @@ def get_articles(soup):
                         if suburla is not None: 
                             suburl = suburla.get("href")
                     art = article(mainurl, title, text, subtext, suburl, category)    
-                    articles.append(art)
-                    print(art)       
+                    articles.append(art)       
     return articles, categories
 
 
@@ -116,6 +113,7 @@ with sync_playwright() as p:
             if handler.test(art):
                 # TODO maybe make it so if it throws a exception fallback to another handler
                 newsitems.append(handler.work(index, art, browser))
+                print("New article indexed: ", newsitems[-1]["title"])
                 break
     browser.close()
 
@@ -144,7 +142,7 @@ PATH_OUTPUT_PDF = "MYOUTPUTFILE.pdf"
 # Build Jinja2 template, compile result latex, move compiled file to output path,
 # and clean up all intermediate files
 #build_pdf(PATH_JINJA2, PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2, PATH_OUTPUT_PDF, DICT_VALS)
-
+print("PDF template creation started")
 latexresult = render_latex_template(
     PATH_JINJA2,
     PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2,
@@ -153,5 +151,7 @@ latexresult = render_latex_template(
 
 # store latexresult in a file using utf8 encoding
 with open("output.tex", "w", encoding="utf-8") as f:
+    print("PDF template creation finished, writing to file")
     f.write(latexresult)
+    print("PDF template written to file")
     
