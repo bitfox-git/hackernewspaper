@@ -96,12 +96,12 @@ jobs:
             ./*.*
             !./.venv
 
-      - name: Create release
-        uses: ncipollo/release-action@v1.14.0
-        with:
-          allowUpdates: true
-          tag: ${{ steps.determine-edition.outputs.EDITION }}
-          name: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}" 
-          body: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}"
-          artifacts: "HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf"
-          removeArtifacts: true
+      # - name: Create release
+      #   uses: ncipollo/release-action@v1.14.0
+      #   with:
+      #     allowUpdates: true
+      #     tag: ${{ steps.determine-edition.outputs.EDITION }}
+      #     name: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}" 
+      #     body: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}"
+      #     artifacts: "HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf"
+      #     removeArtifacts: true
