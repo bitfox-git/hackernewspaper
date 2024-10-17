@@ -214,7 +214,7 @@ def extract_urls(text):
     return_text = ""
     for string in text.split():
         if re.search(r"^https?://", string):
-            return_text += "<a href=\"" + string + "\"> link </a> " 
+            return_text += string 
         else:
             return_text += string
         return_text += " "
@@ -247,7 +247,7 @@ class YoutubeHandler():
 
         firstSentence, data = prep_body(metadata_list["description"])
 
-        # parsed_data = extract_urls(data)
+        parsed_data = extract_urls(data)
 
         image = 'notfound.png'
         if(cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg")):
@@ -288,7 +288,7 @@ class YoutubeHandler():
             "category": art.category,
             "firstline": firstSentence,
             # TODO: Find a way to parse this content, currently some links cause an overflow outside of the designated colum
-            "content": data,
+            "content": parsed_data,
             "properties": newsproperties,
         }
 
