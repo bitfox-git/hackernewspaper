@@ -221,7 +221,6 @@ class YoutubeHandler():
                 video_id = re.search('v=(.+?)&', art.mainurl).group(1)
             except:
                 video_id = re.search('v=(.+?)', art.mainurl).group(1)
-            #TODO: Youtube API here
             with urllib3.PoolManager() as http:
                 response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={YOUTUBE_API_KEY}")
                 video_info = json.loads(response.data)
@@ -321,11 +320,8 @@ class GithubHandler:
         add_stats(newsproperties, metadatadict, art.suburl)
 
         image = "notfound.png"
-        # TODO: Add a check if the image provided is not a gif, these cannot be converted to png and cause issues in creating the pdf (endswith not working as the images are transferred to a hash, find the right solution)
-        if not metadata.image.endswith('.gif'):
-            print(metadata.image)
-            if cached_download(metadata.image, index, "png"):
-                image = f"{asset_dir}{index}.png"
+        if cached_download(metadata.image, index, "png"):
+            image = f"{asset_dir}{index}.png"
 
         return {
             "title": art.text,
