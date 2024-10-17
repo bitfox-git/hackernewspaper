@@ -1,7 +1,6 @@
 import os
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
-import urllib.parse
 from fake_useragent import UserAgent
 from config import asset_dir,ISSUE
 
