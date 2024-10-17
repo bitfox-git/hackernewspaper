@@ -247,7 +247,7 @@ class YoutubeHandler():
 
         firstSentence, data = prep_body(metadata_list["description"])
 
-        parsed_data = extract_urls(data)
+        # parsed_data = extract_urls(data)
 
         image = 'notfound.png'
         if(cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg")):
@@ -288,7 +288,7 @@ class YoutubeHandler():
             "category": art.category,
             "firstline": firstSentence,
             # TODO: Find a way to parse this content, currently some links cause an overflow outside of the designated colum
-            "content": parsed_data,
+            "content": data,
             "properties": newsproperties,
         }
 
