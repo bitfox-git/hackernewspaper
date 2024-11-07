@@ -91,7 +91,7 @@ def get_articles(soup):
 
 
 
-html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
+html = download_html("https://buttondown.com/hacker-newsletter/archive/hacker-newsletter-"+ISSUE)
 soup = parse_html(html)
 header = get_header(soup)
 

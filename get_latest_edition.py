@@ -4,7 +4,7 @@ from urllib.request import urlopen, Request
 from fake_useragent import UserAgent
 
 HACKERNEWSLETTER_URL = (
-    "https://us1.campaign-archive.com/home/?u=faa8eb4ef3a111cef92c4f3d4&id=e505c88a2e"
+    "https://buttondown.com/hacker-newsletter/archive"
 )
 
 
