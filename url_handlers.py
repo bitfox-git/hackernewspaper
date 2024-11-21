@@ -208,19 +208,6 @@ def prep_body(text: str | None):
 
     return firstSentence, text
 
-def extract_urls(text):
-    # Extract URLs from text
-    text.split()
-    return_text = ""
-    for string in text.split():
-        if re.search(r"^https?://", string):
-            return_text += string 
-        else:
-            return_text += string
-        return_text += " "
-    return return_text
-
-
 class YoutubeHandler():
     def test(self, art):
         return art.mainurl.startswith("https://www.youtube.com/watch?v=")
@@ -246,8 +233,6 @@ class YoutubeHandler():
         metadata_list = video_info["items"][0]["snippet"]
 
         firstSentence, data = prep_body(metadata_list["description"])
-
-        parsed_data = extract_urls(data)
 
         image = 'notfound.png'
         if(cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg")):
@@ -288,7 +273,7 @@ class YoutubeHandler():
             "category": art.category,
             "firstline": firstSentence,
             # TODO: Find a way to parse this content, currently some links cause an overflow outside of the designated colum
-            "content": parsed_data,
+            "content": data,
             "properties": newsproperties,
         }
 
