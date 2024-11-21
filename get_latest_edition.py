@@ -4,7 +4,7 @@ from urllib.request import urlopen, Request
 from fake_useragent import UserAgent
 
 HACKERNEWSLETTER_URL = (
-    "https://us1.campaign-archive.com/home/?u=faa8eb4ef3a111cef92c4f3d4&id=e505c88a2e"
+    "https://buttondown.com/hacker-newsletter/archive"
 )
 
 
@@ -20,13 +20,15 @@ def fetch(url):
 
 soup = BeautifulSoup(fetch(HACKERNEWSLETTER_URL), "html.parser")
 
-newsletter_links = soup.find_all("li", class_="campaign")
+parentElement = soup.find("div", class_="email-list")
+newsletter_links = parentElement.find_all("a")
 
 weekly_number = None
 for link in newsletter_links:
-    newsletter_text = link.a.get_text()
+    # This does get the correct number, it does look a bit hacky
+    newsletter_text = link.find("div", class_="email").find("div").find("div").get_text()
     if "#" in newsletter_text:
-        weekly_number = newsletter_text.split("#")[-1]
+        weekly_number = newsletter_text.split("#")[1]
         break
 
 if weekly_number == None:

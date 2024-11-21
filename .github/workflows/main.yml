@@ -52,10 +52,10 @@ jobs:
       - name: Check if edition exists
         id: check-edition
         run: |
-          if wget -qO- "https://mailchi.mp/hackernewsletter/${{ steps.determine-edition.outputs.EDITION }}" | grep -q "trying to reach a page that was built by Mailchimp bu"; then
+          if wget -qO- "https://buttondown.com/hacker-newsletter/archive/hacker-newsletter-${{ steps.determine-edition.outputs.EDITION }}" | grep -q "trying to reach a page that was built by Mailchimp bu"; then
             echo "Mailchimp page not found, exiting workflow."
             exit 1
-          elif wget --spider "https://mailchi.mp/hackernewsletter/${{ steps.determine-edition.outputs.EDITION }}" 2>&1 | grep -q "200 OK"; then
+          elif wget --spider "https://buttondown.com/hacker-newsletter/archive/hacker-newsletter-${{ steps.determine-edition.outputs.EDITION }}" 2>&1 | grep -q "200 OK"; then
             echo "Edition exists, continuing workflow."
           else
             echo "Edition does not exist, exiting workflow."

@@ -1,7 +1,6 @@
 import os
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
-import urllib.parse
 from fake_useragent import UserAgent
 from config import asset_dir,ISSUE
 
@@ -92,7 +91,7 @@ def get_articles(soup):
 
 
 
-html = download_html("https://mailchi.mp/hackernewsletter/"+ISSUE)
+html = download_html("https://buttondown.com/hacker-newsletter/archive/hacker-newsletter-"+ISSUE)
 soup = parse_html(html)
 header = get_header(soup)
 
