@@ -2,9 +2,6 @@ from bs4 import BeautifulSoup
 from sys import exit
 from urllib.request import urlopen, Request
 from fake_useragent import UserAgent
-import logging
-
-logging.basicConfig(level=logging.DEBUG)
 
 HACKERNEWSLETTER_URL = (
     "https://buttondown.com/hacker-newsletter/archive"
