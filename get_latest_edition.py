@@ -35,4 +35,4 @@ if weekly_number == None:
     exit(1)
 
 # NOTE: Rigging is possible for getting editions that have been missed before, type number here to rig
-print(weekly_number)
+print(716)
