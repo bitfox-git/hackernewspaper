@@ -15,13 +15,16 @@ ua = UserAgent()
 
 # download the html from a given url, renewed function, not as fast but way more reliable, as this will later be triggered by a scheduled task reliability is preferred
 def download_html(url):
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    browser = webdriver.Chrome(options=options)
-    browser.get(url)
-    html = browser.page_source
-    browser.close()
-    return html
+    try:
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')
+        browser = webdriver.Chrome(options=options)
+        browser.get(url)
+        html = browser.page_source
+        browser.close()
+        return html
+    except:
+        return None
 
 #check if url is a youtube url using the regex ^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+
 def is_youtube_url(url):
@@ -36,6 +39,8 @@ def loadordownload(index, art):
             sitecontent = f.read()
     else:
         sitecontent = download_html(art.mainurl)
+        if sitecontent is None:
+            sitecontent = ""
         with open(fname, "w", encoding="utf-8") as f:
             f.write(sitecontent)
     return sitecontent
