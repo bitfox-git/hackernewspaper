@@ -12,7 +12,6 @@ HACKERNEWSLETTER_URL = (
 
 
 def fetch(url):
-    print("Fetching the latest edition...")
     header = {"User-Agent": str(UserAgent().random)}
 
     try:
@@ -24,7 +23,6 @@ def fetch(url):
 
 soup = BeautifulSoup(fetch(HACKERNEWSLETTER_URL), "html.parser")
 
-print("Getting links")
 parentElement = soup.find("div", class_="email-list")
 newsletter_links = parentElement.find_all("a")
 
