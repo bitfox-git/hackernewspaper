@@ -26,8 +26,8 @@ Work happens on `develop` → PR to `main` (the workflow runs from `main`).
 **Done when:** releases #773–#814 exist, and deleting one release makes the next run rebuild it.
 
 ## Phase 2 – Robustness and tests
-1. **LaTeX escaping** (B7): a single `latex_escape()` Jinja filter applied to every `\VAR{}` (titles, categories, properties, body), and URLs via `\url`/hyperref-safe escaping. Then try removing `-Z continue-on-errors`, or at least fail on missing images or undefined control sequences.
-2. Fix B2 (mutable default), B3 (use `urllib.parse.parse_qs` for the video id), B4/B5 (None and empty guards), B6 (raise with a message), B9 (strip category text, skip/flag *Sponsor*), B10 (utf-8), B8 (verify the Favorites branch).
+1. **TeX warnings** (B7): latexbuild already escapes, and #814 compiles with 0 errors. Add an emoji-capable fallback font (or strip emoji), then drop `-Z continue-on-errors` so real TeX errors fail the build.
+2. Fix B2 (mutable default), B3 (use `urllib.parse.parse_qs` for the video id), B4/B5 (None and empty guards), B6 (raise with a message), B9 (strip category text, skip/flag *Sponsor*), B10 (utf-8), B14 (`None` comments), B15 (sentence split on version numbers).
 3. **Per-article isolation:** each handler runs in `try/except`. On failure, fall back to `DefaultHandler`, then to a minimal "title + link" item. One bad link never kills an edition.
 4. **One browser stack:** fetch HTML with the already-open Playwright browser (`page.content()`), and drop Selenium and Chrome.
 5. Restructure `generator.py` into functions with `main(issue)`, and use `logging` instead of `print`.
@@ -70,9 +70,9 @@ Suggested sequencing: **0 → 2.1–2.4 → 1 → 2 (rest) → 3 → 4.** Ship #
 ## Local dev setup (to do when implementation starts)
 ```bash
 py -3.12 -m venv .venv
-.venv/Scripts/python -m pip install -r requirements.txt python-magic-bin
+.venv/Scripts/python -m pip install -r requirements.txt
 .venv/Scripts/playwright install chromium
-winget install --id TectonicTypesetting.Tectonic
+# Tectonic: download tectonic-*-x86_64-pc-windows-msvc.zip from github.com/tectonic-typesetting/tectonic/releases
 ```
 Set `YOUTUBE_API_KEY` (and later `ANTHROPIC_API_KEY`) as user environment variables, then run `python generator.py 814` and `tectonic -X compile output.tex`.
 
