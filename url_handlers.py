@@ -215,7 +215,8 @@ def prep_body(text: str | None):
 
 class YoutubeHandler():
     def test(self, art):
-        return art.mainurl.startswith("https://www.youtube.com/watch?v=")
+        # without an API key fall through to the DefaultHandler (screenshot)
+        return YOUTUBE_API_KEY != "" and art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
     def work(self, index, art, browser):
         video_info = read(index)

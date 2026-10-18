@@ -27,47 +27,30 @@ jobs:
       - name: Determine next edition
         id: determine-edition
         run: |
-          git fetch --tags
           git fetch origin --tags
-          latest_git_tag=$(($(git tag | sort -n | tail -n 1)))
 
           source .venv/bin/activate
-          # Get the latest edition from Python script
+          # Get the latest edition from Python script, a failure here fails the run
           latest_edition=$(python get_latest_edition.py)
-
-          if [ $? -eq 1 ]; then
-            echo "Error: Unable to get the latest edition. Exiting..."
-            exit 1
-          fi
-
-          # Compare the outputs
-          if [ "$latest_git_tag" -eq "$latest_edition" ]; then
-              echo "Latest Git tag and latest edition are equal. Exiting workflow."
-              exit 1
-          else
-              echo "Latest Git tag and latest edition are not equal. Continuing workflow."
-              # Continue with your workflow commands here
-          fi
           echo "EDITION=$latest_edition" >> "$GITHUB_OUTPUT"
-      - name: Check if edition exists
-        id: check-edition
-        run: |
-          if wget -qO- "https://buttondown.com/hacker-newsletter/archive/hacker-newsletter-${{ steps.determine-edition.outputs.EDITION }}" | grep -q "trying to reach a page that was built by Mailchimp bu"; then
-            echo "Mailchimp page not found, exiting workflow."
-            exit 1
-          elif wget --spider "https://buttondown.com/hacker-newsletter/archive/hacker-newsletter-${{ steps.determine-edition.outputs.EDITION }}" 2>&1 | grep -q "200 OK"; then
-            echo "Edition exists, continuing workflow."
+
+          # Nothing to do is not an error: skip the remaining steps but keep the run green
+          if [ -n "$(git tag -l "$latest_edition")" ]; then
+              echo "::notice::Edition $latest_edition is already released, nothing to do."
+              echo "BUILD=false" >> "$GITHUB_OUTPUT"
           else
-            echo "Edition does not exist, exiting workflow."
-            exit 1
+              echo "New edition $latest_edition found, building it."
+              echo "BUILD=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Setup Playwright
+        if: steps.determine-edition.outputs.BUILD == 'true'
         run: |
           source .venv/bin/activate
           playwright install chromium
 
       - name: Execute Python script
+        if: steps.determine-edition.outputs.BUILD == 'true'
         env: 
           YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
         run: |
@@ -75,21 +58,25 @@ jobs:
           python generator.py ${{steps.determine-edition.outputs.EDITION }}
 
       - name: Setup Tectonic 
+        if: steps.determine-edition.outputs.BUILD == 'true'
         uses: WtfJoke/setup-tectonic@v3
         with:
            github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Tectonic version
+        if: steps.determine-edition.outputs.BUILD == 'true'
         run: tectonic --version
 
       - name: Run Tectonic
+        if: steps.determine-edition.outputs.BUILD == 'true'
         run: tectonic -X compile output.tex -Z continue-on-errors
 
       - name: Rename output.pdf
+        if: steps.determine-edition.outputs.BUILD == 'true'
         run: mv output.pdf HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf
 
       - name: Upload a Build Artifact
-        if: always()
+        if: always() && steps.determine-edition.outputs.BUILD == 'true'
         uses: actions/upload-artifact@v4.3.1
         with:
           path: |
@@ -97,6 +84,7 @@ jobs:
             !./.venv
 
       - name: Create release
+        if: steps.determine-edition.outputs.BUILD == 'true'
         uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true
