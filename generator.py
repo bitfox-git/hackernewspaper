@@ -1,4 +1,5 @@
 import os
+import sys
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 from fake_useragent import UserAgent
@@ -91,8 +92,20 @@ def get_articles(soup):
 
 
 
-html = download_html("https://buttondown.com/hacker-newsletter/archive/hacker-newsletter-"+ISSUE)
-soup = parse_html(html)
+ARCHIVE_URL = "https://buttondown.com/hacker-newsletter/archive/"
+
+# editions live at /archive/<N>/, the older /archive/hacker-newsletter-<N> slug is kept as a fallback
+soup = None
+for url in [f"{ARCHIVE_URL}{ISSUE}/", f"{ARCHIVE_URL}hacker-newsletter-{ISSUE}"]:
+    html = download_html(url)
+    if html is not None and parse_html(html).find(id="content") is not None:
+        soup = parse_html(html)
+        break
+    print(f"No edition content found at {url}")
+
+if soup is None:
+    sys.exit(f"Unable to download edition {ISSUE}")
+
 header = get_header(soup)
 
 articles, categories = get_articles(soup)

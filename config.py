@@ -5,12 +5,9 @@ from os import environ
 if len(sys.argv) > 1:
     ISSUE = sys.argv[1]
 else:
-    ISSUE = "675" 
+    sys.exit("Usage: python generator.py <issue number>")
 
-YOUTUBE_API_KEY = environ["YOUTUBE_API_KEY"]
+# optional, without a key YouTube links are handled like any other link (screenshot)
+YOUTUBE_API_KEY = environ.get("YOUTUBE_API_KEY", "")
 
-#Some weird url workarounds....
-if ISSUE == "675":
-    ISSUE= "674-2563024"
-    
 asset_dir = f"dist/{ISSUE}/"

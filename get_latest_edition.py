@@ -1,10 +1,11 @@
+import re
 from bs4 import BeautifulSoup
-from sys import exit
+from sys import exit, stderr
 from urllib.request import urlopen, Request
 from fake_useragent import UserAgent
 
 HACKERNEWSLETTER_URL = (
-    "https://buttondown.com/hacker-newsletter/archive"
+    "https://buttondown.com/hacker-newsletter/archive/"
 )
 
 
@@ -14,24 +15,32 @@ def fetch(url):
     try:
         with urlopen(Request(url, headers=header)) as response:
             return response.read().decode("utf-8")
-    except:
+    except Exception as e:
+        print(f"Unable to fetch {url}: {e}", file=stderr)
         return None
 
 
-soup = BeautifulSoup(fetch(HACKERNEWSLETTER_URL), "html.parser")
+html = fetch(HACKERNEWSLETTER_URL)
+if html is None:
+    exit(1)
+
+soup = BeautifulSoup(html, "html.parser")
 
 parentElement = soup.find("div", class_="email-list")
-newsletter_links = parentElement.find_all("a")
+if parentElement is None:
+    print("No email-list found on the archive page", file=stderr)
+    exit(1)
 
 weekly_number = None
-for link in newsletter_links:
-    # This does get the correct number, it does look a bit hacky
-    newsletter_text = link.find("div", class_="email").find("div").find("div").get_text()
-    if "#" in newsletter_text:
-        weekly_number = newsletter_text.split("#")[1]
+for title in parentElement.find_all("div", class_="email-title"):
+    # e.g. "Hacker Newsletter #814"
+    match = re.search(r"#(\d+)", title.get_text())
+    if match:
+        weekly_number = match.group(1)
         break
 
-if weekly_number == None:
+if weekly_number is None:
+    print("No edition number found on the archive page", file=stderr)
     exit(1)
 
 # NOTE: Rigging is possible for getting editions that have been missed before, type number here to rig
