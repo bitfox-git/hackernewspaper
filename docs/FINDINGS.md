@@ -50,13 +50,16 @@ Per-edition pages are now linked as `/archive/<N>/`. The old `/archive/hacker-ne
 | B4 | `url_handlers.py:238` | No check for an empty `items` (private or removed video, bad key, quota) → `IndexError` kills the whole build. |
 | B5 | `url_handlers.py:296-297, 327` | GithubHandler: `metadata` can be `None` (→ `AttributeError`), `extract()` can return `None` (→ `TypeError` on `+`), `metadata.image` can be `None`. |
 | B6 | `generator.py:94-95` | `download_html` returns `None` on any error → `BeautifulSoup(None)` crash with no useful message. Bare `except:` hides causes everywhere. |
-| B7 | `prep_body` / template | **No LaTeX escaping.** Only `%` and `\` are stripped; `& # _ $ { } ^ ~` in titles/body/category names (`#Favorites`) produce TeX errors. This is masked by `-Z continue-on-errors`, so output can be silently damaged. |
-| B8 | `template.tex:92` | `c=="\#Favorites"` vs. the parsed `"#Favorites"`; needs checking whether the Favorites layout ever triggers. |
+| B7 | `prep_body` / template | ~~No LaTeX escaping~~ **Corrected after a local build:** `latexbuild` escapes `\VAR{}` output (`\#`, `\&`, `\_`), and #814 compiled with 0 TeX errors. Remaining: emoji and some Greek glyphs are missing from TeX Gyre Pagella (warnings only). |
+| B8 | `template.tex:92` | ~~Favorites layout may never trigger~~ **Corrected:** it does trigger (verified in the #814 PDF). |
 | B9 | `generator.py:64` | Category text isn't stripped: #773 yields `'\n\n    #\n  \n  Sponsor\n'`. The README's "sponsor parsing is off" item. |
 | B10 | `url_handlers.py:117` | `read()` opens JSON without `encoding="utf-8"` (breaks on Windows). |
 | B11 | `YoutubeHandler.test` | Only `https://www.youtube.com/watch?v=` matches; `youtu.be`, `/shorts/`, `m.youtube`, Vimeo fall through to a screenshot. |
 | B12 | `PDFHandler` | No thumbnail (open issue [#1 Add PDF support](https://github.com/bitfox-git/hackernewspaper/issues/1)). |
 | B13 | `config.py:10` | `environ["YOUTUBE_API_KEY"]` → `KeyError` if unset, so it can't run locally without a key. Default issue `675` plus a hard-coded URL hack. |
+| B14 | `add_stats` | trafilatura's metadata has a `comments` key that is `None`, so articles without HN stats (sponsors) show a `None` comments link. |
+| B15 | `splitFirstSentenceParagraph` | Splits on any `.` within 200 chars, including version numbers: "Python 3.15.0 … Python 3.15." / "0 is the newest…". |
+| B16 | `url_handlers.py` | `python-magic` segfaults on Windows (it clashes with `python-magic-bin`). **Fixed:** GIFs are now detected by magic bytes and the dependency is removed. |
 
 ### Robustness and performance
 - `download_html` starts a **new Selenium Chrome per article** (~60 per edition), while Playwright is already open. That's slow, and it's two browser stacks.
@@ -80,16 +83,21 @@ Per-edition pages are now linked as `/archive/<N>/`. The old `/archive/hacker-ne
 - README still mentions `pythumb`. Stale remote branches `curl`, `debug-711` (Aug 2024, superseded). `develop` == `main`.
 - GitHub: 1 open issue (#1 PDF support), 0 open PRs. Secret `YOUTUBE_API_KEY` exists (set 2024-10-09; validity unknown).
 
-## 4. Local system (Windows 11)
+## 4. Local end-to-end test (#814, 2026-10-19)
+- `generator.py 814`: 63/63 articles in ~10 min (Selenium opens Chrome for every article), 63 screenshots, no YouTube key so the fallback was exercised.
+- `tectonic -X compile`: ~3 min, **0 errors**, 27 pages, 13 MB. Warnings: 36 underfull / 6 overfull hboxes, plus missing emoji/Greek glyphs.
+- Visible issues: cookie/consent banners in many screenshots (Phase 3), `None` comments on sponsors (B14), sentence split on version numbers (B15).
+
+## 5. Local system (Windows 11)
 
 | Requirement | Status |
 |---|---|
 | Python ≥ 3.10 | ✅ 3.12.1 (also 3.11) |
-| Project venv + packages | ❌ none installed |
-| Playwright Chromium | ⚠️ only `chromium-1076` (old, other project); needs `playwright install chromium` |
-| Google Chrome (for Selenium) | ❌ not installed (removing Selenium removes this need) |
-| Tectonic (or XeLaTeX) | ❌ not installed (`winget install tectonic` / scoop / cargo) |
-| libmagic | ❌ needs `python-magic-bin` on Windows, or drop the dependency |
+| Project venv + packages | ✅ `.venv` (requirements.txt) |
+| Playwright Chromium | ✅ installed by `playwright install chromium` |
+| Google Chrome (for Selenium) | ✅ Chrome for Testing auto-downloaded by Selenium Manager (removing Selenium removes this need) |
+| Tectonic | ✅ 0.17.0 in `%LOCALAPPDATA%\Programs\tectonic` (not on PATH; winget has no package, so I used the GitHub release zip) |
+| libmagic | ✅ no longer needed (B16) |
 | `YOUTUBE_API_KEY` env var | ❌ not set |
 | TeX Gyre Pagella + FontAwesome 4 | fetched automatically by Tectonic |
 | git / gh | ✅ 2.40 / 2.89, logged in as `voslucas` with **admin** on `bitfox-git/hackernewspaper` |
