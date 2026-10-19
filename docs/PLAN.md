@@ -17,13 +17,13 @@ Work happens on `develop` → PR to `main` (the workflow runs from `main`).
 
 **Done when:** a manual run publishes Release #814 and a second run is green with "nothing to do".
 
-## Phase 1 – Backfill #773–#813
-1. Add a `workflow_dispatch` input `edition` (optional), so one run builds a specific edition.
-2. Replace "latest vs. highest tag" with **"all editions on the archive page that have no release"**, built in a matrix (max ~4 parallel) or sequentially. That makes future misses self-heal.
-3. Release order: create older editions first, or pass `makeLatest: false` for backfilled ones so #814 stays "Latest".
-4. Change the cron to weekly (e.g. Fri/Sat 06:00 UTC + a Sunday retry). Add a keep-alive (or rely on weekly release commits/tags) so the 60-day inactivity disable can't recur.
+## Phase 1 – Backfill #773–#813 ✅ (2026-10-19)
+1. ✅ A `workflow_dispatch` input `edition` builds one specific edition.
+2. ✅ A `detect` job lists every edition from `BACKFILL_FROM` (773) up to the latest one that has **no release tag**, capped at `MAX_EDITIONS` (50). A matrix `build` job then builds them (max 4 parallel, fail-fast off), so future misses self-heal. Older historic gaps (666, 677, 692, 698, 700, 728) are left alone because of the floor.
+3. ✅ `makeLatest` is true only for the newest edition, so backfilled releases never take "Latest" from it (verified with #813: #814 stayed Latest). Backfilled releases still appear above #814 in the release list, because GitHub sorts by creation date.
+4. ✅ Scheduled runs call the workflow `enable` API, which resets GitHub's 60-day inactivity timer. I kept the daily cron: no-op days are green now, and a missed Friday is picked up the next morning.
 
-**Done when:** releases #773–#814 exist, and deleting one release makes the next run rebuild it.
+To rebuild an edition, delete its release **and its tag** (detection is tag-based), or dispatch with `edition=<N>`.
 
 ## Phase 2 – Robustness and tests
 1. **TeX warnings** (B7): latexbuild already escapes, and #814 compiles with 0 errors. Add an emoji-capable fallback font (or strip emoji), then drop `-Z continue-on-errors` so real TeX errors fail the build.
@@ -77,7 +77,6 @@ py -3.12 -m venv .venv
 Set `YOUTUBE_API_KEY` (and later `ANTHROPIC_API_KEY`) as user environment variables, then run `python generator.py 814` and `tectonic -X compile output.tex`.
 
 ## Open questions
-- Should backfilled releases be marked "Latest", or should #814 stay on top?
-- Is the `YOUTUBE_API_KEY` secret still valid, and who owns the Google Cloud project?
+- Who owns the Google Cloud project behind `YOUTUBE_API_KEY`? (The key itself still works: #813 built 4 YouTube items in CI.)
 - Who pays for and owns the `ANTHROPIC_API_KEY` for summaries (Bitfox org secret)?
 - OK to delete the stale `curl` and `debug-711` branches?
