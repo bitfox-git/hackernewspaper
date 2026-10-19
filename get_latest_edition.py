@@ -20,28 +20,30 @@ def fetch(url):
         return None
 
 
-html = fetch(HACKERNEWSLETTER_URL)
-if html is None:
-    exit(1)
+def parse_latest_edition(html):
+    """Return the newest edition number on the archive page as a string, or None."""
+    soup = BeautifulSoup(html, "html.parser")
 
-soup = BeautifulSoup(html, "html.parser")
+    parentElement = soup.find("div", class_="email-list")
+    if parentElement is None:
+        print("No email-list found on the archive page", file=stderr)
+        return None
 
-parentElement = soup.find("div", class_="email-list")
-if parentElement is None:
-    print("No email-list found on the archive page", file=stderr)
-    exit(1)
+    for title in parentElement.find_all("div", class_="email-title"):
+        # e.g. "Hacker Newsletter #814"
+        match = re.search(r"#(\d+)", title.get_text())
+        if match:
+            return match.group(1)
 
-weekly_number = None
-for title in parentElement.find_all("div", class_="email-title"):
-    # e.g. "Hacker Newsletter #814"
-    match = re.search(r"#(\d+)", title.get_text())
-    if match:
-        weekly_number = match.group(1)
-        break
-
-if weekly_number is None:
     print("No edition number found on the archive page", file=stderr)
-    exit(1)
+    return None
 
-# NOTE: Rigging is possible for getting editions that have been missed before, type number here to rig
-print(weekly_number)
+
+if __name__ == "__main__":
+    html = fetch(HACKERNEWSLETTER_URL)
+    weekly_number = parse_latest_edition(html) if html is not None else None
+    if weekly_number is None:
+        exit(1)
+
+    # NOTE: Rigging is possible for getting editions that have been missed before, type number here to rig
+    print(weekly_number)
