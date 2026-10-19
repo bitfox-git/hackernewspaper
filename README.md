@@ -13,8 +13,21 @@ I :heart: the hacker**news**letter. But I also cannot remember the links I've al
 But ended up with much more....
 
 ## Screenshots
-I use `playwright` to generate screenshots of the links.
-Or `pythumb` in case of a YouTube link, to get the main thumb of the video.
+I use `playwright` to generate screenshots of the links (and to download their html).
+YouTube links use the YouTube Data API thumbnail and description when a `YOUTUBE_API_KEY` is set, otherwise they get a screenshot too.
+
+## Running locally
+Python 3.11+ and [Tectonic](https://tectonic-typesetting.github.io/) are needed.
+```bash
+python -m venv .venv
+.venv/bin/pip install -r requirements.txt -r requirements-dev.txt   # Windows: .venv\Scripts\pip
+.venv/bin/playwright install chromium
+.venv/bin/python generator.py 814     # writes output.tex, caches downloads in dist/814/
+tectonic -X compile output.tex        # writes output.pdf
+.venv/bin/python -m pytest            # parser and handler tests, no network needed
+```
+In GitHub Actions the `main.yml` workflow builds every missing edition daily, a single one can be (re)built with the `edition` input of a manual run.
+See [docs/FINDINGS.md](docs/FINDINGS.md) and [docs/PLAN.md](docs/PLAN.md) for known issues and the roadmap.
 
 ## Credits
 Praise and credits for [Kale Davis](http://www.kaledavis.com), as he is doing all the hard work of handpicking/organizing the articles each week. 
@@ -24,7 +37,7 @@ Disclaimer: Hackernewsletter and Hackernewspaper are not affiliated with Y Combi
 ## Want to help?
 I'm not a Latex expert. And there are also a lot of nice to have refinements to think of:
 - [ ] Parsing the top content (some times Kale leaves a message) on the top of his newsletter, is not done. 
-- [ ] Parsing the sponsor content is sometimes off..
+- [X] Parsing the sponsor content is sometimes off.. (empty sponsor sections are dropped)
 - [ ] Nicer output , more layouts in the template
 - [ ] Solve the GDPR Cookie problems on some screenshot. 
 - [ ] Better text formatting. Maybe with the help of a LLM? 

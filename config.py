@@ -1,13 +1,14 @@
-import sys
 from os import environ
-
-#read the first argument from the command line and use it as the issue number
-if len(sys.argv) > 1:
-    ISSUE = sys.argv[1]
-else:
-    sys.exit("Usage: python generator.py <issue number>")
 
 # optional, without a key YouTube links are handled like any other link (screenshot)
 YOUTUBE_API_KEY = environ.get("YOUTUBE_API_KEY", "")
 
-asset_dir = f"dist/{ISSUE}/"
+# set by configure(), the edition being built and where its downloads are cached
+ISSUE = None
+asset_dir = None
+
+
+def configure(issue):
+    global ISSUE, asset_dir
+    ISSUE = str(issue)
+    asset_dir = f"dist/{ISSUE}/"

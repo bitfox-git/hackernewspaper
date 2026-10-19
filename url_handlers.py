@@ -1,54 +1,71 @@
+import logging
 import os , re
 import urllib.request
 import urllib.parse
 import urllib3
 from trafilatura import extract, extract_metadata
 from fake_useragent import UserAgent
-from config import asset_dir, YOUTUBE_API_KEY
+import config
 import json
 from pypdf import PdfReader
 from PIL import Image
-from selenium import webdriver
+
+log = logging.getLogger("hackernewspaper")
 
 ua = UserAgent()
 
-# download the html from a given url, renewed function, not as fast but way more reliable, as this will later be triggered by a scheduled task reliability is preferred
-def download_html(url):
+PAGE_TIMEOUT_MS = 30000
+
+# visit url in a new page of the (Playwright) browser, optionally take a screenshot,
+# and return the html. A slow page is still captured after the timeout.
+def visit(url, browser, screenshot=None):
+    page = browser.new_page()
     try:
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
-        browser = webdriver.Chrome(options=options)
-        browser.get(url)
-        html = browser.page_source
-        browser.close()
-        return html
-    except:
+        try:
+            page.goto(url, timeout=PAGE_TIMEOUT_MS, wait_until="load")
+        except Exception as e:
+            log.warning("Loading %s did not finish: %s", url, e)
+        if screenshot is not None:
+            try:
+                #TODO Solve the cookie accept problem
+                page.screenshot(path=screenshot, timeout=PAGE_TIMEOUT_MS)
+            except Exception as e:
+                log.warning("Screenshot of %s failed: %s", url, e)
+        return page.content()
+    finally:
+        page.close()
+
+# download the html from a given url
+def download_html(url, browser):
+    try:
+        return visit(url, browser)
+    except Exception as e:
+        log.warning("Downloading %s failed: %s", url, e)
         return None
 
-#check if url is a youtube url using the regex ^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+
-def is_youtube_url(url):
-    regex = "^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+"
-    return re.match(regex, url)
+def write_html(index, sitecontent):
+    with open(f'{config.asset_dir}{index}.html', "w", encoding="utf-8") as f:
+        f.write(sitecontent)
 
 # load or download art.mainurl contents
-def loadordownload(index, art):
-    fname = f'{asset_dir}{index}.html'
+def loadordownload(index, art, browser):
+    fname = f'{config.asset_dir}{index}.html'
     if os.path.isfile(fname):
         with open(fname, encoding="utf-8") as f:
             sitecontent = f.read()
     else:
-        sitecontent = download_html(art.mainurl)
+        sitecontent = download_html(art.mainurl, browser)
         if sitecontent is None:
             sitecontent = ""
-        with open(fname, "w", encoding="utf-8") as f:
-            f.write(sitecontent)
+        write_html(index, sitecontent)
     return sitecontent
 
 def splitFirstSentenceParagraph(data):
-    # find the indexes of all occurences of a dot, question mark or exclamation mark
-    dots = [i for i, ltr in enumerate(data) if ltr in [".", "?", "!"] and i<200]
+    # find the indexes of all occurences of a dot, question mark or exclamation mark,
+    # a dot between two digits (3.15.0) does not end a sentence
+    dots = [i for i, ltr in enumerate(data) if ltr in [".", "?", "!"] and i<200
+            and not (ltr == "." and 0 < i < len(data) - 1 and data[i-1].isdigit() and data[i+1].isdigit())]
     # find the highest index that is smaller than 200 and make sure the max is not taken over an empty set
-    #dots2 = [i for i in dots if i < 200]
     if (len(dots) > 0):
         firstdot = max(dots)
         if firstdot > 10:
@@ -61,13 +78,17 @@ def removeEmptyLines(data):
     lines = [line for line in lines if line.strip() != ""]
     return "\n".join(lines)
 
-#generate screenshot of the url using playwright
-def generate_screenshot(index, url, browser):
-    page = browser.new_page()
-    page.goto(url)
-    #TODO Solve the cookie accept problem 
-    page.screenshot(path=f'{asset_dir}{index}.png')
-    page.close()
+# last resort when every handler failed: title and link only
+def minimal_item(art):
+    return {
+        "title": art.text,
+        "url": art.mainurl,
+        "image": "notfound.png",
+        "category": art.category,
+        "firstline": None,
+        "content": "",
+        "properties": [],
+    }
 
 class UrlHandler(): 
     def test(self, art) -> bool:
@@ -81,8 +102,9 @@ def isValidDictItem(item, dict):
 # map the site to a fontawesome symbol
 # https://www.comet.com/standardizing-experiment/eda-hackernews-data/reports/standardizing-the-experiment-exploring-the-hackernews-dataset
 def faSymbolPerHostname(hostname: str):
+    hostname = hostname.removeprefix("www.")
     match hostname:
-        case "flikr.com": return "Flikr"
+        case "flickr.com": return "Flickr"
         case "github.com": return "Github"
         case "medium.com": return "Medium"
         case "twitter.com": return "Twitter"
@@ -95,7 +117,6 @@ def faSymbolPerHostname(hostname: str):
         case "youtu.be": return "Youtube"
         # Github
         case "github.io": return "Github"
-        case "github.com": return "Github"
         case "github.blog": return "Github"
         # News Papers
         case "theguardian.com": return "NewspaperO"
@@ -111,13 +132,13 @@ def faSymbolPerHostname(hostname: str):
         case _ : return "Globe"
 
 def write(index:int, data):
-    with open(f'{asset_dir}{index}.json', 'w', encoding='utf-8') as f:
+    with open(f'{config.asset_dir}{index}.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 def read(index:int):
     try:
-        with open(f'{asset_dir}{index}.json') as data_file:
+        with open(f'{config.asset_dir}{index}.json', encoding='utf-8') as data_file:
             return json.load(data_file)
-    except:
+    except (OSError, ValueError):
         return None
 
 def download_bin(url):
@@ -125,11 +146,12 @@ def download_bin(url):
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
             return response.read()
-    except:
+    except Exception as e:
+        log.warning("Downloading %s failed: %s", url, e)
         return None
 
 def cached_download(url:str, index:int, ext:str):
-    fname = f'{asset_dir}{index}.{ext}'
+    fname = f'{config.asset_dir}{index}.{ext}'
     if os.path.isfile(fname):
         return True
     else:
@@ -153,7 +175,11 @@ def get_url_extension(url):
     return os.path.splitext(path)[1]
 
 
-def get_metadata(title: str, metadatadict: dict = {}) -> dict:
+# votes and comments come from the newsletter link title, e.g. "Votes: 1872 Comments: 447"
+def get_metadata(title: str, metadatadict: dict | None = None) -> dict:
+    metadatadict = dict(metadatadict or {})
+    # trafilatura has its own (unrelated) comments field, only the HN numbers are used
+    metadatadict.pop("comments", None)
     votes = 0
     comments = 0
     if title is not None:
@@ -213,23 +239,24 @@ def prep_body(text: str | None):
 
     return firstSentence, text
 
+def youtube_video_id(url):
+    return urllib.parse.parse_qs(urllib.parse.urlparse(url).query)["v"][0]
+
 class YoutubeHandler():
     def test(self, art):
         # without an API key fall through to the DefaultHandler (screenshot)
-        return YOUTUBE_API_KEY != "" and art.mainurl.startswith("https://www.youtube.com/watch?v=")
+        return config.YOUTUBE_API_KEY != "" and art.mainurl.startswith("https://www.youtube.com/watch?v=")
 
     def work(self, index, art, browser):
         video_info = read(index)
         if video_info is None:
-            # Sometimes there are parameters which means it will match pattern 1 (the & at the end), otherwise it will match pattern 2 (no &)
-            try:
-                video_id = re.search('v=(.+?)&', art.mainurl).group(1)
-            except:
-                video_id = re.search('v=(.+?)', art.mainurl).group(1)
+            video_id = youtube_video_id(art.mainurl)
             with urllib3.PoolManager() as http:
-                response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={YOUTUBE_API_KEY}")
+                response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={config.YOUTUBE_API_KEY}")
                 video_info = json.loads(response.data)
-            write(index, video_info)
+            # do not cache errors (quota, key) so a rerun tries again
+            if video_info.get("items"):
+                write(index, video_info)
 
 
         metadatadict = get_metadata(art.title)
@@ -246,10 +273,10 @@ class YoutubeHandler():
 
         image = 'notfound.png'
         if(cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg")):
-            image = f"{asset_dir}{index}.jpg"
+            image = f"{config.asset_dir}{index}.jpg"
             # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
             im = Image.open(image)
-            image = f"{asset_dir}{index}.png"
+            image = f"{config.asset_dir}{index}.png"
             im.save(image)
 
         newsproperties.append(
@@ -297,7 +324,7 @@ class GithubHandler:
     def work(self, index, art, browser):
         # TODO clean this up
 
-        sitecontent = loadordownload(index, art)
+        sitecontent = loadordownload(index, art, browser)
         metadata = extract_metadata(sitecontent)
         if metadata is None:
             # page could not be downloaded or parsed, fall back to a screenshot
@@ -332,8 +359,14 @@ class GithubHandler:
         add_stats(newsproperties, metadatadict, art.suburl)
 
         image = "notfound.png"
+        png = f"{config.asset_dir}{index}.png"
         if metadata.image and cached_download(metadata.image, index, "png"):
-            image = f"{asset_dir}{index}.png"
+            image = png
+        else:
+            # no (downloadable) social image, e.g. rate limited, use a screenshot of the repo
+            visit(art.mainurl, browser, screenshot=png)
+            if os.path.isfile(png):
+                image = png
 
         return {
             "title": art.text,
@@ -359,7 +392,7 @@ class PDFHandler:
         data = ""
 
         if cached_download(art.mainurl, index, "pdf"):
-            pdf = f"{asset_dir}{index}.pdf"
+            pdf = f"{config.asset_dir}{index}.pdf"
             reader = PdfReader(pdf)
             number_of_pages = len(reader.pages)
             page = reader.pages[0]
@@ -377,8 +410,8 @@ class PDFHandler:
 
         image = "notfound.png"
 
-        if os.path.isfile(f"{asset_dir}{index}.png"):
-            image = f"{asset_dir}{index}.png"
+        if os.path.isfile(f"{config.asset_dir}{index}.png"):
+            image = f"{config.asset_dir}{index}.png"
 
         newsproperties = []
 
@@ -399,19 +432,13 @@ class DefaultHandler(UrlHandler):
     def test(self, art):
         return True
     def work(self, index, art, browser):
-        # TODO clean this up
-
-        #if file exists skip
-        if not os.path.isfile(f"{asset_dir}{index}.png") and not os.path.isfile(
-            f"{asset_dir}{index}.jpg"
-        ):
-            try:
-                generate_screenshot(index, art.mainurl, browser)
-            except:  # noqa: E722
-                # TODO : create a timeout/404 default jpg.
-                pass
-
-        sitecontent = loadordownload(index, art)
+        # one page visit gives both the screenshot and the html, both are cached
+        png = f"{config.asset_dir}{index}.png"
+        if not os.path.isfile(png) and not os.path.isfile(f"{config.asset_dir}{index}.jpg"):
+            sitecontent = visit(art.mainurl, browser, screenshot=png)
+            write_html(index, sitecontent)
+        else:
+            sitecontent = loadordownload(index, art, browser)
         data  = extract(sitecontent)
 
         firstSentence, data = prep_body(data)
@@ -425,8 +452,8 @@ class DefaultHandler(UrlHandler):
         # fall back 
         image = "notfound.png"
         #image url can be either a png or a jpg
-        if os.path.isfile(f'{asset_dir}{index}.png'):
-            image = f"{asset_dir}{index}.png"
+        if os.path.isfile(f'{config.asset_dir}{index}.png'):
+            image = f"{config.asset_dir}{index}.png"
 
         #potential interested metadata fields are: author, date, image, sitename
         #not used , but for future reference : 

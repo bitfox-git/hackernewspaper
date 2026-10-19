@@ -16,6 +16,7 @@ output.pdf
 
 !notfound.png
 !bflogo.jpg
+!tests/fixtures/*.html
 
 # Distribution / packaging
 .Python
