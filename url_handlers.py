@@ -236,6 +236,10 @@ class YoutubeHandler():
 
         newsproperties = []
 
+        if not video_info.get("items"):
+            # video removed/private or an API error (quota, key), fall back to a screenshot
+            return DefaultHandler().work(index, art, browser)
+
         metadata_list = video_info["items"][0]["snippet"]
 
         firstSentence, data = prep_body(metadata_list["description"])
