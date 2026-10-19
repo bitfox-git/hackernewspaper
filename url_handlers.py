@@ -295,7 +295,10 @@ class GithubHandler:
 
         sitecontent = loadordownload(index, art)
         metadata = extract_metadata(sitecontent)
-        data = metadata.description + " " + extract(sitecontent)
+        if metadata is None:
+            # page could not be downloaded or parsed, fall back to a screenshot
+            return DefaultHandler().work(index, art, browser)
+        data = (metadata.description or "") + " " + (extract(sitecontent) or "")
 
         firstSentence, data = prep_body(data)
 
@@ -325,7 +328,7 @@ class GithubHandler:
         add_stats(newsproperties, metadatadict, art.suburl)
 
         image = "notfound.png"
-        if cached_download(metadata.image, index, "png"):
+        if metadata.image and cached_download(metadata.image, index, "png"):
             image = f"{asset_dir}{index}.png"
 
         return {
