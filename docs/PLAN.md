@@ -20,8 +20,9 @@ Work happens on `develop` → PR to `main` (the workflow runs from `main`).
 ## Phase 1 – Backfill #773–#813 ✅ (2026-10-19)
 1. ✅ A `workflow_dispatch` input `edition` builds one specific edition.
 2. ✅ A `detect` job lists every edition from `BACKFILL_FROM` (773) up to the latest one that has **no release tag**, capped at `MAX_EDITIONS` (50). A matrix `build` job then builds them (max 4 parallel, fail-fast off), so future misses self-heal. Older historic gaps (666, 677, 692, 698, 700, 728) are left alone because of the floor.
-3. ✅ `makeLatest` is true only for the newest edition, so backfilled releases never take "Latest" from it (verified with #813: #814 stayed Latest). Backfilled releases still appear above #814 in the release list, because GitHub sorts by creation date.
+3. ✅ `makeLatest` is `true` only for the newest edition and `false` for backfilled ones. Lesson learned: #814 had been created with the action's default `legacy` mode, so it was never *explicitly* Latest, and GitHub moved Latest to #812 during the backfill. I fixed it by PATCHing #814 with `make_latest=true`. From now on every newest edition is explicitly Latest, so this can't recur. Backfilled releases still appear above #814 in the release list, because GitHub sorts by creation date.
 4. ✅ Scheduled runs call the workflow `enable` API, which resets GitHub's 60-day inactivity timer. I kept the daily cron: no-op days are green now, and a missed Friday is picked up the next morning.
+5. ✅ Backfill results: 38/40 built in the first run. #778 (B5, GithubHandler without metadata) and #811 (B4, YouTube video without items) failed, were fixed with a fallback to the screenshot handler, and the next run without input picked up exactly those two (self-heal verified).
 
 To rebuild an edition, delete its release **and its tag** (detection is tag-based), or dispatch with `edition=<N>`.
 

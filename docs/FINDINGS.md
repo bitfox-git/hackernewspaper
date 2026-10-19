@@ -47,8 +47,8 @@ Per-edition pages are now linked as `/archive/<N>/`. The old `/archive/hacker-ne
 | B1 | `get_latest_edition.py:29` | Breaks on the new archive markup (see above). **Blocker.** |
 | B2 | `url_handlers.py:156` | `get_metadata(title, metadatadict={})` uses a **mutable default**: votes/comments from one YouTube/PDF article carry over to later ones that have none. |
 | B3 | `url_handlers.py:227` | YouTube fallback regex `v=(.+?)` captures **only one character** when the URL has no `&`. It works today only because every link has `&utm_source…`. |
-| B4 | `url_handlers.py:238` | No check for an empty `items` (private or removed video, bad key, quota) → `IndexError` kills the whole build. |
-| B5 | `url_handlers.py:296-297, 327` | GithubHandler: `metadata` can be `None` (→ `AttributeError`), `extract()` can return `None` (→ `TypeError` on `+`), `metadata.image` can be `None`. |
+| B4 | `url_handlers.py:238` | No check for an empty `items` (private or removed video, bad key, quota) → `IndexError` kills the whole build. **Hit in #811, fixed:** falls back to a screenshot. |
+| B5 | `url_handlers.py:296-297, 327` | GithubHandler: `metadata` can be `None` (→ `AttributeError`), `extract()` can return `None` (→ `TypeError` on `+`), `metadata.image` can be `None`. **Hit in #778, fixed:** falls back to a screenshot. |
 | B6 | `generator.py:94-95` | `download_html` returns `None` on any error → `BeautifulSoup(None)` crash with no useful message. Bare `except:` hides causes everywhere. |
 | B7 | `prep_body` / template | ~~No LaTeX escaping~~ **Corrected after a local build:** `latexbuild` escapes `\VAR{}` output (`\#`, `\&`, `\_`), and #814 compiled with 0 TeX errors. Remaining: emoji and some Greek glyphs are missing from TeX Gyre Pagella (warnings only). |
 | B8 | `template.tex:92` | ~~Favorites layout may never trigger~~ **Corrected:** it does trigger (verified in the #814 PDF). |
