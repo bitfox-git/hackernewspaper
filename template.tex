@@ -60,6 +60,72 @@
   BoldItalicFont = *-bolditalic,
 ]
 
+% Fallback fonts for characters TeX Gyre Pagella does not have (emoji, symbols,
+% Greek/Cyrillic, CJK, ...). XeTeX interchar classes switch to the fallback font
+% at the start of a run of such characters and back at its end.
+\newfontfamily\fbserif{FreeSerif.otf}
+\newfontfamily\fbcjk{FandolSong-Regular.otf}
+\newfontfamily\fbhangul{UnBatang.ttf}
+\newfontfamily\fbemoji{NotoEmoji-Regular.ttf}
+
+\XeTeXinterchartokenstate=1
+\newXeTeXintercharclass\fbserifclass
+\newXeTeXintercharclass\fbcjkclass
+\newXeTeXintercharclass\fbhangulclass
+\newXeTeXintercharclass\fbemojiclass
+
+\newcount\fbcount
+% \fbrange{class}{first}{last}
+\newcommand\fbrange[3]{\fbcount=#2\relax
+  \loop\XeTeXcharclass\fbcount=#1\relax\ifnum\fbcount<#3\advance\fbcount by 1\repeat}
+\fbrange\fbserifclass{"0250}{"02FF}  % IPA, modifier letters
+\fbrange\fbserifclass{"0370}{"03FF}  % Greek
+\fbrange\fbserifclass{"1F00}{"1FFF}  % Greek extended
+\fbrange\fbserifclass{"0400}{"04FF}  % Cyrillic
+\fbrange\fbserifclass{"0E00}{"0E7F}  % Thai
+\fbrange\fbserifclass{"2070}{"209F}  % super- and subscripts
+\fbrange\fbserifclass{"20D0}{"20FF}  % combining marks for symbols
+\fbrange\fbserifclass{"2139}{"2139}  % information source
+\fbrange\fbserifclass{"2190}{"21FF}  % arrows
+\fbrange\fbserifclass{"2300}{"23FF}  % misc technical
+\fbrange\fbserifclass{"2460}{"27BF}  % enclosed, box drawing, shapes, symbols, dingbats
+\fbrange\fbserifclass{"29F0}{"29FF}  % misc math symbols
+\fbrange\fbserifclass{"2B00}{"2BFF}  % misc symbols and arrows
+\fbrange\fbserifclass{"1D400}{"1D7FF} % math alphanumerics
+\fbrange\fbcjkclass{"3000}{"30FF}    % CJK punctuation, kana
+\fbrange\fbcjkclass{"4E00}{"9FFF}    % CJK ideographs
+\fbrange\fbcjkclass{"FF00}{"FFEF}    % fullwidth forms
+\fbrange\fbhangulclass{"1100}{"11FF} % Hangul jamo
+\fbrange\fbhangulclass{"3130}{"318F}
+\fbrange\fbhangulclass{"AC00}{"D7AF} % Hangul syllables
+\fbrange\fbemojiclass{"1F000}{"1FAFF} % emoji
+
+% \fbfont{class}{font}: enter the font when a run starts (after a normal character
+% or a boundary), leave it when the run ends
+\newcommand\fbfont[2]{%
+  \XeTeXinterchartoks 0 #1 = {\begingroup#2}%
+  \XeTeXinterchartoks 4095 #1 = {\begingroup#2}%
+  \XeTeXinterchartoks #1 0 = {\endgroup}%
+  \XeTeXinterchartoks #1 4095 = {\endgroup}}
+% \fbswitch{from class}{to class}{font}: one fallback run directly followed by another
+\newcommand\fbswitch[3]{\XeTeXinterchartoks #1 #2 = {\endgroup\begingroup#3}}
+\fbfont\fbserifclass\fbserif
+\fbfont\fbcjkclass\fbcjk
+\fbfont\fbhangulclass\fbhangul
+\fbfont\fbemojiclass\fbemoji
+\fbswitch\fbserifclass\fbcjkclass\fbcjk
+\fbswitch\fbserifclass\fbhangulclass\fbhangul
+\fbswitch\fbserifclass\fbemojiclass\fbemoji
+\fbswitch\fbcjkclass\fbserifclass\fbserif
+\fbswitch\fbcjkclass\fbhangulclass\fbhangul
+\fbswitch\fbcjkclass\fbemojiclass\fbemoji
+\fbswitch\fbhangulclass\fbserifclass\fbserif
+\fbswitch\fbhangulclass\fbcjkclass\fbcjk
+\fbswitch\fbhangulclass\fbemojiclass\fbemoji
+\fbswitch\fbemojiclass\fbserifclass\fbserif
+\fbswitch\fbemojiclass\fbcjkclass\fbcjk
+\fbswitch\fbemojiclass\fbhangulclass\fbhangul
+
 \begin{document}
 \thispagestyle{empty}
 % put LOGO 

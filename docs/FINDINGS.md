@@ -50,7 +50,7 @@ Per-edition pages are now linked as `/archive/<N>/`. The old `/archive/hacker-ne
 | B4 | `url_handlers.py:238` | No check for an empty `items` (private or removed video, bad key, quota) → `IndexError` kills the whole build. **Hit in #811, fixed:** falls back to a screenshot. |
 | B5 | `url_handlers.py:296-297, 327` | GithubHandler: `metadata` can be `None` (→ `AttributeError`), `extract()` can return `None` (→ `TypeError` on `+`), `metadata.image` can be `None`. **Hit in #778, fixed:** falls back to a screenshot. |
 | B6 | `generator.py:94-95` | `download_html` returns `None` on any error → `BeautifulSoup(None)` crash with no useful message. Bare `except:` hides causes everywhere. |
-| B7 | `prep_body` / template | ~~No LaTeX escaping~~ **Corrected after a local build:** `latexbuild` escapes `\VAR{}` output (`\#`, `\&`, `\_`), and #814 compiled with 0 TeX errors. Remaining: emoji and some Greek glyphs are missing from TeX Gyre Pagella (warnings only). |
+| B7 | `prep_body` / template | ~~No LaTeX escaping~~ **Corrected after a local build:** `latexbuild` escapes `\VAR{}` output (`\#`, `\&`, `\_`), and #814 compiled with 0 TeX errors. Missing glyphs (427 distinct over #773–#814) are **fixed** with fallback fonts (see PLAN Phase 2.1). The real TeX errors in #773/#774/#804/#811/#812 came from blank lines in titles and are fixed by title whitespace normalization. |
 | B8 | `template.tex:92` | ~~Favorites layout may never trigger~~ **Corrected:** it does trigger (verified in the #814 PDF). |
 | B9 | `generator.py:64` | Category text isn't stripped: #773 yields `'\n\n    #\n  \n  Sponsor\n'`. The README's "sponsor parsing is off" item. |
 | B10 | `url_handlers.py:117` | `read()` opens JSON without `encoding="utf-8"` (breaks on Windows). |

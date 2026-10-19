@@ -154,6 +154,22 @@ def build_paper(issue, browser):
     }
 
 
+# invisible characters that only end up as "missing character" warnings: variation
+# selectors, zero width / bidi controls, line and paragraph separators, private use,
+# the object replacement character and emoji skin tone modifiers
+INVISIBLE_CHARS = re.compile(
+    "[︀-️​-‏ -‮⁠-⁯-￼\U0001f3fb-\U0001f3ff]")
+
+def clean_text(value):
+    if isinstance(value, str):
+        return INVISIBLE_CHARS.sub("", value)
+    if isinstance(value, dict):
+        return {k: clean_text(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [clean_text(v) for v in value]
+    return value
+
+
 def render(dict_vals, path=PATH_OUTPUT_TEX):
     # Do the latex stuff, latexbuild escapes the template variables
     from latexbuild import render_latex_template
@@ -162,7 +178,7 @@ def render(dict_vals, path=PATH_OUTPUT_TEX):
     latexresult = render_latex_template(
         PATH_JINJA2,
         PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2,
-        dict_vals
+        clean_text(dict_vals)
         )
 
     # store latexresult in a file using utf8 encoding

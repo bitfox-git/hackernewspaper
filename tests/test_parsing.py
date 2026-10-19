@@ -177,6 +177,30 @@ def test_failing_handler_falls_back_to_default(monkeypatch):
     assert generator.process_article(0, Art(), browser=None) == {"title": "from default"}
 
 
+# --- text cleaning before rendering ---
+
+def test_clean_text_strips_invisible_characters():
+    # variation selector, zero width joiner, line separator, private use, skin tone
+    assert generator.clean_text("ok️ ❤‍\U0001f525 a b  \U0001f44b\U0001f3fb") == "ok ❤\U0001f525 ab  \U0001f44b"
+
+
+def test_clean_text_keeps_punctuation_and_scripts():
+    text = "– — “hi” … • Αθήνα Москва 中文 \U0001f680"
+    assert generator.clean_text(text) == text
+
+
+def test_clean_text_recurses():
+    data = {"a": ["x️", {"b": "y​"}], "n": 3, "none": None}
+    assert generator.clean_text(data) == {"a": ["x", {"b": "y"}], "n": 3, "none": None}
+
+
+def test_titles_have_no_line_breaks():
+    # a blank line inside \subsection{} was a TeX error in 773, 774, 804, 811 and 812
+    for name in ["edition-773.html", "edition-814.html"]:
+        articles, _ = generator.get_articles(generator.parse_html(fixture(name)))
+        assert all("\n" not in a.text and a.text == a.text.strip() for a in articles)
+
+
 def test_configure_sets_asset_dir():
     config.configure(814)
     assert config.ISSUE == "814"
