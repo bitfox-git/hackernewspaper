@@ -19,5 +19,10 @@ jobs:
       - name: Install Python packages
         run: python3 -m pip install -r requirements.txt -r requirements-dev.txt
 
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+
       - name: Run tests
         run: python3 -m pytest -v

@@ -23,12 +23,14 @@ PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2 = "template.tex"
 PATH_OUTPUT_TEX = "output.tex"
 
 # a regular desktop Chrome, headless Chromium's own user agent gets blocked by more sites
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+)
 
 
 # use BeautifulSoup to parse the html version of the newsletter
 def parse_html(html):
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
     return soup
 
 
@@ -40,9 +42,10 @@ def get_header(soup):
         return ""
     return header.p.get_text()
 
+
 def parse_header(header):
-    #header could be sometthing like a quote "The best way to predict the future is to invent it. // Alan Kay"
-    #the author is separated by // from the quote
+    # header could be sometthing like a quote "The best way to predict the future is to invent it. // Alan Kay"
+    # the author is separated by // from the quote
     header = " ".join(header.split())
     split = header.split("//")
     if len(split) == 2:
@@ -50,9 +53,11 @@ def parse_header(header):
     else:
         return header, ""
 
+
 # "\n\n    #\n  \n  Sponsor\n" -> "#Sponsor"
 def clean_category(text):
     return re.sub(r"^#\s+", "#", " ".join(text.split()))
+
 
 class article:
     def __init__(self, mainurl, title, text, subtext, suburl, category):
@@ -62,15 +67,17 @@ class article:
         self.subtext = subtext
         self.suburl = suburl
         self.category = category
+
     def __str__(self):
         return self.mainurl + "-" + self.title + "-" + self.text + "-" + self.subtext + "-" + self.suburl
 
+
 def get_articles(soup):
-    categories =[]
+    categories = []
     articles = []
 
     content = soup.find(id="content")
-    #all content starts with a h2
+    # all content starts with a h2
     for h2element in content.find_all("h2"):
         category = clean_category(h2element.get_text())
         found = 0
@@ -78,13 +85,12 @@ def get_articles(soup):
             if nextSibling.name == "h2":
                 break
             if nextSibling.name == "p":
-
                 a = nextSibling.find("a")
                 if a is not None:
                     mainurl = a.get("href")
                     title = a.get("title")
                     text = " ".join(a.get_text().split())
-                    subtext =""
+                    subtext = ""
                     suburl = ""
                     span = nextSibling.find("span")
                     if span is not None:
@@ -114,6 +120,7 @@ def download_edition(issue, browser):
 
 
 handlers = [YoutubeHandler(), PDFHandler(), GithubHandler(), DefaultHandler()]
+
 
 # one bad link never kills an edition: a failing handler falls back to the
 # DefaultHandler, and if that fails too the article is printed with title and link only
@@ -148,17 +155,17 @@ def build_paper(issue, browser):
     quoteLine, quoteAuthor = parse_header(get_header(soup))
 
     return {
-        'data': {"issue": issue, "quoteLine": quoteLine, "quoteAuthor": quoteAuthor},
-        'categories': categories,
-        'newsitems': newsitems,
+        "data": {"issue": issue, "quoteLine": quoteLine, "quoteAuthor": quoteAuthor},
+        "categories": categories,
+        "newsitems": newsitems,
     }
 
 
 # invisible characters that only end up as "missing character" warnings: variation
 # selectors, zero width / bidi controls, line and paragraph separators, private use,
 # the object replacement character and emoji skin tone modifiers
-INVISIBLE_CHARS = re.compile(
-    "[︀-️​-‏ -‮⁠-⁯-￼\U0001f3fb-\U0001f3ff]")
+INVISIBLE_CHARS = re.compile("[︀-️​-‏ -‮⁠-⁯-￼\U0001f3fb-\U0001f3ff]")
+
 
 def clean_text(value):
     if isinstance(value, str):
@@ -175,11 +182,7 @@ def render(dict_vals, path=PATH_OUTPUT_TEX):
     from latexbuild import render_latex_template
 
     log.info("PDF template creation started")
-    latexresult = render_latex_template(
-        PATH_JINJA2,
-        PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2,
-        clean_text(dict_vals)
-        )
+    latexresult = render_latex_template(PATH_JINJA2, PATH_TEMPLATE_RELATIVE_TO_PATH_JINJA2, clean_text(dict_vals))
 
     # store latexresult in a file using utf8 encoding
     with open(path, "w", encoding="utf-8") as f:

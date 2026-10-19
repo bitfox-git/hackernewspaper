@@ -1,5 +1,6 @@
 import logging
-import os , re
+import os
+import re
 import urllib.request
 import urllib.parse
 import urllib3
@@ -16,6 +17,7 @@ ua = UserAgent()
 
 PAGE_TIMEOUT_MS = 30000
 
+
 # visit url in a new page of the (Playwright) browser, optionally take a screenshot,
 # and return the html. A slow page is still captured after the timeout.
 def visit(url, browser, screenshot=None):
@@ -27,13 +29,14 @@ def visit(url, browser, screenshot=None):
             log.warning("Loading %s did not finish: %s", url, e)
         if screenshot is not None:
             try:
-                #TODO Solve the cookie accept problem
+                # TODO Solve the cookie accept problem
                 page.screenshot(path=screenshot, timeout=PAGE_TIMEOUT_MS)
             except Exception as e:
                 log.warning("Screenshot of %s failed: %s", url, e)
         return page.content()
     finally:
         page.close()
+
 
 # download the html from a given url
 def download_html(url, browser):
@@ -43,13 +46,15 @@ def download_html(url, browser):
         log.warning("Downloading %s failed: %s", url, e)
         return None
 
+
 def write_html(index, sitecontent):
-    with open(f'{config.asset_dir}{index}.html', "w", encoding="utf-8") as f:
+    with open(f"{config.asset_dir}{index}.html", "w", encoding="utf-8") as f:
         f.write(sitecontent)
+
 
 # load or download art.mainurl contents
 def loadordownload(index, art, browser):
-    fname = f'{config.asset_dir}{index}.html'
+    fname = f"{config.asset_dir}{index}.html"
     if os.path.isfile(fname):
         with open(fname, encoding="utf-8") as f:
             sitecontent = f.read()
@@ -60,23 +65,31 @@ def loadordownload(index, art, browser):
         write_html(index, sitecontent)
     return sitecontent
 
+
 def splitFirstSentenceParagraph(data):
     # find the indexes of all occurences of a dot, question mark or exclamation mark,
     # a dot between two digits (3.15.0) does not end a sentence
-    dots = [i for i, ltr in enumerate(data) if ltr in [".", "?", "!"] and i<200
-            and not (ltr == "." and 0 < i < len(data) - 1 and data[i-1].isdigit() and data[i+1].isdigit())]
+    dots = [
+        i
+        for i, ltr in enumerate(data)
+        if ltr in [".", "?", "!"]
+        and i < 200
+        and not (ltr == "." and 0 < i < len(data) - 1 and data[i - 1].isdigit() and data[i + 1].isdigit())
+    ]
     # find the highest index that is smaller than 200 and make sure the max is not taken over an empty set
-    if (len(dots) > 0):
+    if len(dots) > 0:
         firstdot = max(dots)
         if firstdot > 10:
-            return data[:firstdot+1], data[firstdot+1:]
+            return data[: firstdot + 1], data[firstdot + 1 :]
     return None, data
+
 
 def removeEmptyLines(data):
     # remove empty lines
     lines = data.split("\n")
     lines = [line for line in lines if line.strip() != ""]
     return "\n".join(lines)
+
 
 # last resort when every handler failed: title and link only
 def minimal_item(art):
@@ -90,59 +103,69 @@ def minimal_item(art):
         "properties": [],
     }
 
-class UrlHandler(): 
+
+class UrlHandler:
     def test(self, art) -> bool:
-        return False;
+        return False
+
     def work(self, index, art):
         pass
+
 
 def isValidDictItem(item, dict):
     return item in dict and dict[item] is not None and dict[item] != ""
 
+
 # map the site to a fontawesome symbol
 # https://www.comet.com/standardizing-experiment/eda-hackernews-data/reports/standardizing-the-experiment-exploring-the-hackernews-dataset
-def faSymbolPerHostname(hostname: str):
-    hostname = hostname.removeprefix("www.")
-    match hostname:
-        case "flickr.com": return "Flickr"
-        case "github.com": return "Github"
-        case "medium.com": return "Medium"
-        case "twitter.com": return "Twitter"
-        case "nytimes.com": return "NewspaperO"
-        case "wikipedia.org": return "WikipediaW"
-        case "reddit.com": return "Reddit"
-        case "ycombinator.com": return "YCombinator"
-        # Youtube
-        case "youtube.com": return "Youtube"
-        case "youtu.be": return "Youtube"
-        # Github
-        case "github.io": return "Github"
-        case "github.blog": return "Github"
-        # News Papers
-        case "theguardian.com": return "NewspaperO"
-        case "dev.to": return "NewspaperO"
-        case "techcrunch.com": return "NewspaperO"
-        case "wsj.com": return "NewspaperO"
-        case "arstechnica.com": return "NewspaperO"
-        case "theverge.com": return "NewspaperO"
-        case "bbc.com": return "NewspaperO"
-        case "bloomberg.com": return "NewspaperO"
-        case "reuters.com": return "NewspaperO"
-        # Globe for others
-        case _ : return "Globe"
+FA_SYMBOLS = {
+    "flickr.com": "Flickr",
+    "medium.com": "Medium",
+    "twitter.com": "Twitter",
+    "wikipedia.org": "WikipediaW",
+    "reddit.com": "Reddit",
+    "ycombinator.com": "YCombinator",
+    # Youtube
+    "youtube.com": "Youtube",
+    "youtu.be": "Youtube",
+    # Github
+    "github.com": "Github",
+    "github.io": "Github",
+    "github.blog": "Github",
+    # News Papers
+    "nytimes.com": "NewspaperO",
+    "theguardian.com": "NewspaperO",
+    "dev.to": "NewspaperO",
+    "techcrunch.com": "NewspaperO",
+    "wsj.com": "NewspaperO",
+    "arstechnica.com": "NewspaperO",
+    "theverge.com": "NewspaperO",
+    "bbc.com": "NewspaperO",
+    "bloomberg.com": "NewspaperO",
+    "reuters.com": "NewspaperO",
+}
 
-def write(index:int, data):
-    with open(f'{config.asset_dir}{index}.json', 'w', encoding='utf-8') as f:
+
+def faSymbolPerHostname(hostname: str):
+    # Globe for others
+    return FA_SYMBOLS.get(hostname.removeprefix("www."), "Globe")
+
+
+def write(index: int, data):
+    with open(f"{config.asset_dir}{index}.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-def read(index:int):
+
+
+def read(index: int):
     try:
-        with open(f'{config.asset_dir}{index}.json', encoding='utf-8') as data_file:
+        with open(f"{config.asset_dir}{index}.json", encoding="utf-8") as data_file:
             return json.load(data_file)
     except (OSError, ValueError):
         return None
 
+
 def download_bin(url):
-    header = {'User-Agent':str(ua.random)}
+    header = {"User-Agent": str(ua.random)}
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=header)) as response:
             return response.read()
@@ -150,8 +173,9 @@ def download_bin(url):
         log.warning("Downloading %s failed: %s", url, e)
         return None
 
-def cached_download(url:str, index:int, ext:str):
-    fname = f'{config.asset_dir}{index}.{ext}'
+
+def cached_download(url: str, index: int, ext: str):
+    fname = f"{config.asset_dir}{index}.{ext}"
     if os.path.isfile(fname):
         return True
     else:
@@ -214,7 +238,6 @@ def add_stats(props: list[dict], metadatadict: dict, link: str):
         )
 
 
-
 def is_github_repo(url):
     pattern = r"^https?://github\.com/[\w.-]+/[\w.-]+(?:\?.*)?$"
     return bool(re.match(pattern, url))
@@ -226,12 +249,7 @@ def prep_body(text: str | None):
 
     text = text[0 : min(1100, len(text))]
 
-    text = (
-        text.replace("%", "")
-        .replace("\u001b", "")
-        .replace("\u000F", "")
-        .replace("\\", "")
-    )
+    text = text.replace("%", "").replace("\u001b", "").replace("\u000f", "").replace("\\", "")
 
     # remove empty lines
     text = removeEmptyLines(text)
@@ -239,10 +257,12 @@ def prep_body(text: str | None):
 
     return firstSentence, text
 
+
 def youtube_video_id(url):
     return urllib.parse.parse_qs(urllib.parse.urlparse(url).query)["v"][0]
 
-class YoutubeHandler():
+
+class YoutubeHandler:
     def test(self, art):
         # without an API key fall through to the DefaultHandler (screenshot)
         return config.YOUTUBE_API_KEY != "" and art.mainurl.startswith("https://www.youtube.com/watch?v=")
@@ -252,12 +272,14 @@ class YoutubeHandler():
         if video_info is None:
             video_id = youtube_video_id(art.mainurl)
             with urllib3.PoolManager() as http:
-                response = http.request("GET", f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={config.YOUTUBE_API_KEY}")
+                response = http.request(
+                    "GET",
+                    f"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id={video_id}&key={config.YOUTUBE_API_KEY}",
+                )
                 video_info = json.loads(response.data)
             # do not cache errors (quota, key) so a rerun tries again
             if video_info.get("items"):
                 write(index, video_info)
-
 
         metadatadict = get_metadata(art.title)
 
@@ -271,17 +293,15 @@ class YoutubeHandler():
 
         firstSentence, data = prep_body(metadata_list["description"])
 
-        image = 'notfound.png'
-        if(cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg")):
+        image = "notfound.png"
+        if cached_download(metadata_list["thumbnails"]["medium"]["url"], index, "jpg"):
             image = f"{config.asset_dir}{index}.jpg"
             # tectonic was being funny with the standard youtube jpg thumbnails so we convert them to PNG and it doesnt complain anymore :)
             im = Image.open(image)
             image = f"{config.asset_dir}{index}.png"
             im.save(image)
 
-        newsproperties.append(
-            {"symbol" : "User", "value" : metadata_list["channelTitle"], "url" : None}
-        )
+        newsproperties.append({"symbol": "User", "value": metadata_list["channelTitle"], "url": None})
 
         upload = metadata_list["publishedAt"]
 
@@ -315,8 +335,6 @@ class YoutubeHandler():
         }
 
 
-
-
 class GithubHandler:
     def test(self, art):
         return is_github_repo(art.mainurl)
@@ -333,20 +351,14 @@ class GithubHandler:
 
         firstSentence, data = prep_body(data)
 
-        metadatadict = get_metadata(
-            art.title, metadata.as_dict() if metadata is not None else {}
-        )
+        metadatadict = get_metadata(art.title, metadata.as_dict() if metadata is not None else {})
 
         newsproperties = []
 
         if isValidDictItem("author", metadatadict):
-            newsproperties.append(
-                {"symbol": "User", "value": metadatadict["author"], "url": None}
-            )
+            newsproperties.append({"symbol": "User", "value": metadatadict["author"], "url": None})
         if isValidDictItem("date", metadatadict):
-            newsproperties.append(
-                {"symbol": "Calendar", "value": metadatadict["date"], "url": None}
-            )
+            newsproperties.append({"symbol": "Calendar", "value": metadatadict["date"], "url": None})
         if isValidDictItem("hostname", metadatadict):
             newsproperties.append(
                 {
@@ -431,6 +443,7 @@ class PDFHandler:
 class DefaultHandler(UrlHandler):
     def test(self, art):
         return True
+
     def work(self, index, art, browser):
         # one page visit gives both the screenshot and the html, both are cached
         png = f"{config.asset_dir}{index}.png"
@@ -439,45 +452,49 @@ class DefaultHandler(UrlHandler):
             write_html(index, sitecontent)
         else:
             sitecontent = loadordownload(index, art, browser)
-        data  = extract(sitecontent)
+        data = extract(sitecontent)
 
         firstSentence, data = prep_body(data)
 
         metadata = extract_metadata(sitecontent)
 
-        metadatadict = get_metadata(
-            art.title, metadata.as_dict() if metadata is not None else {}
-        )
+        metadatadict = get_metadata(art.title, metadata.as_dict() if metadata is not None else {})
 
-        # fall back 
+        # fall back
         image = "notfound.png"
-        #image url can be either a png or a jpg
-        if os.path.isfile(f'{config.asset_dir}{index}.png'):
+        # image url can be either a png or a jpg
+        if os.path.isfile(f"{config.asset_dir}{index}.png"):
             image = f"{config.asset_dir}{index}.png"
 
-        #potential interested metadata fields are: author, date, image, sitename
-        #not used , but for future reference : 
+        # potential interested metadata fields are: author, date, image, sitename
+        # not used , but for future reference :
         # pagetype [object, article, website ]
         # description
         # categories and tags
 
         newsproperties = []
-        
-        if (isValidDictItem("author", metadatadict)): 
-            newsproperties.append({ "symbol": "User", "value" : metadatadict["author"], "url": None})
-        if (isValidDictItem("date", metadatadict)):
-            newsproperties.append({ "symbol": "Calendar", "value" : metadatadict["date"], "url": None})
-        if (isValidDictItem("hostname", metadatadict)):
-            newsproperties.append({ "symbol": faSymbolPerHostname(metadatadict["hostname"]), "value" : metadatadict["hostname"], "url": None})
+
+        if isValidDictItem("author", metadatadict):
+            newsproperties.append({"symbol": "User", "value": metadatadict["author"], "url": None})
+        if isValidDictItem("date", metadatadict):
+            newsproperties.append({"symbol": "Calendar", "value": metadatadict["date"], "url": None})
+        if isValidDictItem("hostname", metadatadict):
+            newsproperties.append(
+                {
+                    "symbol": faSymbolPerHostname(metadatadict["hostname"]),
+                    "value": metadatadict["hostname"],
+                    "url": None,
+                }
+            )
 
         add_stats(newsproperties, metadatadict, art.suburl)
 
         return {
-                "title": art.text, 
-                "url" : art.mainurl,
-                "image": image, 
-                "category" : art.category,
-                "firstline": firstSentence,
-                "content": data, 
-                "properties": newsproperties 
-            }
+            "title": art.text,
+            "url": art.mainurl,
+            "image": image,
+            "category": art.category,
+            "firstline": firstSentence,
+            "content": data,
+            "properties": newsproperties,
+        }

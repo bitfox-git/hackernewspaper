@@ -21,6 +21,7 @@ def edition_814():
 
 # --- archive page ---
 
+
 def test_latest_edition_from_archive():
     assert parse_latest_edition(fixture("archive.html")) == "814"
 
@@ -30,6 +31,7 @@ def test_latest_edition_missing_list():
 
 
 # --- edition page ---
+
 
 def test_categories_and_articles(edition_814):
     articles, categories = generator.get_articles(edition_814)
@@ -76,6 +78,7 @@ def test_get_header_missing():
 
 # --- metadata ---
 
+
 def test_votes_and_comments_from_title():
     meta = url_handlers.get_metadata("Votes: 1872 Comments: 447")
     assert meta == {"votes": 1872, "comments": 447}
@@ -102,18 +105,23 @@ def test_get_metadata_does_not_modify_input():
 
 # --- helpers ---
 
-@pytest.mark.parametrize("url, video_id", [
-    ("https://www.youtube.com/watch?v=XiZmM6hwwAU&utm_source=hackernewsletter", "XiZmM6hwwAU"),
-    ("https://www.youtube.com/watch?v=XiZmM6hwwAU", "XiZmM6hwwAU"),
-    ("https://www.youtube.com/watch?feature=share&v=XiZmM6hwwAU", "XiZmM6hwwAU"),
-])
+
+@pytest.mark.parametrize(
+    "url, video_id",
+    [
+        ("https://www.youtube.com/watch?v=XiZmM6hwwAU&utm_source=hackernewsletter", "XiZmM6hwwAU"),
+        ("https://www.youtube.com/watch?v=XiZmM6hwwAU", "XiZmM6hwwAU"),
+        ("https://www.youtube.com/watch?feature=share&v=XiZmM6hwwAU", "XiZmM6hwwAU"),
+    ],
+)
 def test_youtube_video_id(url, video_id):
     assert url_handlers.youtube_video_id(url) == video_id
 
 
 def test_first_sentence_ignores_version_numbers():
     first, rest = url_handlers.splitFirstSentenceParagraph(
-        "Python 3.15.0 Release date: Oct. 9, 2026 This is the stable release of Python 3.15.0 Python 3.15 is new. More text")
+        "Python 3.15.0 Release date: Oct. 9, 2026 This is the stable release of Python 3.15.0 Python 3.15 is new. More text"
+    )
     assert first.endswith("Python 3.15 is new.")
     assert rest == " More text"
 
@@ -122,12 +130,15 @@ def test_first_sentence_short_text():
     assert url_handlers.splitFirstSentenceParagraph("Hi.") == (None, "Hi.")
 
 
-@pytest.mark.parametrize("host, symbol", [
-    ("github.com", "Github"),
-    ("www.github.com", "Github"),
-    ("flickr.com", "Flickr"),
-    ("example.org", "Globe"),
-])
+@pytest.mark.parametrize(
+    "host, symbol",
+    [
+        ("github.com", "Github"),
+        ("www.github.com", "Github"),
+        ("flickr.com", "Flickr"),
+        ("example.org", "Globe"),
+    ],
+)
 def test_fa_symbol_per_hostname(host, symbol):
     assert url_handlers.faSymbolPerHostname(host) == symbol
 
@@ -142,6 +153,7 @@ def test_prep_body_none():
 
 
 # --- per-article isolation ---
+
 
 class Art:
     mainurl = "https://example.org/x"
@@ -178,6 +190,7 @@ def test_failing_handler_falls_back_to_default(monkeypatch):
 
 
 # --- text cleaning before rendering ---
+
 
 def test_clean_text_strips_invisible_characters():
     # variation selector, zero width joiner, line separator, private use, skin tone

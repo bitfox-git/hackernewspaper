@@ -4,9 +4,7 @@ from sys import exit, stderr
 from urllib.request import urlopen, Request
 from fake_useragent import UserAgent
 
-HACKERNEWSLETTER_URL = (
-    "https://buttondown.com/hacker-newsletter/archive/"
-)
+HACKERNEWSLETTER_URL = "https://buttondown.com/hacker-newsletter/archive/"
 
 
 def fetch(url):
