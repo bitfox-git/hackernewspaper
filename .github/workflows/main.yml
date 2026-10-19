@@ -1,13 +1,29 @@
 on:
   workflow_dispatch:
+    inputs:
+      edition:
+        description: "Build only this edition number (leave empty to build every missing edition)"
+        required: false
+        default: ""
   schedule:
      - cron: '0 6 * * *'
 
-
+env:
+  # Editions below this are never backfilled automatically (older gaps are known and left alone)
+  BACKFILL_FROM: 773
+  # Max editions built per run, the rest is picked up by the next run
+  MAX_EDITIONS: 50
 
 jobs:
-  build:
+  detect:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+    outputs:
+      editions: ${{ steps.detect.outputs.EDITIONS }}
+      latest: ${{ steps.detect.outputs.LATEST }}
+      build: ${{ steps.detect.outputs.BUILD }}
     steps:
       - name: Checkout repo content
         uses: actions/checkout@v4
@@ -15,81 +31,124 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5.0.0
         with:
+          python-version: "3.12"
+
+      - name: Install Python packages
+        run: python3 -m pip install beautifulsoup4 fake-useragent~=1.5.1
+
+      # Scheduled workflows are disabled after 60 days without repository activity,
+      # re-enabling an active workflow resets that timer
+      - name: Keep workflow alive
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/main.yml/enable"
+
+      - name: Determine editions to build
+        id: detect
+        env:
+          INPUT_EDITION: ${{ github.event.inputs.edition }}
+        run: |
+          git fetch origin --tags
+
+          # A failure here fails the run
+          latest_edition=$(python get_latest_edition.py)
+          echo "LATEST=$latest_edition" >> "$GITHUB_OUTPUT"
+
+          if [ -n "$INPUT_EDITION" ]; then
+              editions="$INPUT_EDITION"
+          else
+              # every edition from BACKFILL_FROM up to the latest one that has no release tag yet
+              editions=""
+              for n in $(seq "$BACKFILL_FROM" "$latest_edition"); do
+                  if [ -z "$(git tag -l "$n")" ]; then
+                      editions="$editions $n"
+                  fi
+              done
+              editions=$(echo $editions | tr ' ' '\n' | tail -n "$MAX_EDITIONS" | tr '\n' ' ')
+          fi
+
+          # Nothing to do is not an error: skip the build job but keep the run green
+          if [ -z "$(echo $editions)" ]; then
+              echo "::notice::Edition $latest_edition is already released, nothing to do."
+              echo "BUILD=false" >> "$GITHUB_OUTPUT"
+              echo "EDITIONS=[]" >> "$GITHUB_OUTPUT"
+          else
+              echo "::notice::Building editions:$editions"
+              echo "BUILD=true" >> "$GITHUB_OUTPUT"
+              echo "EDITIONS=$(echo $editions | jq -Rc 'split(" ")')" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: detect
+    if: needs.detect.outputs.build == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        edition: ${{ fromJSON(needs.detect.outputs.editions) }}
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5.0.0
+        with:
+          python-version: "3.12"
           cache: "pip"
-      
+
       - name: Install Python packages
         run: |
           python3 -m venv .venv
           source .venv/bin/activate
           python3 -m pip install -r requirements.txt
 
-      
-      - name: Determine next edition
-        id: determine-edition
-        run: |
-          git fetch origin --tags
-
-          source .venv/bin/activate
-          # Get the latest edition from Python script, a failure here fails the run
-          latest_edition=$(python get_latest_edition.py)
-          echo "EDITION=$latest_edition" >> "$GITHUB_OUTPUT"
-
-          # Nothing to do is not an error: skip the remaining steps but keep the run green
-          if [ -n "$(git tag -l "$latest_edition")" ]; then
-              echo "::notice::Edition $latest_edition is already released, nothing to do."
-              echo "BUILD=false" >> "$GITHUB_OUTPUT"
-          else
-              echo "New edition $latest_edition found, building it."
-              echo "BUILD=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Setup Playwright
-        if: steps.determine-edition.outputs.BUILD == 'true'
         run: |
           source .venv/bin/activate
           playwright install chromium
 
       - name: Execute Python script
-        if: steps.determine-edition.outputs.BUILD == 'true'
-        env: 
+        env:
           YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
         run: |
           source .venv/bin/activate
-          python generator.py ${{steps.determine-edition.outputs.EDITION }}
+          python generator.py ${{ matrix.edition }}
 
-      - name: Setup Tectonic 
-        if: steps.determine-edition.outputs.BUILD == 'true'
+      - name: Setup Tectonic
         uses: WtfJoke/setup-tectonic@v3
         with:
            github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Tectonic version
-        if: steps.determine-edition.outputs.BUILD == 'true'
         run: tectonic --version
 
       - name: Run Tectonic
-        if: steps.determine-edition.outputs.BUILD == 'true'
         run: tectonic -X compile output.tex -Z continue-on-errors
 
       - name: Rename output.pdf
-        if: steps.determine-edition.outputs.BUILD == 'true'
-        run: mv output.pdf HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf
+        run: mv output.pdf HackerNewsPaper-${{ matrix.edition }}.pdf
 
       - name: Upload a Build Artifact
-        if: always() && steps.determine-edition.outputs.BUILD == 'true'
+        if: always()
         uses: actions/upload-artifact@v4.3.1
         with:
+          name: edition-${{ matrix.edition }}
           path: |
             ./*.*
             !./.venv
 
       - name: Create release
-        if: steps.determine-edition.outputs.BUILD == 'true'
         uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true
-          tag: ${{ steps.determine-edition.outputs.EDITION }}
-          name: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}" 
-          body: "HackerNewsPaper #${{ steps.determine-edition.outputs.EDITION }}"
-          artifacts: "HackerNewsPaper-${{ steps.determine-edition.outputs.EDITION }}.pdf"
+          tag: ${{ matrix.edition }}
+          name: "HackerNewsPaper #${{ matrix.edition }}"
+          body: "HackerNewsPaper #${{ matrix.edition }}"
+          artifacts: "HackerNewsPaper-${{ matrix.edition }}.pdf"
           removeArtifacts: true
+          # only the newest edition may become "Latest", backfilled ones never take it over
+          makeLatest: ${{ matrix.edition == needs.detect.outputs.latest && 'true' || 'false' }}
