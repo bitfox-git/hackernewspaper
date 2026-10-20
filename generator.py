@@ -9,9 +9,10 @@ from url_handlers import (
     DefaultHandler,
     GithubHandler,
     PDFHandler,
-    YoutubeHandler,
+    VideoHandler,
     download_html,
     minimal_item,
+    strip_tracking,
 )
 
 log = logging.getLogger("hackernewspaper")
@@ -87,7 +88,7 @@ def get_articles(soup):
             if nextSibling.name == "p":
                 a = nextSibling.find("a")
                 if a is not None:
-                    mainurl = a.get("href")
+                    mainurl = strip_tracking(a.get("href"))
                     title = a.get("title")
                     text = " ".join(a.get_text().split())
                     subtext = ""
@@ -97,7 +98,7 @@ def get_articles(soup):
                         subtext = span.text
                         suburla = span.find("a")
                         if suburla is not None:
-                            suburl = suburla.get("href")
+                            suburl = strip_tracking(suburla.get("href"))
                     art = article(mainurl, title, text, subtext, suburl, category)
                     articles.append(art)
                     found += 1
@@ -119,7 +120,7 @@ def download_edition(issue, browser):
     return None
 
 
-handlers = [YoutubeHandler(), PDFHandler(), GithubHandler(), DefaultHandler()]
+handlers = [VideoHandler(), PDFHandler(), GithubHandler(), DefaultHandler()]
 
 
 # one bad link never kills an edition: a failing handler falls back to the

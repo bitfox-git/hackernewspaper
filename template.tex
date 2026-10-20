@@ -184,8 +184,10 @@
 %- if n.firstline != None
 \paragraph{\VAR{n.firstline}}
 %- endif
+%- if n.content
 \VAR{n.content}
 \dots
+%- endif
 \end{multicols}
 \end{minipage}
 \par\medskip
@@ -220,9 +222,11 @@
 \paragraph{}
 \textbf{\VAR{n.firstline}}
 %- endif
+%- if n.content
 \paragraph{}
 \VAR{n.content}
 \dots\par
+%- endif
 %\par\noindent\textcolor{red}{\rule{\linewidth}{0.2mm}}
 %- endif
 

@@ -214,6 +214,131 @@ def test_titles_have_no_line_breaks():
         assert all("\n" not in a.text and a.text == a.text.strip() for a in articles)
 
 
+# --- phase 3: videos, pdfs, images, tracking parameters ---
+
+
+@pytest.mark.parametrize(
+    "url, video_id",
+    [
+        ("https://youtu.be/XiZmM6hwwAU?si=abc", "XiZmM6hwwAU"),
+        ("https://www.youtube.com/shorts/XiZmM6hwwAU", "XiZmM6hwwAU"),
+        ("https://m.youtube.com/watch?v=XiZmM6hwwAU", "XiZmM6hwwAU"),
+        ("https://www.youtube.com/live/XiZmM6hwwAU", "XiZmM6hwwAU"),
+        ("https://www.youtube.com/@somechannel", None),
+        ("https://example.org/watch?v=XiZmM6hwwAU", None),
+    ],
+)
+def test_youtube_video_id_variants(url, video_id):
+    assert url_handlers.youtube_video_id(url) == video_id
+
+
+def test_vimeo_video_id():
+    assert url_handlers.vimeo_video_id("https://vimeo.com/76979871") == "76979871"
+    assert url_handlers.vimeo_video_id("https://player.vimeo.com/video/76979871") == "76979871"
+    assert url_handlers.vimeo_video_id("https://vimeo.com/channels/staffpicks") is None
+
+
+@pytest.mark.parametrize(
+    "iso, text",
+    [("PT1H2M3S", "1:02:03"), ("PT4M5S", "4:05"), ("PT45S", "0:45"), ("P1DT1H", "25:00:00"), ("", None), ("P0D", None)],
+)
+def test_format_iso_duration(iso, text):
+    assert url_handlers.format_iso_duration(iso) == text
+
+
+def test_video_handler_test():
+    class Video:
+        mainurl = "https://youtu.be/XiZmM6hwwAU"
+
+    assert url_handlers.VideoHandler().test(Video())
+    assert not url_handlers.VideoHandler().test(Art())
+
+
+def test_pdf_handler_test():
+    class Pdf:
+        mainurl = "https://example.org/paper.PDF"
+
+    class Arxiv:
+        mainurl = "https://arxiv.org/pdf/2401.12345"
+
+    assert url_handlers.PDFHandler().test(Pdf())
+    assert url_handlers.PDFHandler().test(Arxiv())
+    assert not url_handlers.PDFHandler().test(Art())
+
+
+@pytest.mark.parametrize(
+    "url, clean",
+    [
+        (
+            "https://example.org/a?utm_source=hackernewsletter&utm_medium=email&utm_term=fav",
+            "https://example.org/a",
+        ),
+        ("https://www.youtube.com/watch?v=abc&utm_source=hn", "https://www.youtube.com/watch?v=abc"),
+        (
+            "http://news.ycombinator.com/item?id=50093568&utm_term=comment",
+            "http://news.ycombinator.com/item?id=50093568",
+        ),
+        ("https://example.org/a?b=1#frag", "https://example.org/a?b=1#frag"),
+        ("", ""),
+    ],
+)
+def test_strip_tracking(url, clean):
+    assert url_handlers.strip_tracking(url) == clean
+
+
+def test_articles_have_no_tracking_parameters(edition_814):
+    articles, _ = generator.get_articles(edition_814)
+    assert not any("utm_" in a.mainurl or "utm_" in a.suburl for a in articles)
+
+
+@pytest.fixture
+def asset_dir(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "asset_dir", f"{tmp_path}/")
+    return tmp_path
+
+
+def test_download_image_converts_to_jpeg_on_white(asset_dir, monkeypatch):
+    import io
+
+    from PIL import Image
+
+    transparent = Image.new("RGBA", (16, 16), (255, 0, 0, 0))
+    buffer = io.BytesIO()
+    transparent.save(buffer, "WEBP")
+    monkeypatch.setattr(url_handlers, "download_bin", lambda url: buffer.getvalue())
+
+    path = url_handlers.download_image("https://example.org/logo.webp", 7)
+    assert path == f"{asset_dir}/7-img.jpg"
+    with Image.open(path) as im:
+        assert im.format == "JPEG"
+        assert im.mode == "RGB"
+        assert all(c > 250 for c in im.getpixel((0, 0)))
+    assert url_handlers.find_image(7) == path
+
+
+def test_find_image_order(asset_dir):
+    assert url_handlers.find_image(3) == url_handlers.NOT_FOUND
+    (asset_dir / "3.jpg").write_bytes(b"x")
+    assert url_handlers.find_image(3) == f"{asset_dir}/3.jpg"
+    # png cached by older builds
+    (asset_dir / "3.png").write_bytes(b"x")
+    assert url_handlers.find_image(3) == f"{asset_dir}/3.png"
+    (asset_dir / "3-img.jpg").write_bytes(b"x")
+    assert url_handlers.find_image(3) == f"{asset_dir}/3-img.jpg"
+
+
+def test_render_pdf_page(asset_dir):
+    from PIL import Image
+
+    pdf = asset_dir / "1.pdf"
+    Image.new("RGB", (200, 100), "blue").save(pdf, "PDF")
+    assert url_handlers.is_pdf(pdf)
+    url_handlers.render_pdf_page(pdf, asset_dir / "1-img.jpg", width=400)
+    with Image.open(asset_dir / "1-img.jpg") as im:
+        assert im.format == "JPEG"
+        assert im.width == 400
+
+
 def test_configure_sets_asset_dir():
     config.configure(814)
     assert config.ISSUE == "814"
