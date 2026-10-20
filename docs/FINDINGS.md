@@ -54,8 +54,8 @@ Per-edition pages are now linked as `/archive/<N>/`. The old `/archive/hacker-ne
 | B8 | `template.tex:92` | ~~Favorites layout may never trigger~~ **Corrected:** it does trigger (verified in the #814 PDF). |
 | B9 | `generator.py:64` | Category text isn't stripped: #773 yields `'\n\n    #\n  \n  Sponsor\n'`. The README's "sponsor parsing is off" item. |
 | B10 | `url_handlers.py:117` | `read()` opens JSON without `encoding="utf-8"` (breaks on Windows). |
-| B11 | `YoutubeHandler.test` | Only `https://www.youtube.com/watch?v=` matches; `youtu.be`, `/shorts/`, `m.youtube`, Vimeo fall through to a screenshot. |
-| B12 | `PDFHandler` | No thumbnail (open issue [#1 Add PDF support](https://github.com/bitfox-git/hackernewspaper/issues/1)). |
+| B11 | `YoutubeHandler.test` | Only `https://www.youtube.com/watch?v=` matches; `youtu.be`, `/shorts/`, `m.youtube`, Vimeo fall through to a screenshot. **Fixed in Phase 3:** `VideoHandler` handles all of these plus Vimeo. |
+| B12 | `PDFHandler` | No thumbnail (open issue [#1 Add PDF support](https://github.com/bitfox-git/hackernewspaper/issues/1)). **Fixed in Phase 3:** first page rendered with pypdfium2; arxiv `/pdf/` links included. |
 | B13 | `config.py:10` | `environ["YOUTUBE_API_KEY"]` → `KeyError` if unset, so it can't run locally without a key. Default issue `675` plus a hard-coded URL hack. |
 | B14 | `add_stats` | trafilatura's metadata has a `comments` key that is `None`, so articles without HN stats (sponsors) show a `None` comments link. |
 | B15 | `splitFirstSentenceParagraph` | Splits on any `.` within 200 chars, including version numbers: "Python 3.15.0 … Python 3.15." / "0 is the newest…". |
