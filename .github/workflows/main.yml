@@ -127,7 +127,8 @@ jobs:
         run: tectonic --version
 
       - name: Run Tectonic
-        run: tectonic -X compile output.tex -Z continue-on-errors
+        # a TeX error fails the edition instead of silently producing a damaged PDF
+        run: tectonic -X compile output.tex
 
       - name: Rename output.pdf
         run: mv output.pdf HackerNewsPaper-${{ matrix.edition }}.pdf

@@ -26,14 +26,19 @@ Work happens on `develop` → PR to `main` (the workflow runs from `main`).
 
 To rebuild an edition, delete its release **and its tag** (detection is tag-based), or dispatch with `edition=<N>`.
 
-## Phase 2 – Robustness and tests (mostly ✅, 2026-10-19)
-1. ⏳ **TeX warnings** (B7): latexbuild already escapes, and #814 compiles with 0 errors. Still to do: an emoji-capable fallback font (or strip emoji), then drop `-Z continue-on-errors` so real TeX errors fail the build.
+## Phase 2 – Robustness and tests ✅ (2026-10-20)
+1. ✅ **TeX warnings and errors** (B7), done 2026-10-20:
+   - The CI logs of #773–#814 had 427 distinct characters missing from TeX Gyre Pagella, plus real TeX errors in 5 editions (#773, #774, #804, #811, #812), all from blank lines inside a `\subsection{}` title. The whitespace normalization of titles in this phase fixes those.
+   - The template now has **fallback fonts through XeTeX interchar classes**: FreeSerif (Greek, Cyrillic, Thai, IPA, symbols, dingbats, box drawing, math letters), FandolSong (CJK, kana), UnBatang (Hangul) and Noto Emoji, the monochrome one (emoji). Those are the fonts available in Tectonic's bundle; color emoji and Noto CJK aren't in it.
+   - Invisible characters (variation selectors, zero-width and bidi controls, private use, skin-tone modifiers) are stripped before rendering (`generator.clean_text`).
+   - Result: 372 of the 427 characters render. The remaining 55 are emoji newer than the bundled Noto Emoji, which show as a box, and some Japanese-only kanji.
+   - `-Z continue-on-errors` is dropped from `main.yml`. Before that, every title, category and quote of all 42 editions compiled without it.
 2. ✅ Fixed B2 (mutable default), B3 (`parse_qs` for the video id), B4/B5 (fall back to a screenshot), B6 (fetch errors are logged, a missing edition raises with a message), B9 (category text is cleaned, empty sections like *Sponsor* are dropped), B10 (utf-8), B14 (trafilatura's `comments` field is ignored), B15 (no sentence split inside version numbers). Failed YouTube API responses are no longer cached.
 3. ✅ **Per-article isolation:** a failing handler falls back to `DefaultHandler`, and if that fails too, to a title + link item. One bad link never kills an edition.
 4. ✅ **One browser stack:** Selenium is gone. Playwright fetches all HTML, and one page visit gives both the screenshot and the HTML. A slow page is still captured after a 30 s timeout. Every article uses one desktop context (1280×800, regular Chrome user agent).
 5. ✅ `generator.py` is split into functions with `main()`, and uses `logging`. Nothing runs at import time; `config.configure(issue)` replaces the `sys.argv` parsing in `config.py`.
 6. ✅ **Tests:** `tests/test_parsing.py` (27 tests) on saved fixtures for the archive page, #773 and #814. `.github/workflows/test.yml` runs them on every PR and on pushes to main/develop.
-7. ✅ `requirements.txt` went from 67 to 32 pins (Selenium, the Google API client and `pythumb` stacks removed). Added `requirements-dev.txt` (pytest) and a minimal `pyproject.toml` (`requires-python >=3.11`, pytest config). ⏳ Ruff is not enabled yet: it would reformat every file, so it's better done as a separate commit.
+7. ✅ `requirements.txt` went from 67 to 32 pins (Selenium, the Google API client and `pythumb` stacks removed). Added `requirements-dev.txt` (pytest) and a minimal `pyproject.toml` (`requires-python >=3.11`, pytest config). ✅ Ruff is enabled (`ruff check` + `ruff format`, line length 120) and runs in `test.yml`.
 8. ✅ Housekeeping: fixed the template text and links, `faSymbolPerHostname` (strips `www.`, `flickr`, no duplicate case) and the README. ⏳ Deleting the stale `curl` / `debug-711` branches still needs your OK.
 
 ## Phase 3 – Better screenshots
