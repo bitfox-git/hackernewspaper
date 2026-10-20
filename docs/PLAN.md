@@ -41,17 +41,24 @@ To rebuild an edition, delete its release **and its tag** (detection is tag-base
 7. ✅ `requirements.txt` went from 67 to 32 pins (Selenium, the Google API client and `pythumb` stacks removed). Added `requirements-dev.txt` (pytest) and a minimal `pyproject.toml` (`requires-python >=3.11`, pytest config). ✅ Ruff is enabled (`ruff check` + `ruff format`, line length 120) and runs in `test.yml`.
 8. ✅ Housekeeping: fixed the template text and links, `faSymbolPerHostname` (strips `www.`, `flickr`, no duplicate case) and the README. ⏳ Deleting the stale `curl` / `debug-711` branches still needs your OK.
 
-## Phase 3 – Better screenshots
-1. **Cookie/GDPR banners:** run Playwright with a consent-blocking approach:
-   - load an "I don't care about cookies"-style filter list / uBlock cosmetic list via a persistent context with the extension, **or**
-   - a lightweight in-house step: after `goto`, try known consent-button selectors (OneTrust, Quantcast, Didomi, Cookiebot, "Reject all/Accept all" text) and hide fixed overlays via CSS injection.
-   Start with the in-house step (no extension needed in headless), and measure it on the 63 links of #814.
-2. Fixed viewport (1280×800), `wait_until="networkidle"` with a 15 s cap, `reduced_motion`, a dark/light-neutral color scheme, and JPEG at quality 80 to shrink PDFs (#772 is 8 MB).
-3. **PDF links** (issue #1, B12): render page 1 with `pypdfium2` to a PNG thumbnail.
-4. **Video links** (B11): handle `youtu.be`, `/shorts/`, `m.youtube`, and Vimeo (oEmbed, no key needed). Use YouTube oEmbed as a no-key fallback for title/author/thumbnail.
-5. Non-HTML links (MP4, images): detect via `Content-Type` HEAD, then a placeholder or first frame.
-6. Run screenshots concurrently (async Playwright, 4–6 pages) to cut build time.
-7. Strip `utm_*` params from displayed and fetched URLs.
+## Phase 3 – Better screenshots (mostly ✅, 2026-10-20)
+Measured on the 63 links of #814 (baseline → now): consent banners visible in 7 → **0** screenshots; blank or unfinished pages 4 → 0; PDF 12.9 MB → **6.6 MB**; build time 3 → 4 min (because of the network-idle wait).
+1. ✅ **Cookie/GDPR banners** (`consent.py`), the in-house approach:
+   - Click a known consent-manager button (OneTrust, Cookiebot, Didomi, Funding Choices, Quantcast, Sourcepoint), else a button with a consent-like text inside a cookie/consent/privacy container. **Reject / necessary-only is preferred**, accept is the fallback.
+   - Searches the page, its iframes and open shadow roots (WPConsent renders in one).
+   - Remaining fixed/sticky consent overlays are hidden with CSS, and scroll locks are undone.
+   - On #814, 13 pages had a banner handled: 11 rejected or declined, 2 (Anthropic, ProjectionLab) accepted because they only offer accept.
+2. ✅ JPEG screenshots (quality 80) and a 5 s network-idle wait after `load` (fixes lazily rendered pages). Fixed viewport 1280×800 and a regular Chrome user agent were done in Phase 2. ⏳ Not done: `reduced_motion` / color scheme (no visible problem seen).
+3. ✅ **PDF links** (issue #1, B12): the first page is rendered with `pypdfium2`, and the properties show the page count and host. arXiv `/pdf/` links (no extension) are included. A download that isn't a PDF falls back to a web page.
+4. ✅ **Video links** (B11): `VideoHandler` handles `youtu.be`, `/shorts/`, `/live/`, `/embed/`, `m.youtube` and Vimeo.
+   - YouTube uses the Data API (channel, date, **duration**, description) with a key, and oEmbed (channel, thumbnail) without one. The thumbnail is the 1280×720 one, falling back to 320×180.
+   - Vimeo uses oEmbed (author, date, duration, description, thumbnail).
+   - A removed or private video falls back to a screenshot. Errors aren't cached.
+5. ⏳ Other non-HTML links (MP4, images) are not handled yet; they still go through the screenshot path.
+6. ⏳ Concurrent screenshots (async Playwright) are not done; a 4-minute build is fine for a weekly job.
+7. ✅ `utm_*` parameters are stripped from article and HN comment links (`strip_tracking`).
+8. Also: downloaded pictures (social image, video thumbnail, PDF page) are stored as `<index>-img.jpg` (baseline RGB JPEG, transparency on white). Older `<index>.png` caches are still used. The "…" after an article is only printed when it has text.
+9. ⏳ Still visible in #814: bot walls (Access Denied / "Checking your browser" / "temporarily restricted" on 3–4 sites). Options: detect them and use the site's social image instead of the screenshot.
 
 ## Phase 4 – LLM summaries
 1. New optional step `summarize.py`: for each article, send the trafilatura text (truncated to ~6–8k tokens) plus the title to Claude and get back **structured JSON**: `{ "lede": str (≤1 sentence), "summary": str (60–120 words), "tags": [str], "read_minutes": int }`.

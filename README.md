@@ -14,7 +14,7 @@ But ended up with much more....
 
 ## Screenshots
 I use `playwright` to generate screenshots of the links (and to download their html).
-YouTube links use the YouTube Data API thumbnail and description when a `YOUTUBE_API_KEY` is set, otherwise they get a screenshot too.
+YouTube and Vimeo links show the video thumbnail with channel, date, duration and description (YouTube: Data API when a `YOUTUBE_API_KEY` is set, otherwise oEmbed with channel and thumbnail only). PDF links show their first page. Cookie banners are rejected or hidden before a screenshot is taken.
 
 ## Running locally
 Python 3.11+ and [Tectonic](https://tectonic-typesetting.github.io/) are needed.
@@ -39,8 +39,8 @@ I'm not a Latex expert. And there are also a lot of nice to have refinements to 
 - [ ] Parsing the top content (some times Kale leaves a message) on the top of his newsletter, is not done. 
 - [X] Parsing the sponsor content is sometimes off.. (empty sponsor sections are dropped)
 - [ ] Nicer output , more layouts in the template
-- [ ] Solve the GDPR Cookie problems on some screenshot. 
+- [X] Solve the GDPR Cookie problems on some screenshot. (consent banners are rejected or hidden before the screenshot, see `consent.py`)
 - [ ] Better text formatting. Maybe with the help of a LLM? 
-- [ ] For non-html links, devise another method to generate a screenshot and extract text and metadata. The link in the newsletter is not always pointing to html content (think of direct links to MP4 files, PDF files, etc. )       
-- [X/50%] In case of YouTube / Vimeo url's , get the duration as metadata + description from the platform. Which requires a Youtube Video API v3 key...
+- [X/50%] For non-html links, devise another method to generate a screenshot and extract text and metadata. The link in the newsletter is not always pointing to html content (think of direct links to MP4 files, PDF files, etc. ) PDF links (and arxiv papers) now show their first page, MP4 and other files are still open.
+- [X] In case of YouTube / Vimeo url's , get the duration as metadata + description from the platform. YouTube needs a Youtube Video API v3 key for date, duration and description, without one oEmbed still gives the channel and the thumbnail. Vimeo needs no key.
 
